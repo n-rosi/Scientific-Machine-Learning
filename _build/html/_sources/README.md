@@ -11,6 +11,7 @@
 📔 [Link](https://n-rosi.github.io/Scientific-Machine-Learning/intro.html) to the jupyter-book format.
 
 --------------------------------------------------------------------------------
+## Create virtual environment
 
 Create `jupybook` mamba virtual env with most of dependencies included with:
 ```
@@ -22,9 +23,10 @@ install `deepxde`:
 mamba -c conda-forge deepxde
 ```
 
-these library allow to run all notebooks. 
+these library allow to run all notebooks in this repository. 
 
 --------------------------------------------------------------------------------
+## Build jupyter book
 
 Install `jupyter-book`:
 ```

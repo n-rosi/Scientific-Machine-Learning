@@ -200,7 +200,7 @@
 
 <li class="toctree-l1"><a class="reference internal" href="../Exercise%2012.2/Exercise_12.2_.html">Exercise 12.2 - Galerkin method applied to the Kuramoto Sivashinsky dynamical system</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Exercise%2012.3/Exercise_12.3_.html">Exercise 12.3 - Autoencoders</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Exercise%2014.X01/Exercise_14.X01_.html">Exercise 14.X01</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%2014.X01/Exercise_14.X01_.html">Exercise 14.X01 - Physics Informed Neural Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Exercise%2014.X02/Exercise_14.X02_.html">Exercise 14.X02 - Physics-Informed Neural Networks for inverse problems</a></li>
 </ul>
 
@@ -494,21 +494,21 @@ document.write(`
 <section id="physics-informed-least-square-regression">
 <h2>Physics-Informed Least Square Regression<a class="headerlink" href="#physics-informed-least-square-regression" title="Link to this heading">#</a></h2>
 <p>The parameters <span class="math notranslate nohighlight">\(\beta\)</span> and <span class="math notranslate nohighlight">\(\gamma\)</span> can be found using the PI-LSR (Physics Informed Least Square Regression):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-763c2355-5890-409f-b96e-e371b6c7dcc0">
-<span class="eqno">(1)<a class="headerlink" href="#equation-763c2355-5890-409f-b96e-e371b6c7dcc0" title="Permalink to this equation">#</a></span>\[\begin{gather}
+<div class="amsmath math notranslate nohighlight" id="equation-dc7a2236-e34d-4197-8c82-f5608006fdc3">
+<span class="eqno">(1)<a class="headerlink" href="#equation-dc7a2236-e34d-4197-8c82-f5608006fdc3" title="Permalink to this equation">#</a></span>\[\begin{gather}
 b=Ax\Rightarrow x=(A^{+}A^{-1})A^{+}b
 \end{gather}\]</div>
 <p>where <span class="math notranslate nohighlight">\(+\)</span> indicates the complex conjugate and :</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f78c2490-5546-4932-8bb6-5a1c564a5de2">
-<span class="eqno">(2)<a class="headerlink" href="#equation-f78c2490-5546-4932-8bb6-5a1c564a5de2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-bb02e9c9-f748-4a64-b106-b24a06b752c5">
+<span class="eqno">(2)<a class="headerlink" href="#equation-bb02e9c9-f748-4a64-b106-b24a06b752c5" title="Permalink to this equation">#</a></span>\[\begin{equation}
 b = \begin{bmatrix}  \frac{\partial S}{\partial t} \\ \frac{\partial I}{\partial t} \\ \frac{\partial R}{\partial t}  \end{bmatrix}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-bb87dd4c-a083-435e-baff-0f6663d2389e">
-<span class="eqno">(3)<a class="headerlink" href="#equation-bb87dd4c-a083-435e-baff-0f6663d2389e" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-33d4c201-b8b5-44ab-8049-2ba1c9d54587">
+<span class="eqno">(3)<a class="headerlink" href="#equation-33d4c201-b8b5-44ab-8049-2ba1c9d54587" title="Permalink to this equation">#</a></span>\[\begin{align}
 A = \begin{bmatrix}  -\frac{SI}{N} &amp; 0 \\ \frac{SI}{N} &amp; -I \\ 0 &amp; I  \end{bmatrix}
 \end{align}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-2c811c34-8108-4a0f-a9df-368c5d7c5e55">
-<span class="eqno">(4)<a class="headerlink" href="#equation-2c811c34-8108-4a0f-a9df-368c5d7c5e55" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-98e1319c-c038-4e1b-a76c-eb38a2323986">
+<span class="eqno">(4)<a class="headerlink" href="#equation-98e1319c-c038-4e1b-a76c-eb38a2323986" title="Permalink to this equation">#</a></span>\[\begin{align}
 x = \begin{bmatrix} \beta \\ \gamma \end{bmatrix}
 \end{align}\]</div>
 <p>In particular, we build every derivative and physical quantity as a column vector, where each row is a step forward in time. So, given the vectors <span class="math notranslate nohighlight">\(S\)</span>, <span class="math notranslate nohighlight">\(I\)</span>, and <span class="math notranslate nohighlight">\(R\)</span>, which describe how these quantities develop in time, and using the forward finite difference method to compute the respective derivatives, we can compute <span class="math notranslate nohighlight">\(x\)</span> as shown below.</p>

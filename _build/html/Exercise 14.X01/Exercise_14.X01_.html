@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Exercise 14.X01 &#8212; sml report</title>
+    <title>Exercise 14.X01 - Physics Informed Neural Networks &#8212; sml report</title>
   
   
   
@@ -200,7 +200,7 @@
 
 <li class="toctree-l1"><a class="reference internal" href="../Exercise%2012.2/Exercise_12.2_.html">Exercise 12.2 - Galerkin method applied to the Kuramoto Sivashinsky dynamical system</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Exercise%2012.3/Exercise_12.3_.html">Exercise 12.3 - Autoencoders</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Exercise 14.X01</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Exercise 14.X01 - Physics Informed Neural Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Exercise%2014.X02/Exercise_14.X02_.html">Exercise 14.X02 - Physics-Informed Neural Networks for inverse problems</a></li>
 </ul>
 
@@ -385,7 +385,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Exercise 14.X01</h1>
+    <h1>Exercise 14.X01 - Physics Informed Neural Networks</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -399,8 +399,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="exercise-14-x01">
-<h1>Exercise 14.X01<a class="headerlink" href="#exercise-14-x01" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="exercise-14-x01-physics-informed-neural-networks">
+<h1>Exercise 14.X01 - Physics Informed Neural Networks<a class="headerlink" href="#exercise-14-x01-physics-informed-neural-networks" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the necessary libraries.</span>
@@ -703,7 +703,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8d7bfdd2bae6792346884d33e780477aee912f5fa0683383d49e6aa564497919.png" src="../_images/8d7bfdd2bae6792346884d33e780477aee912f5fa0683383d49e6aa564497919.png" />
+<img alt="../_images/3e2416d4c04bd315efd2db63f327053cba373e19ab48dd0eb65271a9896ef825.png" src="../_images/3e2416d4c04bd315efd2db63f327053cba373e19ab48dd0eb65271a9896ef825.png" />
 </div>
 </div>
 <p><strong>STEP 7</strong></p>
@@ -766,7 +766,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ae9d6fae69ab6f1318dad48265bf3626b65ce4529feeecbb11fb0f5adbf54b27.png" src="../_images/ae9d6fae69ab6f1318dad48265bf3626b65ce4529feeecbb11fb0f5adbf54b27.png" />
+<img alt="../_images/7df533078373a6b1110b8d0c00341995f49762700863328bfc0f84f8b6afcc19.png" src="../_images/7df533078373a6b1110b8d0c00341995f49762700863328bfc0f84f8b6afcc19.png" />
 </div>
 </div>
 <p><strong>STEP 8</strong></p>
@@ -797,7 +797,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3759336e76cb4c117b591ce2f3738c35fdce622ec1683a8b6d7fb75f261f6155.png" src="../_images/3759336e76cb4c117b591ce2f3738c35fdce622ec1683a8b6d7fb75f261f6155.png" />
+<img alt="../_images/e03be97fa088ab45c008f71afffa8157ad32898081ce26a9471e74aa753bd8bc.png" src="../_images/e03be97fa088ab45c008f71afffa8157ad32898081ce26a9471e74aa753bd8bc.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -828,7 +828,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/bd86aac631abe65d81e4930c8452cf1460f75589a5a813f36a3aea6648a30867.png" src="../_images/bd86aac631abe65d81e4930c8452cf1460f75589a5a813f36a3aea6648a30867.png" />
+<img alt="../_images/be1848a173749274ca9788823de42504eb47d9f8c10e9584fd28bad35009ed2d.png" src="../_images/be1848a173749274ca9788823de42504eb47d9f8c10e9584fd28bad35009ed2d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -847,10 +847,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- MSE between predictions and analytical values of sin(x) WO grad information: 0.00018 
-- MSE between predictions and analytical values of exp(sin(x)) WO grad information: 0.00090 
-- MSE between predictions and analytical values of sin(x) W grad information: 0.000545 
-- MSE between predictions and analytical values of exp(sin(x)) W grad information: 0.00009 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- MSE between predictions and analytical values of sin(x) WO grad information: 0.00001 
+- MSE between predictions and analytical values of exp(sin(x)) WO grad information: 0.00085 
+- MSE between predictions and analytical values of sin(x) W grad information: 0.000028 
+- MSE between predictions and analytical values of exp(sin(x)) W grad information: 0.00019 
 </pre></div>
 </div>
 </div>

@@ -200,7 +200,7 @@
 
 <li class="toctree-l1"><a class="reference internal" href="../Exercise%2012.2/Exercise_12.2_.html">Exercise 12.2 - Galerkin method applied to the Kuramoto Sivashinsky dynamical system</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Exercise%2012.3/Exercise_12.3_.html">Exercise 12.3 - Autoencoders</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Exercise%2014.X01/Exercise_14.X01_.html">Exercise 14.X01</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%2014.X01/Exercise_14.X01_.html">Exercise 14.X01 - Physics Informed Neural Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Exercise%2014.X02/Exercise_14.X02_.html">Exercise 14.X02 - Physics-Informed Neural Networks for inverse problems</a></li>
 </ul>
 
@@ -476,16 +476,16 @@ document.write(`
 </div>
 <p><strong>STEP 2</strong></p>
 <p>The dataset can be generated via numerical integration of the well-known Lorenz system:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5639000d-8306-4c89-a35f-c46af00ddb1b">
-<span class="eqno">(5)<a class="headerlink" href="#equation-5639000d-8306-4c89-a35f-c46af00ddb1b" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e1ffb5c1-5f86-468b-a5c4-18e84ff97266">
+<span class="eqno">(5)<a class="headerlink" href="#equation-e1ffb5c1-5f86-468b-a5c4-18e84ff97266" title="Permalink to this equation">#</a></span>\[\begin{align}
 \dot{x} = \sigma(y-x)
 \end{align}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-636d435d-7fc3-46d7-bedd-f3ef5a4212ff">
-<span class="eqno">(6)<a class="headerlink" href="#equation-636d435d-7fc3-46d7-bedd-f3ef5a4212ff" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-9ea9f697-f968-4b93-a7e4-338fad80ac62">
+<span class="eqno">(6)<a class="headerlink" href="#equation-9ea9f697-f968-4b93-a7e4-338fad80ac62" title="Permalink to this equation">#</a></span>\[\begin{align}
 \dot{y} = x ( \rho - z ) - y
 \end{align}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-341c0bad-434e-4f5e-9518-158d1a49b8a4">
-<span class="eqno">(7)<a class="headerlink" href="#equation-341c0bad-434e-4f5e-9518-158d1a49b8a4" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-d959c4da-6a33-4b3d-9a26-a906a7ea6589">
+<span class="eqno">(7)<a class="headerlink" href="#equation-d959c4da-6a33-4b3d-9a26-a906a7ea6589" title="Permalink to this equation">#</a></span>\[\begin{align}
 \dot{z} = xy - \beta z
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\( \beta \)</span>, <span class="math notranslate nohighlight">\( \sigma \)</span> and <span class="math notranslate nohighlight">\( \rho \)</span> define a particular dynamic ans <span class="math notranslate nohighlight">\( x_{0} \)</span> are the initial conditions. In the following block of code, the Right-Hand-Side (RHS) of the Lorenz System is defined and the PDEs are integrated using the <code class="docutils literal notranslate"><span class="pre">odeint</span></code> method over the total length of the trajectory <span class="math notranslate nohighlight">\( T_{long} \)</span>. Note that it is necessary to remove the first <span class="math notranslate nohighlight">\( t=1 \)</span> of the dataset itself as required from the exercise.</p>
@@ -612,16 +612,16 @@ MODEL SPECIFICATIONS:
 </div>
 </div>
 <p>Recall that the problem was initialized with  <span class="math notranslate nohighlight">\( \sigma = 10 \)</span>, <span class="math notranslate nohighlight">\( \beta=8/3 \)</span> and <span class="math notranslate nohighlight">\( \rho=28 \)</span>. Consequently the Lorenz system can be written explicitely as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-097bc8f3-e107-4578-9c2c-32baa41e91eb">
-<span class="eqno">(8)<a class="headerlink" href="#equation-097bc8f3-e107-4578-9c2c-32baa41e91eb" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-bdee502c-ee9f-4545-af35-7c89b395dedb">
+<span class="eqno">(8)<a class="headerlink" href="#equation-bdee502c-ee9f-4545-af35-7c89b395dedb" title="Permalink to this equation">#</a></span>\[\begin{align}
 \dot{x} = 10(y-x)
 \end{align}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-f8c61e2c-e771-4c19-b9f1-b55f1abd9866">
-<span class="eqno">(9)<a class="headerlink" href="#equation-f8c61e2c-e771-4c19-b9f1-b55f1abd9866" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e0a21fa5-9f82-4e60-9824-33bf86023f0d">
+<span class="eqno">(9)<a class="headerlink" href="#equation-e0a21fa5-9f82-4e60-9824-33bf86023f0d" title="Permalink to this equation">#</a></span>\[\begin{align}
 \dot{y} = x ( 28 - z ) - y
 \end{align}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-6b4651dd-858b-4348-b4bb-1ab76d8d9f69">
-<span class="eqno">(10)<a class="headerlink" href="#equation-6b4651dd-858b-4348-b4bb-1ab76d8d9f69" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-ee21b60f-194d-4499-a7eb-76512df07642">
+<span class="eqno">(10)<a class="headerlink" href="#equation-ee21b60f-194d-4499-a7eb-76512df07642" title="Permalink to this equation">#</a></span>\[\begin{align}
 \dot{z} = xy - 2.667 z
 \end{align}\]</div>
 <p>The result that we obtained above show that, for this choice of <span class="math notranslate nohighlight">\( r \)</span> , <span class="math notranslate nohighlight">\( T \)</span> and <span class="math notranslate nohighlight">\( \Delta t \)</span> , SINDy is perfectly able to recover the exact non-linear dynamics from the sparse data.</p>
