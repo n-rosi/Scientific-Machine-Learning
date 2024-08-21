@@ -1,0 +1,889 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Exercise X01.1 - Integration of Dynamical Systems &#8212; sml report</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Exercise X01.1/ExerciseX01.1_';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Exercise 1.7 - Singular Value Decomposition" href="../Exercise%201.7/Exercise_1.7_.html" />
+    <link rel="prev" title="Welcome to the Scientific Machine Learning Jupyter Book" href="../intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="sml report - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="sml report - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to the Scientific Machine Learning Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Exercise X01.1 - Integration of Dynamical Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%201.7/Exercise_1.7_.html">Exercise 1.7 - Singular Value Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%202.3/Exercise_2.3_.html">Exercise 2.3 - Fast Fourier Transform (FFT) for Numerical Integration</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Exercise%206.1/6.1_toc.html">Exercise 6.1</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Exercise%206.1/Exercise_6.1_KS_a_b.html">Neural Network for Numerical Integration on the Kuramoto–Sivashinsky (KS) PDE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Exercise%206.1/Exercise6.1_L_d.html">Neural Network for Predicting the Lorenz System</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%207.4/Exercise_7.4_.html">Exercise 7.4 - SINDy</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%20X02.1/Exercise_X02_1.html">Exercise X02.1 - Fast Fourier Transform for Point-Wise Gradient Computations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%20X03.1/Exercise_X03.1_.html">Exercise X03.1 - Dynamic Mode Decomposition (DMD)</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%2012.2/Exercise_12.2_.html">Exercise 12.2 - Galerkin method applied to the Kuramoto Sivashinsky dynamical system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%2012.3/Exercise_12.3_.html">Exercise 12.3 - Autoencoders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%2014.X01/Exercise_14.X01_.html">Exercise 14.X01 - Physics Informed Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%2014.X02/Exercise_14.X02_.html">Exercise 14.X02 - Physics-Informed Neural Networks for inverse problems</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FExercise X01.1/ExerciseX01.1_.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Exercise X01.1/ExerciseX01.1_.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Exercise X01.1 - Integration of Dynamical Systems</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#physics-informed-least-square-regression">Physics-Informed Least Square Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bathema-equations">The Bathema Equations.</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="exercise-x01-1-integration-of-dynamical-systems">
+<h1>Exercise X01.1 - Integration of Dynamical Systems<a class="headerlink" href="#exercise-x01-1-integration-of-dynamical-systems" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the necessary libraries.</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">solve_ivp</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following lines, the SIR model, which describes epidemics phenomena, is presented as an <em>Initial Value Problem</em> and solved numerically using the method reported in the slide 35 of Lecture 1. A function which define the Right Hand Side of the dynamical system is defined</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definition of the RHS function ( N is equal to 1 becaus ethe starting conditions are already normalized ).</span>
+<span class="k">def</span> <span class="nf">sir_model</span><span class="p">(</span> <span class="n">t</span> <span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">beta</span> <span class="p">,</span> <span class="n">gamma</span> <span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">):</span>
+    
+    <span class="c1"># Define the system of differential equations.</span>
+    <span class="n">S</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="n">dSdt</span> <span class="o">=</span> <span class="o">-</span> <span class="n">beta</span> <span class="o">*</span> <span class="p">(</span> <span class="p">(</span> <span class="n">S</span> <span class="o">*</span> <span class="n">I</span> <span class="p">)</span> <span class="o">/</span> <span class="n">N</span> <span class="p">)</span>
+    <span class="n">dIdt</span> <span class="o">=</span> <span class="n">beta</span> <span class="o">*</span> <span class="p">(</span> <span class="p">(</span> <span class="n">S</span> <span class="o">*</span> <span class="n">I</span> <span class="p">)</span> <span class="o">/</span> <span class="n">N</span> <span class="p">)</span> <span class="o">-</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">I</span>
+    <span class="n">dRdt</span> <span class="o">=</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">I</span>
+    
+    <span class="k">return</span> <span class="p">[</span><span class="n">dSdt</span><span class="p">,</span> <span class="n">dIdt</span><span class="p">,</span> <span class="n">dRdt</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then, the <strong>initial conditions</strong>, the <strong>parameters of the model</strong> and the <strong>time grid</strong> are initialized, note that the starting conditions are already normalized, for this reason <span class="math notranslate nohighlight">\(N\)</span> is put equal to 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the initial conditions. </span>
+<span class="n">y0</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">1</span> <span class="o">-</span> <span class="mf">0.001</span> <span class="p">,</span> <span class="mf">0.001</span> <span class="p">,</span> <span class="mi">0</span> <span class="p">]</span> <span class="c1">#y0 = [ S0 , I0 , R0 ]</span>
+
+<span class="c1"># Define the parameters values.</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="mf">0.8</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="mf">5.4</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Define the initial and final time and the number of time steps.</span>
+<span class="n">ti</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">tf</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">n_dt</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">tspan</span> <span class="o">=</span> <span class="p">(</span> <span class="n">ti</span> <span class="p">,</span> <span class="n">tf</span> <span class="p">)</span> 
+<span class="n">tmeasurements</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span> <span class="n">ti</span> <span class="p">,</span> <span class="n">tf</span> <span class="p">,</span> <span class="n">n_dt</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, the <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> function from <code class="docutils literal notranslate"><span class="pre">scipy</span></code> is used to integrate the system and the result is plotted.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solve the system of differential equations using solve_ivp</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">sir_model</span><span class="p">(</span> <span class="n">t</span> <span class="p">,</span> <span class="n">y</span> <span class="p">,</span> <span class="n">beta</span> <span class="p">,</span> <span class="n">gamma</span> <span class="p">,</span> <span class="n">N</span> <span class="p">),</span> <span class="n">tspan</span> <span class="p">,</span> <span class="n">y0</span> <span class="p">,</span> <span class="n">t_eval</span> <span class="o">=</span> <span class="n">tmeasurements</span> <span class="p">)</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Input description:</span>
+
+<span class="sd">lambda t = the right hand side of the system is a function of t.</span>
+<span class="sd">y = output of the &quot;sir_model&quot; function defined above. </span>
+<span class="sd">tspan = Interval of integration (t0, tf). </span>
+<span class="sd">y0 = Initial state.</span>
+<span class="sd">t_eval = Times at which to store the computed solution.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Plot the results</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;g&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span> <span class="s2">&quot;t [days]&quot;</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span> <span class="s2">&quot;progress [%]&quot;</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span> <span class="s2">&quot; SIR dynamical evolution &quot;</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;(S) subsceptible &quot;</span><span class="p">,</span> <span class="s2">&quot;(I) infected&quot;</span><span class="p">,</span> <span class="s2">&quot;(R) recovered&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/b516f44f6597f018e613ae379790d46fe50c0bdfed51d6333e2c2bfca8dea5e8.png" src="../_images/b516f44f6597f018e613ae379790d46fe50c0bdfed51d6333e2c2bfca8dea5e8.png" />
+</div>
+</div>
+<section id="physics-informed-least-square-regression">
+<h2>Physics-Informed Least Square Regression<a class="headerlink" href="#physics-informed-least-square-regression" title="Link to this heading">#</a></h2>
+<p>The parameters <span class="math notranslate nohighlight">\(\beta\)</span> and <span class="math notranslate nohighlight">\(\gamma\)</span> can be found using the PI-LSR (Physics Informed Least Square Regression):</p>
+<div class="amsmath math notranslate nohighlight" id="equation-dc7a2236-e34d-4197-8c82-f5608006fdc3">
+<span class="eqno">(1)<a class="headerlink" href="#equation-dc7a2236-e34d-4197-8c82-f5608006fdc3" title="Permalink to this equation">#</a></span>\[\begin{gather}
+b=Ax\Rightarrow x=(A^{+}A^{-1})A^{+}b
+\end{gather}\]</div>
+<p>where <span class="math notranslate nohighlight">\(+\)</span> indicates the complex conjugate and :</p>
+<div class="amsmath math notranslate nohighlight" id="equation-bb02e9c9-f748-4a64-b106-b24a06b752c5">
+<span class="eqno">(2)<a class="headerlink" href="#equation-bb02e9c9-f748-4a64-b106-b24a06b752c5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+b = \begin{bmatrix}  \frac{\partial S}{\partial t} \\ \frac{\partial I}{\partial t} \\ \frac{\partial R}{\partial t}  \end{bmatrix}
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-33d4c201-b8b5-44ab-8049-2ba1c9d54587">
+<span class="eqno">(3)<a class="headerlink" href="#equation-33d4c201-b8b5-44ab-8049-2ba1c9d54587" title="Permalink to this equation">#</a></span>\[\begin{align}
+A = \begin{bmatrix}  -\frac{SI}{N} &amp; 0 \\ \frac{SI}{N} &amp; -I \\ 0 &amp; I  \end{bmatrix}
+\end{align}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-98e1319c-c038-4e1b-a76c-eb38a2323986">
+<span class="eqno">(4)<a class="headerlink" href="#equation-98e1319c-c038-4e1b-a76c-eb38a2323986" title="Permalink to this equation">#</a></span>\[\begin{align}
+x = \begin{bmatrix} \beta \\ \gamma \end{bmatrix}
+\end{align}\]</div>
+<p>In particular, we build every derivative and physical quantity as a column vector, where each row is a step forward in time. So, given the vectors <span class="math notranslate nohighlight">\(S\)</span>, <span class="math notranslate nohighlight">\(I\)</span>, and <span class="math notranslate nohighlight">\(R\)</span>, which describe how these quantities develop in time, and using the forward finite difference method to compute the respective derivatives, we can compute <span class="math notranslate nohighlight">\(x\)</span> as shown below.</p>
+<p><strong>STEP 1:</strong> We define a function to compute the forward finite difference and obtain the first-order approximation of the derivatives of the dynamical quantities. Then, we stack the derivatives in a long column vector to obtain the solution of the above system, <span class="math notranslate nohighlight">\(b\)</span>, whose dimension will be <span class="math notranslate nohighlight">\(3\cdot time\_steps\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a function to compute the &quot;Simple forward finitedifference approximations&quot; in order to get vector b.</span>
+<span class="k">def</span> <span class="nf">FDM</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">DT</span> <span class="p">):</span>
+    
+    <span class="n">X</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span> <span class="mi">0</span> <span class="p">:</span> <span class="o">-</span><span class="mi">2</span> <span class="p">]</span>
+    <span class="n">X_prime</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span> <span class="mi">1</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span> <span class="p">]</span>
+    
+    <span class="n">dXdt</span> <span class="o">=</span> <span class="p">(</span> <span class="n">X_prime</span> <span class="o">-</span> <span class="n">X</span> <span class="p">)</span> <span class="o">/</span> <span class="n">DT</span>
+    
+    <span class="k">return</span> <span class="n">dXdt</span>
+
+<span class="c1"># Compute the dimension of a time step (here we can use this demplifications because the steps have all the same dimension).</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="p">(</span> <span class="n">tf</span> <span class="o">-</span> <span class="n">ti</span> <span class="p">)</span> <span class="o">/</span> <span class="n">n_dt</span>
+
+<span class="c1"># Assign to the variables a more recognizible name.</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">I</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="c1"># Use the FDM function to get dSdt, dIdt, dRdt.</span>
+<span class="n">dSdt</span> <span class="o">=</span> <span class="n">FDM</span><span class="p">(</span> <span class="n">S</span> <span class="p">,</span> <span class="n">dt</span> <span class="p">)</span>
+<span class="n">dIdt</span> <span class="o">=</span> <span class="n">FDM</span><span class="p">(</span> <span class="n">I</span> <span class="p">,</span> <span class="n">dt</span> <span class="p">)</span>
+<span class="n">dRdt</span> <span class="o">=</span> <span class="n">FDM</span><span class="p">(</span> <span class="n">R</span> <span class="p">,</span> <span class="n">dt</span> <span class="p">)</span>
+
+<span class="c1"># Reconstruct the b vector of the system b = Ax.</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span> <span class="p">(</span> <span class="n">dSdt</span> <span class="p">,</span> <span class="n">dIdt</span> <span class="p">,</span> <span class="n">dRdt</span> <span class="p">)</span> <span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>STEP 2: We use the results of the previous exercise, <span class="math notranslate nohighlight">\(S\)</span>, <span class="math notranslate nohighlight">\(I\)</span> and <span class="math notranslate nohighlight">\(R\)</span> to compute the matrix <span class="math notranslate nohighlight">\(A\)</span> of the system above, whose shape will be <span class="math notranslate nohighlight">\((3\cdot time\_steps \times 2)\)</span>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reconstruct matrix A of the system b = Ax.</span>
+<span class="k">def</span> <span class="nf">build_A</span><span class="p">(</span> <span class="o">*</span><span class="n">args</span> <span class="p">):</span>
+    
+    <span class="n">A</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="kc">None</span> <span class="p">]</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span> <span class="mi">1</span> <span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">):</span>
+        <span class="n">next_col</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span> <span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">)</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span> <span class="p">(</span><span class="n">A</span> <span class="p">,</span> <span class="n">next_col</span><span class="p">)</span> <span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">A</span>
+        
+<span class="n">col0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span> <span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="p">(</span> <span class="o">-</span> <span class="p">(</span> <span class="n">S</span><span class="p">[</span> <span class="mi">1</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span> <span class="p">]</span> <span class="o">*</span> <span class="n">I</span><span class="p">[</span> <span class="mi">1</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span> <span class="p">]</span> <span class="p">)</span> <span class="o">/</span> <span class="n">N</span>  <span class="p">)</span> <span class="p">)</span> <span class="p">,</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="p">(</span> <span class="n">S</span><span class="p">[</span> <span class="mi">1</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span> <span class="p">]</span> <span class="o">*</span> <span class="n">I</span><span class="p">[</span> <span class="mi">1</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span> <span class="p">]</span> <span class="p">)</span> <span class="o">/</span> <span class="n">N</span> <span class="p">),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="p">(</span> <span class="n">n_dt</span> <span class="o">-</span> <span class="mi">2</span> <span class="p">)</span> <span class="p">)</span> <span class="p">)</span> <span class="p">)</span>
+
+<span class="n">col1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span> <span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="p">(</span> <span class="n">n_dt</span> <span class="o">-</span> <span class="mi">2</span> <span class="p">)</span> <span class="p">),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="o">-</span> <span class="n">I</span><span class="p">[</span><span class="mi">1</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">N</span> <span class="p">),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="n">I</span><span class="p">[</span><span class="mi">1</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">N</span> <span class="p">)</span> <span class="p">)</span> <span class="p">)</span> 
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">build_A</span><span class="p">(</span> <span class="n">col0</span> <span class="p">,</span> <span class="n">col1</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>STEP 3: Now we just need to implement the Physics-informed Least-Squares Regression, and print the results, which fit the analytical value with a nice percentage error.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Implement LSR.</span>
+
+<span class="n">AT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span> <span class="p">(</span><span class="n">AT</span> <span class="o">@</span> <span class="n">A</span><span class="p">)</span> <span class="p">)</span> <span class="o">@</span> <span class="n">AT</span> <span class="o">@</span> <span class="n">b</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---&gt; Using PI-LSR with FDM, beta computed is: </span><span class="si">{:.5f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The percentage error (in absolute value) wrt the alaytical value is </span><span class="si">{:.5f}</span><span class="s2">% &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">beta</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="o">/</span><span class="n">beta</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---&gt; Using PI-LSR with FDM, gamma computed is: </span><span class="si">{:.5f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The percentage error (in absolute value) wrt the alaytical value is </span><span class="si">{:.5f}</span><span class="s2">% &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">gamma</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="o">/</span><span class="n">gamma</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>---&gt; Using PI-LSR with FDM, beta computed is: 0.80149
+The percentage error (in absolute value) wrt the alaytical value is 0.18597% 
+
+---&gt; Using PI-LSR with FDM, gamma computed is: 0.18516
+The percentage error (in absolute value) wrt the alaytical value is 0.01609% 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-bathema-equations">
+<h2>The Bathema Equations.<a class="headerlink" href="#the-bathema-equations" title="Link to this heading">#</a></h2>
+<p>Bateman equation is a mathematical model that describes the abundance of a nuclide in the decay chain of isotopes. In order to calculate the population of a particular isotope, one would solve the Bateman equation governing the decay chain that includes the isotope of interest. A simple decay chain, where each nuclde has a single decay proct can be written as:</p>
+<div class="math notranslate nohighlight">
+\[ X_1 \rightarrow 
+\,\,\,\,\,\,
+X_2 \rightarrow 
+\,\,\,\,\,\,
+X_3 \rightarrow ... 
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(X_1\)</span> is typically called “parent” nuclide, while <span class="math notranslate nohighlight">\(X_2\)</span> and <span class="math notranslate nohighlight">\(X_3\)</span> are the “daughter” and the “grand-daughter” respectively; <a class="reference external" href="https://periodictable.com/Isotopes/052.132/index2.full.dm.html">this link</a> provides with all the decay chains of the nuclide periodic table.</p>
+<p>Let <span class="math notranslate nohighlight">\(N_2(t)\)</span> and <span class="math notranslate nohighlight">\(N_3(t)\)</span> be the population ratios of two nuclides <span class="math notranslate nohighlight">\(X_2\)</span> and <span class="math notranslate nohighlight">\(X_3\)</span> at time t, starting from a condition where only <span class="math notranslate nohighlight">\(X_1\)</span> was present. We can then write how the ratios of these three populations evolve in time, given the decay constant of each of them:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial N_1(t)}{\partial t} = -\lambda_1 N_1(t) 
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial N_2(t)}{\partial t} = \lambda_1 N_1(t) -\lambda_2 N_2(t) 
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial N_3(t)}{\partial t} = -\lambda_2 N_2(t) -\lambda_3 N_3(t)
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\lambda_1\)</span> is the decay constant of <span class="math notranslate nohighlight">\(X_1\)</span> ( <span class="math notranslate nohighlight">\(s^{-1}\)</span> ).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\lambda_2\)</span> is the decay constant of <span class="math notranslate nohighlight">\(X_2\)</span> ( <span class="math notranslate nohighlight">\(s^{-1}\)</span> ).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\lambda_3\)</span> is the decay constant of <span class="math notranslate nohighlight">\(X_3\)</span> ( <span class="math notranslate nohighlight">\(s^{-1}\)</span> ).</p></li>
+</ul>
+<p>and they can be obtained numerically through their half-lives ( <span class="math notranslate nohighlight">\(\lambda = ln(2)/t_{1/2}\)</span> ). Such system can be then solved using the same strategy as before.</p>
+<p><strong>ATTENTION</strong>: here I did assumption that there exist an instant, <span class="math notranslate nohighlight">\(t_0\)</span>, where only <span class="math notranslate nohighlight">\(X_1\)</span> is present ( <span class="math notranslate nohighlight">\(N_1(0) = 1\)</span> , <span class="math notranslate nohighlight">\(N_2(0)=N_3(0) = 0\)</span> ). Beasides, I am considering am as a relative quantities and not as an absolute number of nuclides.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the necessary libraries.</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">solve_ivp</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># RHS function.</span>
+<span class="k">def</span> <span class="nf">sir_model</span><span class="p">(</span> <span class="n">t</span> <span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lambda1</span> <span class="p">,</span> <span class="n">lambda2</span> <span class="p">,</span> <span class="n">lambda3</span> <span class="p">):</span>
+    <span class="c1"># Define the system of differential equations.</span>
+    <span class="n">N1</span><span class="p">,</span> <span class="n">N2</span><span class="p">,</span> <span class="n">N3</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="n">dN1dt</span> <span class="o">=</span> <span class="o">-</span> <span class="n">lambda1</span> <span class="o">*</span> <span class="n">N1</span>
+    <span class="n">dN2dt</span> <span class="o">=</span> <span class="n">lambda1</span> <span class="o">*</span> <span class="n">N1</span> <span class="o">-</span> <span class="n">lambda2</span> <span class="o">*</span> <span class="n">N2</span>
+    <span class="n">dN3dt</span> <span class="o">=</span> <span class="n">lambda2</span> <span class="o">*</span> <span class="n">N2</span> <span class="o">-</span> <span class="n">lambda3</span> <span class="o">*</span> <span class="n">N3</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">dN1dt</span><span class="p">,</span> <span class="n">dN2dt</span><span class="p">,</span> <span class="n">dN3dt</span><span class="p">]</span>
+
+<span class="c1"># Define the initial conditions and parameters values</span>
+<span class="n">y0</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">1</span> <span class="p">,</span> <span class="mi">0</span> <span class="p">,</span> <span class="mi">0</span> <span class="p">]</span> <span class="c1">#[N1(0), N2(0), N3(0)]</span>
+<span class="n">l1</span> <span class="o">=</span> <span class="mf">0.693</span> <span class="o">/</span> <span class="mi">7</span>     <span class="c1"># t1/2 = 7 min (Cadmium-103)</span>
+<span class="n">l2</span> <span class="o">=</span> <span class="mf">0.693</span> <span class="o">/</span> <span class="mi">66</span>    <span class="c1"># t1/2 = 66 min (Silver-103)</span>
+<span class="n">l3</span> <span class="o">=</span> <span class="mf">0.693</span> <span class="o">/</span> <span class="mi">23040</span> <span class="c1"># t1/2 = 16 days (Palladium-103)</span>
+
+<span class="n">ti</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">tf</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">n_dt</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">tspan</span> <span class="o">=</span> <span class="p">(</span> <span class="n">ti</span> <span class="p">,</span> <span class="n">tf</span> <span class="p">)</span> 
+
+<span class="c1"># Solve the system of differential equations using solve_ivp</span>
+<span class="n">tmeasurements</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span> <span class="n">ti</span> <span class="p">,</span> <span class="n">tf</span> <span class="p">,</span> <span class="n">n_dt</span> <span class="p">)</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">sir_model</span><span class="p">(</span> <span class="n">t</span> <span class="p">,</span> <span class="n">y</span> <span class="p">,</span> <span class="n">l1</span> <span class="p">,</span> <span class="n">l2</span><span class="p">,</span> <span class="n">l3</span> <span class="p">),</span> <span class="n">tspan</span> <span class="p">,</span> <span class="n">y0</span> <span class="p">,</span> <span class="n">t_eval</span> <span class="o">=</span> <span class="n">tmeasurements</span> <span class="p">)</span>
+
+<span class="c1"># Plot the results</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;g&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span> <span class="s2">&quot;t [min]&quot;</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span> <span class="s2">&quot;Radiactive nuclei [%]&quot;</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span> <span class="s2">&quot; Dynamical evolution of the Bathema Equations &quot;</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot; $Nuclide-1$ &quot;</span><span class="p">,</span> <span class="s2">&quot;$Nuclide-2$&quot;</span><span class="p">,</span> <span class="s2">&quot;$Nuclide-3$&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5ac2f49aa527b9606ddc53cf79ada6fdba92870a5d137ce7d320b30b1afdd93b.png" src="../_images/5ac2f49aa527b9606ddc53cf79ada6fdba92870a5d137ce7d320b30b1afdd93b.png" />
+</div>
+</div>
+<p>In this case I used:</p>
+<ul class="simple">
+<li><p>Nuclide1 = Cadmium-103.</p></li>
+<li><p>Nuclide2 = Silver-103.</p></li>
+<li><p>Nuclide3 = Palladium-103.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="n">display</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;./Img/decay_chain.png&quot;</span><span class="p">,</span> <span class="n">embed</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9504ded85be6d06546c502dd72665613cbf5dc543904799efa23cd1e6ee24b7c.png" src="../_images/9504ded85be6d06546c502dd72665613cbf5dc543904799efa23cd1e6ee24b7c.png" />
+</div>
+</div>
+<p>The father and the doughter have comparable half-lives, while the grandoughter is more stable. Many other really existing chains could be traied by looking at the link provided above. Now we can use the PI-LSR to find the decay constants from the generated data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute the dimension of a time step (here we can use this demplifications because the steps have all the same dimension).</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="p">(</span> <span class="n">tf</span> <span class="o">-</span> <span class="n">ti</span> <span class="p">)</span> <span class="o">/</span> <span class="n">n_dt</span>
+
+<span class="c1"># Assign to the variables a more recognizible name.</span>
+<span class="n">N1</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">N2</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">N3</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="c1"># Use the FDM function to get dSdt, dIdt, dRdt.</span>
+<span class="n">dN1dt</span> <span class="o">=</span> <span class="n">FDM</span><span class="p">(</span> <span class="n">N1</span> <span class="p">,</span> <span class="n">dt</span> <span class="p">)</span>
+<span class="n">dN2dt</span> <span class="o">=</span> <span class="n">FDM</span><span class="p">(</span> <span class="n">N2</span> <span class="p">,</span> <span class="n">dt</span> <span class="p">)</span>
+<span class="n">dN3dt</span> <span class="o">=</span> <span class="n">FDM</span><span class="p">(</span> <span class="n">N3</span> <span class="p">,</span> <span class="n">dt</span> <span class="p">)</span>
+
+<span class="c1"># Reconstruct the b vector of the system b = Ax.</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span> <span class="p">(</span> <span class="n">dN1dt</span> <span class="p">,</span> <span class="n">dN2dt</span> <span class="p">,</span> <span class="n">dN3dt</span> <span class="p">)</span> <span class="p">)</span> 
+        
+<span class="n">col0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span> <span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="o">-</span> <span class="n">N1</span><span class="p">[</span> <span class="mi">1</span> <span class="p">:</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="p">)</span> <span class="p">,</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="n">N1</span><span class="p">[</span> <span class="mi">1</span> <span class="p">:</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>  <span class="p">),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="p">(</span> <span class="n">n_dt</span> <span class="o">-</span> <span class="mi">2</span> <span class="p">)</span> <span class="p">)</span> 
+                  <span class="p">)</span> <span class="p">)</span>
+
+<span class="n">col1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span> <span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="p">(</span> <span class="n">n_dt</span> <span class="o">-</span> <span class="mi">2</span> <span class="p">)</span> <span class="p">),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="o">-</span> <span class="n">N2</span><span class="p">[</span> <span class="mi">1</span> <span class="p">:</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="p">),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="n">N2</span><span class="p">[</span> <span class="mi">1</span> <span class="p">:</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="p">)</span> 
+                  <span class="p">)</span> <span class="p">)</span> 
+
+<span class="n">col2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span> <span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="p">(</span> <span class="n">n_dt</span> <span class="o">-</span> <span class="mi">2</span> <span class="p">)</span> <span class="p">),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="p">(</span> <span class="n">n_dt</span> <span class="o">-</span> <span class="mi">2</span> <span class="p">)</span> <span class="p">),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="o">-</span><span class="n">N3</span><span class="p">[</span> <span class="mi">1</span> <span class="p">:</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="p">)</span> 
+                  <span class="p">)</span> <span class="p">)</span> 
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">build_A</span><span class="p">(</span> <span class="n">col0</span> <span class="p">,</span> <span class="n">col1</span> <span class="p">,</span> <span class="n">col2</span> <span class="p">)</span>
+
+<span class="c1"># Implement LSR.</span>
+<span class="n">AT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span> <span class="p">(</span><span class="n">AT</span> <span class="o">@</span> <span class="n">A</span><span class="p">)</span> <span class="p">)</span> <span class="o">@</span> <span class="n">AT</span> <span class="o">@</span> <span class="n">b</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---&gt; Using PI-LSR with FDM, beta computed is: </span><span class="si">{:.5f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The percentage error (in absolute value) wrt the alaytical value is </span><span class="si">{:.5f}</span><span class="s2">% &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">l1</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="o">/</span><span class="n">l1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---&gt; Using PI-LSR with FDM, gamma computed is: </span><span class="si">{:.5f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The percentage error (in absolute value) wrt the alaytical value is </span><span class="si">{:.5f}</span><span class="s2">% &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">l2</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="o">/</span><span class="n">l2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---&gt; Using PI-LSR with FDM, gamma computed is: </span><span class="si">{:.5f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The percentage error (in absolute value) wrt the alaytical value is </span><span class="si">{:.5f}</span><span class="s2">% &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">l3</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="o">/</span><span class="n">l3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>---&gt; Using PI-LSR with FDM, beta computed is: 0.09917
+The percentage error (in absolute value) wrt the alaytical value is 0.17005% 
+
+---&gt; Using PI-LSR with FDM, gamma computed is: 0.01050
+The percentage error (in absolute value) wrt the alaytical value is 0.02347% 
+
+---&gt; Using PI-LSR with FDM, gamma computed is: 0.00003
+The percentage error (in absolute value) wrt the alaytical value is 0.10708% 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Exercise X01.1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome to the Scientific Machine Learning Jupyter Book</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Exercise%201.7/Exercise_1.7_.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Exercise 1.7 - Singular Value Decomposition</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#physics-informed-least-square-regression">Physics-Informed Least Square Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bathema-equations">The Bathema Equations.</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Nicole Rosi & Jens Peter Schøler
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
