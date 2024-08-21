@@ -6,6 +6,6 @@
 
 :sunglasses: Authors are Nicole Rosi and Jens Peter Schøler. 
 
-:video_camera: The Notebooks contains link to my Youtube channel were videos can be dispalied. 
+:video_camera: The Notebooks contains links to my Youtube channel were videos can be dispalied. 
 
-📔 [Link](https://n-rosi.github.io/Scientific_Machine_Learning/intro.html) to the jupyter-book format.
+📔 [Link](https://n-rosi.github.io/Scientific-Machine-Learning/intro.html) to the jupyter-book format.

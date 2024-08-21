@@ -478,7 +478,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_3946016/1616666174.py:6: MatplotlibDeprecationWarning: The dist attribute was deprecated in Matplotlib 3.6 and will be removed two minor releases later.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_4013441/1616666174.py:6: MatplotlibDeprecationWarning: The dist attribute was deprecated in Matplotlib 3.6 and will be removed two minor releases later.
   ax.dist = 12
 </pre></div>
 </div>
@@ -526,56 +526,107 @@ document.write(`
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0it [00:00, ?it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0it [00:29, ?it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1it [00:50, 50.08s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2it [01:48, 54.88s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3it [02:02, 36.43s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4it [02:55, 42.97s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5it [03:48, 46.65s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6it [04:03, 35.57s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6it [04:03, 40.50s/it]
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">22</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="n">x</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">kappa</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">setup_problem</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">dx</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="n">timing_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="ne">---&gt; </span><span class="mi">22</span> <span class="n">u</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">rhsBurgers</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">kappa</span><span class="p">,</span><span class="n">nu</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="n">timing</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">timing_start</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="n">idx_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mf">1.6037</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/scipy/integrate/_odepack_py.py:241,</span> in <span class="ni">odeint</span><span class="nt">(func, y0, t, args, Dfun, col_deriv, full_output, ml, mu, rtol, atol, tcrit, h0, hmax, hmin, ixpr, mxstep, mxhnil, mxordn, mxords, printmessg, tfirst)</span>
-<span class="g g-Whitespace">    </span><span class="mi">239</span> <span class="n">t</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">240</span> <span class="n">y0</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">y0</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">241</span> <span class="n">output</span> <span class="o">=</span> <span class="n">_odepack</span><span class="o">.</span><span class="n">odeint</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">Dfun</span><span class="p">,</span> <span class="n">col_deriv</span><span class="p">,</span> <span class="n">ml</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">242</span>                          <span class="n">full_output</span><span class="p">,</span> <span class="n">rtol</span><span class="p">,</span> <span class="n">atol</span><span class="p">,</span> <span class="n">tcrit</span><span class="p">,</span> <span class="n">h0</span><span class="p">,</span> <span class="n">hmax</span><span class="p">,</span> <span class="n">hmin</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">243</span>                          <span class="n">ixpr</span><span class="p">,</span> <span class="n">mxstep</span><span class="p">,</span> <span class="n">mxhnil</span><span class="p">,</span> <span class="n">mxordn</span><span class="p">,</span> <span class="n">mxords</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">244</span>                          <span class="nb">int</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">tfirst</span><span class="p">)))</span>
-<span class="g g-Whitespace">    </span><span class="mi">245</span> <span class="k">if</span> <span class="n">output</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">246</span>     <span class="n">warning_msg</span> <span class="o">=</span> <span class="n">_msgs</span><span class="p">[</span><span class="n">output</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="s2">&quot; Run with full_output = 1 to get quantitative information.&quot;</span>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-<span class="nn">Cell In[2], line 15,</span> in <span class="ni">rhsBurgers</span><span class="nt">(u, t, kappa, nu)</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="k">def</span> <span class="nf">rhsBurgers</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">kappa</span><span class="p">,</span><span class="n">nu</span><span class="p">):</span>
-<span class="ne">---&gt; </span><span class="mi">15</span>     <span class="n">uhat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="n">d_uhat</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="p">)</span><span class="o">*</span><span class="n">kappa</span><span class="o">*</span><span class="n">uhat</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="n">dd_uhat</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">kappa</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">uhat</span>
-
-<span class="nn">File &lt;__array_function__ internals&gt;:180,</span> in <span class="ni">fft</span><span class="nt">(*args, **kwargs)</span>
-
-<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/numpy/fft/_pocketfft.py:215,</span> in <span class="ni">fft</span><span class="nt">(a, n, axis, norm)</span>
-<span class="g g-Whitespace">    </span><span class="mi">213</span>     <span class="n">n</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">214</span> <span class="n">inv_norm</span> <span class="o">=</span> <span class="n">_get_forward_norm</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">norm</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">215</span> <span class="n">output</span> <span class="o">=</span> <span class="n">_raw_fft</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">inv_norm</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">216</span> <span class="k">return</span> <span class="n">output</span>
-
-<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/numpy/fft/_pocketfft.py:70,</span> in <span class="ni">_raw_fft</span><span class="nt">(a, n, axis, is_real, is_forward, inv_norm)</span>
-<span class="g g-Whitespace">     </span><span class="mi">67</span>         <span class="n">a</span> <span class="o">=</span> <span class="n">z</span>
-<span class="g g-Whitespace">     </span><span class="mi">69</span> <span class="k">if</span> <span class="n">axis</span> <span class="o">==</span> <span class="n">a</span><span class="o">.</span><span class="n">ndim</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">70</span>     <span class="n">r</span> <span class="o">=</span> <span class="n">pfi</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">is_real</span><span class="p">,</span> <span class="n">is_forward</span><span class="p">,</span> <span class="n">fct</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">71</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">72</span>     <span class="n">a</span> <span class="o">=</span> <span class="n">swapaxes</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
-</pre></div>
-</div>
-</div>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>dt</th>
+      <th>dx</th>
+      <th>t_est*pi</th>
+      <th>du_x</th>
+      <th>timing</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.001</td>
+      <td>0.00050</td>
+      <td>1.602212</td>
+      <td>-152.004810</td>
+      <td>50.076087</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.001</td>
+      <td>0.00075</td>
+      <td>1.602212</td>
+      <td>-151.101123</td>
+      <td>58.230728</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.001</td>
+      <td>0.00100</td>
+      <td>1.602212</td>
+      <td>-152.004818</td>
+      <td>14.480112</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.010</td>
+      <td>0.00050</td>
+      <td>1.602212</td>
+      <td>-152.004809</td>
+      <td>52.993297</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.010</td>
+      <td>0.00075</td>
+      <td>1.602212</td>
+      <td>-151.101131</td>
+      <td>53.164737</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.010</td>
+      <td>0.00100</td>
+      <td>1.602212</td>
+      <td>-152.004810</td>
+      <td>14.044016</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>As can be seen from the results they do not exactly refelct the target but come quite close. This coudl perhaps be improved with a finer discretisation in time as well as in space. However this is deemed to be more work than it is worth.</p>
 </section>

@@ -588,7 +588,7 @@ paddle supports more examples now and is recommended.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Compiling model...
-&#39;compile&#39; took 0.000218 s
+&#39;compile&#39; took 0.000219 s
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training model...
@@ -597,133 +597,289 @@ paddle supports more examples now and is recommended.
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step      Train loss                                                                                    Test loss                                                                                     Test metric
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0         [1.10e-01, 4.89e-02, 1.26e+01, 6.40e+01, 4.90e+01, 7.29e+02, 3.64e+01, 3.71e+01, 2.10e+02]    [1.10e-01, 4.89e-02, 1.26e+01, 6.40e+01, 4.90e+01, 7.29e+02, 3.64e+01, 3.71e+01, 2.10e+02]    []  
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0         [7.65e-01, 1.50e+00, 1.26e+01, 6.40e+01, 4.90e+01, 7.29e+02, 3.39e+01, 2.85e+01, 2.21e+02]    [7.65e-01, 1.50e+00, 1.26e+01, 6.40e+01, 4.90e+01, 7.29e+02, 3.39e+01, 2.85e+01, 2.21e+02]    []  
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1000      [5.18e+00, 3.11e+00, 1.29e+01, 3.37e+01, 1.04e-06, 1.20e+00, 3.52e+01, 6.65e+00, 1.26e+01]    [5.18e+00, 3.11e+00, 1.29e+01, 3.37e+01, 1.04e-06, 1.20e+00, 3.52e+01, 6.65e+00, 1.26e+01]    []  
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1000      [4.18e+00, 3.58e+00, 1.34e+01, 3.60e+01, 1.32e-02, 1.22e+00, 3.52e+01, 6.66e+00, 1.24e+01]    [4.18e+00, 3.58e+00, 1.34e+01, 3.60e+01, 1.32e-02, 1.22e+00, 3.52e+01, 6.66e+00, 1.24e+01]    []  
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2000      [9.25e+00, 2.32e+00, 9.59e+00, 1.82e+01, 2.37e-01, 1.25e+00, 3.55e+01, 1.25e+01, 6.49e+00]    [9.25e+00, 2.32e+00, 9.59e+00, 1.82e+01, 2.37e-01, 1.25e+00, 3.55e+01, 1.25e+01, 6.49e+00]    []  
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2000      [8.33e+00, 2.10e+00, 1.01e+01, 1.94e+01, 2.29e-01, 1.44e+00, 3.56e+01, 1.29e+01, 6.04e+00]    [8.33e+00, 2.10e+00, 1.01e+01, 1.94e+01, 2.29e-01, 1.44e+00, 3.56e+01, 1.29e+01, 6.04e+00]    []  
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span> <span class="s2">&quot;adam&quot;</span> <span class="p">,</span> <span class="n">lr</span> <span class="o">=</span> <span class="mf">0.001</span> <span class="p">,</span> <span class="n">external_trainable_variables</span> <span class="o">=</span> <span class="p">[</span> <span class="n">sigma</span> <span class="p">,</span> <span class="n">rho</span> <span class="p">,</span> <span class="n">beta</span> <span class="p">])</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">variable</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">VariableValue</span><span class="p">(</span> <span class="p">[</span> <span class="n">sigma</span> <span class="p">,</span> <span class="n">rho</span> <span class="p">,</span> <span class="n">beta</span> <span class="p">],</span> <span class="n">period</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">filename</span> <span class="o">=</span> <span class="n">fnamevar</span> <span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span> <span class="n">iterations</span> <span class="o">=</span> <span class="mi">90000</span><span class="p">,</span> <span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span> <span class="n">variable</span> <span class="p">]</span> <span class="p">)</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3000      [8.91e+00, 2.26e+00, 9.02e+00, 1.46e+01, 2.89e-01, 1.23e+00, 3.56e+01, 1.61e+01, 3.67e+00]    [8.91e+00, 2.26e+00, 9.02e+00, 1.46e+01, 2.89e-01, 1.23e+00, 3.56e+01, 1.61e+01, 3.67e+00]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4000      [8.78e+00, 2.16e+00, 5.51e+00, 1.22e+01, 2.76e-01, 9.97e-01, 3.56e+01, 1.75e+01, 3.11e+00]    [8.78e+00, 2.16e+00, 5.51e+00, 1.22e+01, 2.76e-01, 9.97e-01, 3.56e+01, 1.75e+01, 3.11e+00]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5000      [8.75e+00, 2.15e+00, 2.50e+00, 9.83e+00, 2.54e-01, 8.53e-01, 3.55e+01, 1.89e+01, 2.87e+00]    [8.75e+00, 2.15e+00, 2.50e+00, 9.83e+00, 2.54e-01, 8.53e-01, 3.55e+01, 1.89e+01, 2.87e+00]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6000      [8.42e+00, 2.41e+00, 2.24e+00, 8.24e+00, 2.40e-01, 7.41e-01, 3.51e+01, 1.96e+01, 2.48e+00]    [8.42e+00, 2.41e+00, 2.24e+00, 8.24e+00, 2.40e-01, 7.41e-01, 3.51e+01, 1.96e+01, 2.48e+00]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7000      [7.77e+00, 2.77e+00, 3.37e-01, 6.97e+00, 2.33e-01, 7.69e-01, 3.40e+01, 1.93e+01, 1.77e+00]    [7.77e+00, 2.77e+00, 3.37e-01, 6.97e+00, 2.33e-01, 7.69e-01, 3.40e+01, 1.93e+01, 1.77e+00]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8000      [7.05e+00, 3.49e+00, 2.21e-01, 5.70e+00, 2.25e-01, 6.35e-01, 3.23e+01, 1.95e+01, 2.03e+00]    [7.05e+00, 3.49e+00, 2.21e-01, 5.70e+00, 2.25e-01, 6.35e-01, 3.23e+01, 1.95e+01, 2.03e+00]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9000      [1.40e+00, 2.56e+00, 6.70e-01, 2.24e+00, 3.51e-01, 1.69e-01, 7.94e+00, 8.95e+00, 1.44e+01]    [1.40e+00, 2.56e+00, 6.70e-01, 2.24e+00, 3.51e-01, 1.69e-01, 7.94e+00, 8.95e+00, 1.44e+01]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10000     [4.96e-01, 1.21e+00, 4.26e-01, 9.52e-01, 1.89e-01, 1.05e-02, 2.74e+00, 3.27e+00, 1.04e+01]    [4.96e-01, 1.21e+00, 4.26e-01, 9.52e-01, 1.89e-01, 1.05e-02, 2.74e+00, 3.27e+00, 1.04e+01]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11000     [2.90e-01, 7.39e-01, 3.68e-01, 4.68e-01, 6.98e-02, 4.16e-03, 1.27e+00, 1.53e+00, 6.41e+00]    [2.90e-01, 7.39e-01, 3.68e-01, 4.68e-01, 6.98e-02, 4.16e-03, 1.27e+00, 1.53e+00, 6.41e+00]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12000     [1.95e-01, 4.98e-01, 2.98e-01, 2.95e-01, 1.94e-02, 2.29e-02, 6.78e-01, 7.50e-01, 3.50e+00]    [1.95e-01, 4.98e-01, 2.98e-01, 2.95e-01, 1.94e-02, 2.29e-02, 6.78e-01, 7.50e-01, 3.50e+00]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13000     [1.02e-01, 3.02e-01, 2.01e-01, 1.43e-01, 4.71e-03, 2.66e-02, 4.07e-01, 4.15e-01, 1.69e+00]    [1.02e-01, 3.02e-01, 2.01e-01, 1.43e-01, 4.71e-03, 2.66e-02, 4.07e-01, 4.15e-01, 1.69e+00]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14000     [5.89e-02, 1.67e-01, 1.28e-01, 6.77e-02, 1.35e-03, 1.77e-02, 2.49e-01, 2.40e-01, 7.08e-01]    [5.89e-02, 1.67e-01, 1.28e-01, 6.77e-02, 1.35e-03, 1.77e-02, 2.49e-01, 2.40e-01, 7.08e-01]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15000     [3.64e-02, 9.63e-02, 7.96e-02, 3.12e-02, 4.70e-04, 1.04e-02, 1.45e-01, 1.34e-01, 2.68e-01]    [3.64e-02, 9.63e-02, 7.96e-02, 3.12e-02, 4.70e-04, 1.04e-02, 1.45e-01, 1.34e-01, 2.68e-01]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16000     [2.42e-02, 5.52e-02, 5.01e-02, 1.34e-02, 2.23e-04, 4.83e-03, 7.72e-02, 6.96e-02, 1.08e-01]    [2.42e-02, 5.52e-02, 5.01e-02, 1.34e-02, 2.23e-04, 4.83e-03, 7.72e-02, 6.96e-02, 1.08e-01]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17000     [2.22e-02, 3.48e-02, 3.43e-02, 4.27e-03, 3.41e-04, 2.62e-03, 3.76e-02, 3.35e-02, 4.77e-02]    [2.22e-02, 3.48e-02, 3.43e-02, 4.27e-03, 3.41e-04, 2.62e-03, 3.76e-02, 3.35e-02, 4.77e-02]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18000     [1.78e-02, 2.13e-02, 3.35e-02, 9.43e-04, 1.56e-04, 9.34e-04, 1.66e-02, 1.52e-02, 2.17e-02]    [1.78e-02, 2.13e-02, 3.35e-02, 9.43e-04, 1.56e-04, 9.34e-04, 1.66e-02, 1.52e-02, 2.17e-02]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19000     [1.07e-02, 1.30e-02, 2.18e-02, 5.18e-04, 7.26e-05, 1.52e-04, 6.49e-03, 5.95e-03, 8.62e-03]    [1.07e-02, 1.30e-02, 2.18e-02, 5.18e-04, 7.26e-05, 1.52e-04, 6.49e-03, 5.95e-03, 8.62e-03]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20000     [9.06e-03, 1.01e-02, 1.48e-02, 1.75e-04, 3.00e-05, 2.42e-05, 2.33e-03, 2.19e-03, 3.27e-03]    [9.06e-03, 1.01e-02, 1.48e-02, 1.75e-04, 3.00e-05, 2.42e-05, 2.33e-03, 2.19e-03, 3.27e-03]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21000     [7.56e-03, 7.94e-03, 1.11e-02, 3.51e-05, 4.01e-05, 2.07e-05, 1.05e-03, 9.92e-04, 1.49e-03]    [7.56e-03, 7.94e-03, 1.11e-02, 3.51e-05, 4.01e-05, 2.07e-05, 1.05e-03, 9.92e-04, 1.49e-03]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>22000     [6.25e-03, 6.19e-03, 9.07e-03, 2.65e-05, 1.57e-05, 9.24e-07, 5.81e-04, 5.73e-04, 8.62e-04]    [6.25e-03, 6.19e-03, 9.07e-03, 2.65e-05, 1.57e-05, 9.24e-07, 5.81e-04, 5.73e-04, 8.62e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23000     [8.29e-03, 7.79e-03, 8.52e-03, 1.29e-04, 5.72e-06, 8.40e-05, 3.59e-04, 4.00e-04, 6.61e-04]    [8.29e-03, 7.79e-03, 8.52e-03, 1.29e-04, 5.72e-06, 8.40e-05, 3.59e-04, 4.00e-04, 6.61e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24000     [6.66e-03, 5.02e-03, 7.15e-03, 6.94e-05, 7.34e-06, 8.54e-06, 2.71e-04, 2.62e-04, 4.39e-04]    [6.66e-03, 5.02e-03, 7.15e-03, 6.94e-05, 7.34e-06, 8.54e-06, 2.71e-04, 2.62e-04, 4.39e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25000     [4.86e-03, 4.23e-03, 6.10e-03, 1.77e-05, 4.48e-07, 5.76e-06, 2.09e-04, 2.25e-04, 3.43e-04]    [4.86e-03, 4.23e-03, 6.10e-03, 1.77e-05, 4.48e-07, 5.76e-06, 2.09e-04, 2.25e-04, 3.43e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26000     [3.90e-03, 3.24e-03, 5.42e-03, 3.50e-05, 2.31e-06, 6.03e-06, 1.74e-04, 1.81e-04, 2.85e-04]    [3.90e-03, 3.24e-03, 5.42e-03, 3.50e-05, 2.31e-06, 6.03e-06, 1.74e-04, 1.81e-04, 2.85e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27000     [7.83e-03, 5.63e-03, 5.47e-03, 8.42e-06, 3.12e-05, 1.02e-05, 1.71e-04, 1.44e-04, 3.22e-04]    [7.83e-03, 5.63e-03, 5.47e-03, 8.42e-06, 3.12e-05, 1.02e-05, 1.71e-04, 1.44e-04, 3.22e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>28000     [9.65e-03, 9.23e-03, 1.45e-02, 1.26e-03, 2.83e-04, 1.53e-03, 2.62e-04, 1.66e-04, 2.74e-04]    [9.65e-03, 9.23e-03, 1.45e-02, 1.26e-03, 2.83e-04, 1.53e-03, 2.62e-04, 1.66e-04, 2.74e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29000     [2.87e-03, 2.51e-03, 4.33e-03, 9.93e-06, 1.84e-05, 3.44e-05, 1.22e-04, 1.23e-04, 1.84e-04]    [2.87e-03, 2.51e-03, 4.33e-03, 9.93e-06, 1.84e-05, 3.44e-05, 1.22e-04, 1.23e-04, 1.84e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30000     [2.65e-03, 2.20e-03, 3.89e-03, 1.79e-06, 2.49e-06, 3.10e-07, 9.69e-05, 1.05e-04, 1.55e-04]    [2.65e-03, 2.20e-03, 3.89e-03, 1.79e-06, 2.49e-06, 3.10e-07, 9.69e-05, 1.05e-04, 1.55e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>31000     [2.49e-03, 2.09e-03, 3.81e-03, 5.70e-06, 1.76e-06, 4.21e-09, 8.33e-05, 8.98e-05, 1.34e-04]    [2.49e-03, 2.09e-03, 3.81e-03, 5.70e-06, 1.76e-06, 4.21e-09, 8.33e-05, 8.98e-05, 1.34e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32000     [2.49e-03, 2.03e-03, 3.49e-03, 3.71e-06, 3.79e-07, 5.51e-07, 7.23e-05, 8.04e-05, 1.18e-04]    [2.49e-03, 2.03e-03, 3.49e-03, 3.71e-06, 3.79e-07, 5.51e-07, 7.23e-05, 8.04e-05, 1.18e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>33000     [2.19e-03, 1.79e-03, 3.26e-03, 7.72e-06, 1.36e-06, 5.76e-07, 6.46e-05, 6.63e-05, 1.03e-04]    [2.19e-03, 1.79e-03, 3.26e-03, 7.72e-06, 1.36e-06, 5.76e-07, 6.46e-05, 6.63e-05, 1.03e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34000     [1.28e-02, 6.58e-03, 7.22e-03, 9.52e-06, 4.73e-07, 1.17e-05, 8.15e-05, 1.33e-04, 2.55e-04]    [1.28e-02, 6.58e-03, 7.22e-03, 9.52e-06, 4.73e-07, 1.17e-05, 8.15e-05, 1.33e-04, 2.55e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35000     [1.89e-03, 1.58e-03, 2.95e-03, 2.04e-06, 1.65e-06, 7.54e-08, 5.54e-05, 5.83e-05, 8.74e-05]    [1.89e-03, 1.58e-03, 2.95e-03, 2.04e-06, 1.65e-06, 7.54e-08, 5.54e-05, 5.83e-05, 8.74e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36000     [1.82e-03, 1.52e-03, 2.82e-03, 3.12e-06, 3.41e-07, 4.26e-07, 5.06e-05, 5.59e-05, 8.17e-05]    [1.82e-03, 1.52e-03, 2.82e-03, 3.12e-06, 3.41e-07, 4.26e-07, 5.06e-05, 5.59e-05, 8.17e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>37000     [2.38e-02, 1.58e-02, 7.04e-03, 5.01e-06, 1.58e-05, 6.33e-06, 1.18e-04, 1.20e-04, 5.04e-04]    [2.38e-02, 1.58e-02, 7.04e-03, 5.01e-06, 1.58e-05, 6.33e-06, 1.18e-04, 1.20e-04, 5.04e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>38000     [1.62e-03, 1.37e-03, 2.57e-03, 1.52e-06, 1.68e-06, 1.38e-07, 4.52e-05, 4.63e-05, 7.12e-05]    [1.62e-03, 1.37e-03, 2.57e-03, 1.52e-06, 1.68e-06, 1.38e-07, 4.52e-05, 4.63e-05, 7.12e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>39000     [1.63e-02, 8.69e-03, 1.68e-02, 6.17e-06, 1.46e-06, 1.15e-07, 5.19e-05, 2.15e-04, 3.20e-04]    [1.63e-02, 8.69e-03, 1.68e-02, 6.17e-06, 1.46e-06, 1.15e-07, 5.19e-05, 2.15e-04, 3.20e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40000     [1.46e-03, 1.25e-03, 2.36e-03, 1.74e-06, 6.57e-07, 1.94e-08, 3.94e-05, 4.23e-05, 6.28e-05]    [1.46e-03, 1.25e-03, 2.36e-03, 1.74e-06, 6.57e-07, 1.94e-08, 3.94e-05, 4.23e-05, 6.28e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>41000     [4.18e-03, 3.09e-03, 2.91e-03, 5.17e-06, 3.80e-06, 9.74e-06, 4.05e-05, 5.50e-05, 1.14e-04]    [4.18e-03, 3.09e-03, 2.91e-03, 5.17e-06, 3.80e-06, 9.74e-06, 4.05e-05, 5.50e-05, 1.14e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42000     [1.69e-03, 1.45e-03, 3.26e-03, 7.90e-06, 4.51e-06, 8.11e-06, 4.02e-05, 3.90e-05, 5.00e-05]    [1.69e-03, 1.45e-03, 3.26e-03, 7.90e-06, 4.51e-06, 8.11e-06, 4.02e-05, 3.90e-05, 5.00e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>43000     [2.30e-03, 3.72e-03, 5.16e-03, 2.13e-04, 8.36e-05, 3.44e-04, 7.49e-05, 5.69e-05, 1.20e-04]    [2.30e-03, 3.72e-03, 5.16e-03, 2.13e-04, 8.36e-05, 3.44e-04, 7.49e-05, 5.69e-05, 1.20e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44000     [1.35e-03, 1.21e-03, 2.19e-03, 1.61e-05, 7.71e-06, 2.65e-05, 3.50e-05, 3.42e-05, 4.87e-05]    [1.35e-03, 1.21e-03, 2.19e-03, 1.61e-05, 7.71e-06, 2.65e-05, 3.50e-05, 3.42e-05, 4.87e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>45000     [2.26e-02, 1.30e-02, 7.27e-03, 1.55e-06, 2.69e-05, 1.17e-05, 7.93e-05, 1.11e-04, 4.18e-04]    [2.26e-02, 1.30e-02, 7.27e-03, 1.55e-06, 2.69e-05, 1.17e-05, 7.93e-05, 1.11e-04, 4.18e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>46000     [7.56e-03, 9.98e-03, 1.18e-02, 2.87e-03, 4.47e-04, 2.69e-03, 9.55e-05, 3.35e-05, 1.76e-04]    [7.56e-03, 9.98e-03, 1.18e-02, 2.87e-03, 4.47e-04, 2.69e-03, 9.55e-05, 3.35e-05, 1.76e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>47000     [7.83e-03, 4.07e-03, 1.06e-02, 4.07e-06, 4.05e-06, 3.85e-06, 3.75e-05, 1.31e-04, 1.54e-04]    [7.83e-03, 4.07e-03, 1.06e-02, 4.07e-06, 4.05e-06, 3.85e-06, 3.75e-05, 1.31e-04, 1.54e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48000     [1.24e-03, 1.11e-03, 2.10e-03, 4.75e-06, 8.29e-09, 8.81e-07, 2.49e-05, 3.08e-05, 4.38e-05]    [1.24e-03, 1.11e-03, 2.10e-03, 4.75e-06, 8.29e-09, 8.81e-07, 2.49e-05, 3.08e-05, 4.38e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49000     [3.08e-02, 2.34e-02, 6.99e-03, 1.73e-04, 1.87e-04, 4.40e-04, 1.36e-04, 9.34e-05, 7.00e-04]    [3.08e-02, 2.34e-02, 6.99e-03, 1.73e-04, 1.87e-04, 4.40e-04, 1.36e-04, 9.34e-05, 7.00e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50000     [1.46e-03, 1.23e-03, 2.19e-03, 1.49e-05, 2.05e-06, 1.07e-05, 3.07e-05, 2.70e-05, 3.62e-05]    [1.46e-03, 1.23e-03, 2.19e-03, 1.49e-05, 2.05e-06, 1.07e-05, 3.07e-05, 2.70e-05, 3.62e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>51000     [2.26e-03, 2.95e-03, 3.70e-03, 4.30e-04, 9.18e-05, 4.99e-04, 5.12e-05, 2.65e-05, 5.99e-05]    [2.26e-03, 2.95e-03, 3.70e-03, 4.30e-04, 9.18e-05, 4.99e-04, 5.12e-05, 2.65e-05, 5.99e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>52000     [3.53e-03, 5.60e-03, 6.46e-03, 6.71e-05, 2.63e-05, 1.35e-04, 7.46e-05, 4.51e-05, 1.40e-04]    [3.53e-03, 5.60e-03, 6.46e-03, 6.71e-05, 2.63e-05, 1.35e-04, 7.46e-05, 4.51e-05, 1.40e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>53000     [1.44e-03, 1.17e-03, 2.00e-03, 8.12e-05, 3.49e-06, 5.53e-05, 1.90e-05, 1.97e-05, 3.73e-05]    [1.44e-03, 1.17e-03, 2.00e-03, 8.12e-05, 3.49e-06, 5.53e-05, 1.90e-05, 1.97e-05, 3.73e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>54000     [2.07e-02, 4.70e-02, 4.72e-02, 2.33e-03, 8.46e-04, 3.93e-03, 5.41e-04, 2.73e-04, 1.19e-03]    [2.07e-02, 4.70e-02, 4.72e-02, 2.33e-03, 8.46e-04, 3.93e-03, 5.41e-04, 2.73e-04, 1.19e-03]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>55000     [2.58e-02, 1.99e-02, 6.38e-03, 1.70e-04, 1.55e-04, 3.69e-04, 9.70e-05, 8.55e-05, 5.89e-04]    [2.58e-02, 1.99e-02, 6.38e-03, 1.70e-04, 1.55e-04, 3.69e-04, 9.70e-05, 8.55e-05, 5.89e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>56000     [9.49e-04, 1.02e-03, 1.59e-03, 3.60e-05, 1.64e-06, 2.57e-05, 1.53e-05, 1.75e-05, 2.80e-05]    [9.49e-04, 1.02e-03, 1.59e-03, 3.60e-05, 1.64e-06, 2.57e-05, 1.53e-05, 1.75e-05, 2.80e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>57000     [5.29e-03, 2.71e-03, 3.49e-03, 3.31e-05, 5.82e-08, 2.19e-05, 2.90e-05, 4.49e-05, 8.32e-05]    [5.29e-03, 2.71e-03, 3.49e-03, 3.31e-05, 5.82e-08, 2.19e-05, 2.90e-05, 4.49e-05, 8.32e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>58000     [8.44e-04, 8.80e-04, 1.43e-03, 3.78e-08, 7.45e-07, 7.83e-07, 1.68e-05, 1.81e-05, 2.60e-05]    [8.44e-04, 8.80e-04, 1.43e-03, 3.78e-08, 7.45e-07, 7.83e-07, 1.68e-05, 1.81e-05, 2.60e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>59000     [9.63e-04, 1.01e-03, 1.61e-03, 4.40e-05, 1.28e-06, 3.19e-05, 1.43e-05, 1.62e-05, 2.69e-05]    [9.63e-04, 1.01e-03, 1.61e-03, 4.40e-05, 1.28e-06, 3.19e-05, 1.43e-05, 1.62e-05, 2.69e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60000     [1.31e-03, 1.35e-03, 2.67e-03, 7.09e-06, 3.65e-06, 7.13e-10, 2.67e-05, 2.44e-05, 4.46e-05]    [1.31e-03, 1.35e-03, 2.67e-03, 7.09e-06, 3.65e-06, 7.13e-10, 2.67e-05, 2.44e-05, 4.46e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>61000     [2.15e-02, 2.83e-02, 8.70e-03, 1.48e-03, 5.63e-04, 2.18e-03, 1.77e-04, 3.79e-05, 7.55e-04]    [2.15e-02, 2.83e-02, 8.70e-03, 1.48e-03, 5.63e-04, 2.18e-03, 1.77e-04, 3.79e-05, 7.55e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>62000     [8.54e-04, 9.96e-04, 1.42e-03, 2.67e-05, 9.65e-06, 3.70e-05, 1.79e-05, 1.56e-05, 2.54e-05]    [8.54e-04, 9.96e-04, 1.42e-03, 2.67e-05, 9.65e-06, 3.70e-05, 1.79e-05, 1.56e-05, 2.54e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>63000     [1.02e-03, 1.22e-03, 1.70e-03, 1.01e-06, 4.86e-06, 9.35e-06, 2.16e-05, 1.74e-05, 3.77e-05]    [1.02e-03, 1.22e-03, 1.70e-03, 1.01e-06, 4.86e-06, 9.35e-06, 2.16e-05, 1.74e-05, 3.77e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64000     [3.31e-03, 1.74e-03, 3.67e-03, 4.16e-05, 7.81e-07, 2.16e-05, 1.31e-05, 2.99e-05, 4.70e-05]    [3.31e-03, 1.74e-03, 3.67e-03, 4.16e-05, 7.81e-07, 2.16e-05, 1.31e-05, 2.99e-05, 4.70e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>65000     [2.96e-03, 1.58e-03, 3.54e-03, 4.75e-06, 8.70e-06, 2.51e-08, 3.45e-05, 2.59e-05, 3.22e-05]    [2.96e-03, 1.58e-03, 3.54e-03, 4.75e-06, 8.70e-06, 2.51e-08, 3.45e-05, 2.59e-05, 3.22e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>66000     [1.18e-02, 6.02e-03, 5.38e-03, 1.24e-06, 3.15e-05, 8.84e-06, 2.85e-05, 4.96e-05, 1.93e-04]    [1.18e-02, 6.02e-03, 5.38e-03, 1.24e-06, 3.15e-05, 8.84e-06, 2.85e-05, 4.96e-05, 1.93e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>67000     [1.36e-03, 1.97e-03, 2.19e-03, 1.65e-04, 2.64e-05, 1.88e-04, 2.68e-05, 1.55e-05, 4.01e-05]    [1.36e-03, 1.97e-03, 2.19e-03, 1.65e-04, 2.64e-05, 1.88e-04, 2.68e-05, 1.55e-05, 4.01e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>68000     [7.35e-04, 8.21e-04, 1.22e-03, 4.29e-06, 1.74e-06, 7.40e-06, 1.35e-05, 1.38e-05, 1.99e-05]    [7.35e-04, 8.21e-04, 1.22e-03, 4.29e-06, 1.74e-06, 7.40e-06, 1.35e-05, 1.38e-05, 1.99e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>69000     [7.25e-04, 8.58e-04, 1.28e-03, 2.57e-06, 1.84e-06, 6.46e-06, 1.44e-05, 1.48e-05, 2.34e-05]    [7.25e-04, 8.58e-04, 1.28e-03, 2.57e-06, 1.84e-06, 6.46e-06, 1.44e-05, 1.48e-05, 2.34e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>70000     [1.29e-02, 8.54e-03, 3.60e-03, 1.08e-05, 3.96e-05, 5.30e-05, 6.07e-05, 4.02e-05, 2.51e-04]    [1.29e-02, 8.54e-03, 3.60e-03, 1.08e-05, 3.96e-05, 5.30e-05, 6.07e-05, 4.02e-05, 2.51e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>71000     [6.82e-04, 7.64e-04, 1.12e-03, 7.20e-07, 5.78e-08, 9.55e-08, 1.11e-05, 1.28e-05, 1.83e-05]    [6.82e-04, 7.64e-04, 1.12e-03, 7.20e-07, 5.78e-08, 9.55e-08, 1.11e-05, 1.28e-05, 1.83e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>72000     [3.96e-03, 6.37e-03, 5.87e-03, 1.18e-03, 1.10e-04, 1.06e-03, 4.20e-05, 1.47e-05, 1.06e-04]    [3.96e-03, 6.37e-03, 5.87e-03, 1.18e-03, 1.10e-04, 1.06e-03, 4.20e-05, 1.47e-05, 1.06e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>73000     [6.79e-04, 7.54e-04, 1.11e-03, 1.33e-06, 1.96e-07, 1.78e-07, 1.06e-05, 1.15e-05, 1.75e-05]    [6.79e-04, 7.54e-04, 1.11e-03, 1.33e-06, 1.96e-07, 1.78e-07, 1.06e-05, 1.15e-05, 1.75e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>74000     [7.86e-03, 1.93e-02, 8.84e-03, 6.49e-04, 1.83e-04, 1.03e-03, 1.35e-04, 3.51e-05, 5.04e-04]    [7.86e-03, 1.93e-02, 8.84e-03, 6.49e-04, 1.83e-04, 1.03e-03, 1.35e-04, 3.51e-05, 5.04e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>75000     [9.07e-03, 5.16e-03, 5.62e-03, 2.48e-05, 3.04e-05, 4.72e-05, 1.39e-05, 7.25e-05, 1.55e-04]    [9.07e-03, 5.16e-03, 5.62e-03, 2.48e-05, 3.04e-05, 4.72e-05, 1.39e-05, 7.25e-05, 1.55e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>76000     [6.81e-04, 7.49e-04, 1.07e-03, 4.24e-07, 6.16e-07, 2.57e-08, 9.88e-06, 1.06e-05, 1.66e-05]    [6.81e-04, 7.49e-04, 1.07e-03, 4.24e-07, 6.16e-07, 2.57e-08, 9.88e-06, 1.06e-05, 1.66e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>77000     [1.50e-02, 1.01e-02, 4.24e-03, 1.63e-05, 4.67e-05, 1.10e-04, 9.74e-05, 3.40e-05, 2.91e-04]    [1.50e-02, 1.01e-02, 4.24e-03, 1.63e-05, 4.67e-05, 1.10e-04, 9.74e-05, 3.40e-05, 2.91e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>78000     [2.19e-03, 2.81e-03, 4.75e-03, 3.43e-04, 3.66e-05, 2.97e-04, 3.84e-05, 1.88e-05, 3.35e-05]    [2.19e-03, 2.81e-03, 4.75e-03, 3.43e-04, 3.66e-05, 2.97e-04, 3.84e-05, 1.88e-05, 3.35e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>79000     [3.33e-03, 2.20e-03, 2.78e-03, 1.68e-07, 1.53e-06, 1.36e-06, 1.03e-05, 3.37e-05, 5.94e-05]    [3.33e-03, 2.20e-03, 2.78e-03, 1.68e-07, 1.53e-06, 1.36e-06, 1.03e-05, 3.37e-05, 5.94e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>80000     [2.03e-03, 2.72e-03, 2.92e-03, 4.32e-04, 3.01e-05, 3.68e-04, 1.91e-05, 1.07e-05, 4.32e-05]    [2.03e-03, 2.72e-03, 2.92e-03, 4.32e-04, 3.01e-05, 3.68e-04, 1.91e-05, 1.07e-05, 4.32e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>81000     [6.52e-04, 7.60e-04, 1.16e-03, 1.02e-06, 3.12e-07, 3.94e-07, 9.18e-06, 1.06e-05, 1.49e-05]    [6.52e-04, 7.60e-04, 1.16e-03, 1.02e-06, 3.12e-07, 3.94e-07, 9.18e-06, 1.06e-05, 1.49e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>82000     [7.88e-04, 8.05e-04, 9.89e-04, 1.11e-06, 3.38e-07, 1.03e-06, 9.22e-06, 1.06e-05, 1.61e-05]    [7.88e-04, 8.05e-04, 9.89e-04, 1.11e-06, 3.38e-07, 1.03e-06, 9.22e-06, 1.06e-05, 1.61e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>83000     [1.13e-03, 1.28e-03, 2.54e-03, 2.51e-05, 2.45e-06, 3.37e-05, 1.87e-05, 2.53e-05, 3.21e-05]    [1.13e-03, 1.28e-03, 2.54e-03, 2.51e-05, 2.45e-06, 3.37e-05, 1.87e-05, 2.53e-05, 3.21e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>84000     [6.08e-04, 7.20e-04, 9.35e-04, 3.14e-06, 7.16e-08, 1.83e-06, 8.29e-06, 9.56e-06, 1.40e-05]    [6.08e-04, 7.20e-04, 9.35e-04, 3.14e-06, 7.16e-08, 1.83e-06, 8.29e-06, 9.56e-06, 1.40e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>85000     [6.02e-04, 7.30e-04, 9.54e-04, 9.15e-07, 9.59e-07, 2.93e-06, 9.69e-06, 9.56e-06, 1.56e-05]    [6.02e-04, 7.30e-04, 9.54e-04, 9.15e-07, 9.59e-07, 2.93e-06, 9.69e-06, 9.56e-06, 1.56e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>86000     [6.41e-03, 9.08e-03, 9.14e-03, 1.44e-03, 1.44e-04, 1.43e-03, 8.63e-05, 2.39e-05, 1.32e-04]    [6.41e-03, 9.08e-03, 9.14e-03, 1.44e-03, 1.44e-04, 1.43e-03, 8.63e-05, 2.39e-05, 1.32e-04]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>87000     [8.24e-04, 9.64e-04, 1.28e-03, 2.58e-05, 1.87e-06, 2.16e-05, 1.33e-05, 9.78e-06, 1.77e-05]    [8.24e-04, 9.64e-04, 1.28e-03, 2.58e-05, 1.87e-06, 2.16e-05, 1.33e-05, 9.78e-06, 1.77e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>88000     [1.57e-03, 3.34e-03, 4.24e-03, 7.48e-05, 8.28e-06, 9.97e-05, 3.94e-05, 3.37e-05, 8.89e-05]    [1.57e-03, 3.34e-03, 4.24e-03, 7.48e-05, 8.28e-06, 9.97e-05, 3.94e-05, 3.37e-05, 8.89e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>89000     [5.75e-04, 6.82e-04, 9.08e-04, 3.27e-09, 1.65e-07, 8.19e-08, 8.37e-06, 8.96e-06, 1.24e-05]    [5.75e-04, 6.82e-04, 9.08e-04, 3.27e-09, 1.65e-07, 8.19e-08, 8.37e-06, 8.96e-06, 1.24e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>90000     [7.22e-04, 9.59e-04, 1.08e-03, 2.38e-05, 4.25e-06, 2.78e-05, 1.08e-05, 8.53e-06, 1.82e-05]    [7.22e-04, 9.59e-04, 1.08e-03, 2.38e-05, 4.25e-06, 2.78e-05, 1.08e-05, 8.53e-06, 1.82e-05]    []  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best model at step 89000:
+  train loss: 2.19e-03
+  test loss: 2.19e-03
+  test metric: []
 
-<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/deepxde/utils/internal.py:22,</span> in <span class="ni">timing.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span>     <span class="n">ts</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span>
-<span class="ne">---&gt; </span><span class="mi">22</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span>     <span class="n">te</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">24</span>     <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-
-<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/deepxde/model.py:657,</span> in <span class="ni">Model.train</span><span class="nt">(self, iterations, batch_size, display_every, disregard_previous_best, callbacks, model_restore_path, model_save_path, epochs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">655</span>     <span class="k">if</span> <span class="n">iterations</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">656</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No iterations for </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opt_name</span><span class="p">))</span>
-<span class="ne">--&gt; </span><span class="mi">657</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_train_sgd</span><span class="p">(</span><span class="n">iterations</span><span class="p">,</span> <span class="n">display_every</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">658</span> <span class="bp">self</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">on_train_end</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">660</span> <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-
-<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/deepxde/model.py:675,</span> in <span class="ni">Model._train_sgd</span><span class="nt">(self, iterations, display_every)</span>
-<span class="g g-Whitespace">    </span><span class="mi">670</span> <span class="bp">self</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">on_batch_begin</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">672</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_state</span><span class="o">.</span><span class="n">set_data_train</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">673</span>     <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">train_next_batch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">674</span> <span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">675</span> <span class="bp">self</span><span class="o">.</span><span class="n">_train_step</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">676</span>     <span class="bp">self</span><span class="o">.</span><span class="n">train_state</span><span class="o">.</span><span class="n">X_train</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">677</span>     <span class="bp">self</span><span class="o">.</span><span class="n">train_state</span><span class="o">.</span><span class="n">y_train</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">678</span>     <span class="bp">self</span><span class="o">.</span><span class="n">train_state</span><span class="o">.</span><span class="n">train_aux_vars</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">679</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">681</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_state</span><span class="o">.</span><span class="n">epoch</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="g g-Whitespace">    </span><span class="mi">682</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_state</span><span class="o">.</span><span class="n">step</span> <span class="o">+=</span> <span class="mi">1</span>
-
-<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/deepxde/model.py:567,</span> in <span class="ni">Model._train_step</span><span class="nt">(self, inputs, targets, auxiliary_vars)</span>
-<span class="g g-Whitespace">    </span><span class="mi">565</span>     <span class="bp">self</span><span class="o">.</span><span class="n">train_step</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">auxiliary_vars</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">566</span> <span class="k">elif</span> <span class="n">backend_name</span> <span class="o">==</span> <span class="s2">&quot;pytorch&quot;</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">567</span>     <span class="bp">self</span><span class="o">.</span><span class="n">train_step</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">auxiliary_vars</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">568</span> <span class="k">elif</span> <span class="n">backend_name</span> <span class="o">==</span> <span class="s2">&quot;jax&quot;</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">569</span>     <span class="c1"># TODO: auxiliary_vars</span>
-<span class="g g-Whitespace">    </span><span class="mi">570</span>     <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">opt_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_step</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">571</span>         <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">opt_state</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span>
-<span class="g g-Whitespace">    </span><span class="mi">572</span>     <span class="p">)</span>
-
-<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/deepxde/model.py:364,</span> in <span class="ni">Model._compile_pytorch.&lt;locals&gt;.train_step</span><span class="nt">(inputs, targets, auxiliary_vars)</span>
-<span class="g g-Whitespace">    </span><span class="mi">361</span>     <span class="n">total_loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">362</span>     <span class="k">return</span> <span class="n">total_loss</span>
-<span class="ne">--&gt; </span><span class="mi">364</span> <span class="bp">self</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">closure</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">365</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lr_scheduler</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">366</span>     <span class="bp">self</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
-
-<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/torch/optim/optimizer.py:140,</span> in <span class="ni">Optimizer._hook_for_profile.&lt;locals&gt;.profile_hook_step.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">138</span> <span class="n">profile_name</span> <span class="o">=</span> <span class="s2">&quot;Optimizer.step#</span><span class="si">{}</span><span class="s2">.step&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">139</span> <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">autograd</span><span class="o">.</span><span class="n">profiler</span><span class="o">.</span><span class="n">record_function</span><span class="p">(</span><span class="n">profile_name</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">140</span>     <span class="n">out</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">141</span>     <span class="n">obj</span><span class="o">.</span><span class="n">_optimizer_step_code</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">142</span>     <span class="k">return</span> <span class="n">out</span>
-
-<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/torch/optim/optimizer.py:23,</span> in <span class="ni">_use_grad_for_differentiable.&lt;locals&gt;._use_grad</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="n">torch</span><span class="o">.</span><span class="n">set_grad_enabled</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;differentiable&#39;</span><span class="p">])</span>
-<span class="ne">---&gt; </span><span class="mi">23</span>     <span class="n">ret</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="k">finally</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span>     <span class="n">torch</span><span class="o">.</span><span class="n">set_grad_enabled</span><span class="p">(</span><span class="n">prev_grad</span><span class="p">)</span>
-
-<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/torch/optim/adam.py:234,</span> in <span class="ni">Adam.step</span><span class="nt">(self, closure, grad_scaler)</span>
-<span class="g g-Whitespace">    </span><span class="mi">231</span>                 <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;`requires_grad` is not supported for `step` in differentiable mode&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">232</span>             <span class="n">state_steps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;step&#39;</span><span class="p">])</span>
-<span class="ne">--&gt; </span><span class="mi">234</span>     <span class="n">adam</span><span class="p">(</span><span class="n">params_with_grad</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">235</span>          <span class="n">grads</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">236</span>          <span class="n">exp_avgs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">237</span>          <span class="n">exp_avg_sqs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">238</span>          <span class="n">max_exp_avg_sqs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">239</span>          <span class="n">state_steps</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">240</span>          <span class="n">amsgrad</span><span class="o">=</span><span class="n">group</span><span class="p">[</span><span class="s1">&#39;amsgrad&#39;</span><span class="p">],</span>
-<span class="g g-Whitespace">    </span><span class="mi">241</span>          <span class="n">beta1</span><span class="o">=</span><span class="n">beta1</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">242</span>          <span class="n">beta2</span><span class="o">=</span><span class="n">beta2</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">243</span>          <span class="n">lr</span><span class="o">=</span><span class="n">group</span><span class="p">[</span><span class="s1">&#39;lr&#39;</span><span class="p">],</span>
-<span class="g g-Whitespace">    </span><span class="mi">244</span>          <span class="n">weight_decay</span><span class="o">=</span><span class="n">group</span><span class="p">[</span><span class="s1">&#39;weight_decay&#39;</span><span class="p">],</span>
-<span class="g g-Whitespace">    </span><span class="mi">245</span>          <span class="n">eps</span><span class="o">=</span><span class="n">group</span><span class="p">[</span><span class="s1">&#39;eps&#39;</span><span class="p">],</span>
-<span class="g g-Whitespace">    </span><span class="mi">246</span>          <span class="n">maximize</span><span class="o">=</span><span class="n">group</span><span class="p">[</span><span class="s1">&#39;maximize&#39;</span><span class="p">],</span>
-<span class="g g-Whitespace">    </span><span class="mi">247</span>          <span class="n">foreach</span><span class="o">=</span><span class="n">group</span><span class="p">[</span><span class="s1">&#39;foreach&#39;</span><span class="p">],</span>
-<span class="g g-Whitespace">    </span><span class="mi">248</span>          <span class="n">capturable</span><span class="o">=</span><span class="n">group</span><span class="p">[</span><span class="s1">&#39;capturable&#39;</span><span class="p">],</span>
-<span class="g g-Whitespace">    </span><span class="mi">249</span>          <span class="n">differentiable</span><span class="o">=</span><span class="n">group</span><span class="p">[</span><span class="s1">&#39;differentiable&#39;</span><span class="p">],</span>
-<span class="g g-Whitespace">    </span><span class="mi">250</span>          <span class="n">fused</span><span class="o">=</span><span class="n">group</span><span class="p">[</span><span class="s1">&#39;fused&#39;</span><span class="p">],</span>
-<span class="g g-Whitespace">    </span><span class="mi">251</span>          <span class="n">grad_scale</span><span class="o">=</span><span class="n">grad_scale</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">252</span>          <span class="n">found_inf</span><span class="o">=</span><span class="n">found_inf</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">254</span> <span class="k">return</span> <span class="n">loss</span>
-
-<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/torch/optim/adam.py:300,</span> in <span class="ni">adam</span><span class="nt">(params, grads, exp_avgs, exp_avg_sqs, max_exp_avg_sqs, state_steps, foreach, capturable, differentiable, fused, grad_scale, found_inf, amsgrad, beta1, beta2, lr, weight_decay, eps, maximize)</span>
-<span class="g g-Whitespace">    </span><span class="mi">297</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">298</span>     <span class="n">func</span> <span class="o">=</span> <span class="n">_single_tensor_adam</span>
-<span class="ne">--&gt; </span><span class="mi">300</span> <span class="n">func</span><span class="p">(</span><span class="n">params</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">301</span>      <span class="n">grads</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">302</span>      <span class="n">exp_avgs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">303</span>      <span class="n">exp_avg_sqs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">304</span>      <span class="n">max_exp_avg_sqs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">305</span>      <span class="n">state_steps</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">306</span>      <span class="n">amsgrad</span><span class="o">=</span><span class="n">amsgrad</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">307</span>      <span class="n">beta1</span><span class="o">=</span><span class="n">beta1</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">308</span>      <span class="n">beta2</span><span class="o">=</span><span class="n">beta2</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">309</span>      <span class="n">lr</span><span class="o">=</span><span class="n">lr</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">310</span>      <span class="n">weight_decay</span><span class="o">=</span><span class="n">weight_decay</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">311</span>      <span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">312</span>      <span class="n">maximize</span><span class="o">=</span><span class="n">maximize</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">313</span>      <span class="n">capturable</span><span class="o">=</span><span class="n">capturable</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">314</span>      <span class="n">differentiable</span><span class="o">=</span><span class="n">differentiable</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">315</span>      <span class="n">grad_scale</span><span class="o">=</span><span class="n">grad_scale</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">316</span>      <span class="n">found_inf</span><span class="o">=</span><span class="n">found_inf</span><span class="p">)</span>
-
-<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/torch/optim/adam.py:410,</span> in <span class="ni">_single_tensor_adam</span><span class="nt">(params, grads, exp_avgs, exp_avg_sqs, max_exp_avg_sqs, state_steps, grad_scale, found_inf, amsgrad, beta1, beta2, lr, weight_decay, eps, maximize, capturable, differentiable)</span>
-<span class="g g-Whitespace">    </span><span class="mi">408</span>     <span class="n">denom</span> <span class="o">=</span> <span class="p">(</span><span class="n">max_exp_avg_sqs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">sqrt</span><span class="p">()</span> <span class="o">/</span> <span class="n">bias_correction2_sqrt</span><span class="p">)</span><span class="o">.</span><span class="n">add_</span><span class="p">(</span><span class="n">eps</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">409</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">410</span>     <span class="n">denom</span> <span class="o">=</span> <span class="p">(</span><span class="n">exp_avg_sq</span><span class="o">.</span><span class="n">sqrt</span><span class="p">()</span> <span class="o">/</span> <span class="n">bias_correction2_sqrt</span><span class="p">)</span><span class="o">.</span><span class="n">add_</span><span class="p">(</span><span class="n">eps</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">412</span> <span class="n">param</span><span class="o">.</span><span class="n">addcdiv_</span><span class="p">(</span><span class="n">exp_avg</span><span class="p">,</span> <span class="n">denom</span><span class="p">,</span> <span class="n">value</span><span class="o">=-</span><span class="n">step_size</span><span class="p">)</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
+&#39;train&#39; took 1094.658423 s
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;deepxde.model.LossHistory at 0x7fc7a2768820&gt;,
+ &lt;deepxde.model.TrainState at 0x7fc7a2768640&gt;)
 </pre></div>
 </div>
 </div>
@@ -774,7 +930,7 @@ paddle supports more examples now and is recommended.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/08cd7e3ab4531839ad9020f1d7a7b998e65b87f09068f7204b372e11c6e15ae7.png" src="../_images/08cd7e3ab4531839ad9020f1d7a7b998e65b87f09068f7204b372e11c6e15ae7.png" />
+<img alt="../_images/53cee6af53fa0893e0e414cdc1513db18c27e74bda6a10a134ffe940f10acdd8.png" src="../_images/53cee6af53fa0893e0e414cdc1513db18c27e74bda6a10a134ffe940f10acdd8.png" />
 </div>
 </div>
 </section>

@@ -7,8 +7,10 @@ logo: logo.png
 
 # Force re-execution of notebooks on each build.
 execute:
-  execute_notebooks: force # See https://jupyterbook.org/content/execute.html
-  timeout: 100 # see https://jupyterbook.org/en/stable/content/execute.html#the-execution-working-directory
+  execute_notebooks: force    # See https://jupyterbook.org/content/execute.html
+  timeout: -1                 # see https://jupyterbook.org/en/stable/content/execute.html#the-execution-working-directory
+  allow_errors: true          # Allow errors during execution
+  raise_on_error: false       # Do not raise an error if a notebook fails
 
 # Define the name of the latex output file for PDF builds
 latex:

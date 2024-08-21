@@ -477,16 +477,16 @@ document.write(`
 </div>
 <p><strong>STEP 2</strong></p>
 <p>The dataset can be generated via numerical integration of the well-known Lorenz system:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fc8631b8-1194-4fe1-85eb-21fc66c000ae">
-<span class="eqno">(5)<a class="headerlink" href="#equation-fc8631b8-1194-4fe1-85eb-21fc66c000ae" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-a6252120-9384-48c9-b452-f4dac573fbfb">
+<span class="eqno">(5)<a class="headerlink" href="#equation-a6252120-9384-48c9-b452-f4dac573fbfb" title="Permalink to this equation">#</a></span>\[\begin{align}
 \dot{x} = \sigma(y-x)
 \end{align}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-c327d212-bb69-42e6-b69a-cc68994484b0">
-<span class="eqno">(6)<a class="headerlink" href="#equation-c327d212-bb69-42e6-b69a-cc68994484b0" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-c85e6714-d0c8-43ef-aa0e-49aa341de0d4">
+<span class="eqno">(6)<a class="headerlink" href="#equation-c85e6714-d0c8-43ef-aa0e-49aa341de0d4" title="Permalink to this equation">#</a></span>\[\begin{align}
 \dot{y} = x ( \rho - z ) - y
 \end{align}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-2375a1a0-581e-49d9-8ad2-1ffe8e80cef8">
-<span class="eqno">(7)<a class="headerlink" href="#equation-2375a1a0-581e-49d9-8ad2-1ffe8e80cef8" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-76a00975-2a54-4da4-b9a3-be7e61c6838e">
+<span class="eqno">(7)<a class="headerlink" href="#equation-76a00975-2a54-4da4-b9a3-be7e61c6838e" title="Permalink to this equation">#</a></span>\[\begin{align}
 \dot{z} = xy - \beta z
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\( \beta \)</span>, <span class="math notranslate nohighlight">\( \sigma \)</span> and <span class="math notranslate nohighlight">\( \rho \)</span> define a particular dynamic ans <span class="math notranslate nohighlight">\( x_{0} \)</span> are the initial conditions. In the following block of code, the Right-Hand-Side (RHS) of the Lorenz System is defined and the PDEs are integrated using the <code class="docutils literal notranslate"><span class="pre">odeint</span></code> method over the total length of the trajectory <span class="math notranslate nohighlight">\( T_{long} \)</span>. Note that it is necessary to remove the first <span class="math notranslate nohighlight">\( t=1 \)</span> of the dataset itself as required from the exercise.</p>
@@ -613,16 +613,16 @@ MODEL SPECIFICATIONS:
 </div>
 </div>
 <p>Recall that the problem was initialized with  <span class="math notranslate nohighlight">\( \sigma = 10 \)</span>, <span class="math notranslate nohighlight">\( \beta=8/3 \)</span> and <span class="math notranslate nohighlight">\( \rho=28 \)</span>. Consequently the Lorenz system can be written explicitely as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-dfab5477-d2e5-441c-a098-c8f7a652829d">
-<span class="eqno">(8)<a class="headerlink" href="#equation-dfab5477-d2e5-441c-a098-c8f7a652829d" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-cd958d85-f632-41c0-a9ec-222a10c64db3">
+<span class="eqno">(8)<a class="headerlink" href="#equation-cd958d85-f632-41c0-a9ec-222a10c64db3" title="Permalink to this equation">#</a></span>\[\begin{align}
 \dot{x} = 10(y-x)
 \end{align}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-4457892a-cd4f-4bb0-9ff7-b18bab0207cd">
-<span class="eqno">(9)<a class="headerlink" href="#equation-4457892a-cd4f-4bb0-9ff7-b18bab0207cd" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-de56490a-b50f-41f9-9f5f-806c7572cb8c">
+<span class="eqno">(9)<a class="headerlink" href="#equation-de56490a-b50f-41f9-9f5f-806c7572cb8c" title="Permalink to this equation">#</a></span>\[\begin{align}
 \dot{y} = x ( 28 - z ) - y
 \end{align}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-a3f0f8aa-eb29-47fc-b2dd-e9a3d11d6153">
-<span class="eqno">(10)<a class="headerlink" href="#equation-a3f0f8aa-eb29-47fc-b2dd-e9a3d11d6153" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-59dea903-1375-49df-9f48-5fcff8fcd2d5">
+<span class="eqno">(10)<a class="headerlink" href="#equation-59dea903-1375-49df-9f48-5fcff8fcd2d5" title="Permalink to this equation">#</a></span>\[\begin{align}
 \dot{z} = xy - 2.667 z
 \end{align}\]</div>
 <p>The result that we obtained above show that, for this choice of <span class="math notranslate nohighlight">\( r \)</span> , <span class="math notranslate nohighlight">\( T \)</span> and <span class="math notranslate nohighlight">\( \Delta t \)</span> , SINDy is perfectly able to recover the exact non-linear dynamics from the sparse data.</p>
@@ -721,76 +721,6 @@ MODEL SPECIFICATIONS:
 <span class="n">Dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span> <span class="o">-</span> <span class="mi">4</span> <span class="p">,</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">100</span> <span class="p">)</span>
 <span class="c1"># Implement the algorithm in the description.</span>
 <span class="n">dts</span> <span class="p">,</span> <span class="n">rs</span> <span class="o">=</span> <span class="n">relation_discover</span><span class="p">(</span> <span class="n">Dt</span> <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">41</span>
-<span class="g g-Whitespace">     </span><span class="mi">39</span> <span class="n">Dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span> <span class="o">-</span> <span class="mi">4</span> <span class="p">,</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">100</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">40</span> <span class="c1"># Implement the algorithm in the description.</span>
-<span class="ne">---&gt; </span><span class="mi">41</span> <span class="n">dts</span> <span class="p">,</span> <span class="n">rs</span> <span class="o">=</span> <span class="n">relation_discover</span><span class="p">(</span> <span class="n">Dt</span> <span class="p">)</span>
-
-<span class="nn">Cell In[7], line 29,</span> in <span class="ni">relation_discover</span><span class="nt">(Dt, tau, x0, beta, sigma, rho, feature_names, sparse_regression_optimizer)</span>
-<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">x_frac</span> <span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">dt</span>  <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span> <span class="n">MSE</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span> <span class="n">x_train</span> <span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">dt</span> <span class="p">,</span> <span class="n">metric</span> <span class="o">=</span> <span class="n">mean_squared_error</span> <span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">29</span> <span class="n">R2</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span> <span class="n">x_train</span> <span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">dt</span> <span class="p">,</span> <span class="n">metric</span> <span class="o">=</span> <span class="n">r2_score</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span> <span class="k">if</span> <span class="p">(</span> <span class="n">MSE</span> <span class="o">&lt;</span> <span class="mf">1e-4</span> <span class="p">)</span> <span class="ow">and</span> <span class="p">(</span> <span class="mf">0.8</span> <span class="o">&lt;</span> <span class="n">R2</span> <span class="o">&lt;</span> <span class="mf">1.2</span> <span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">32</span>     <span class="n">dts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">dt</span> <span class="p">)</span>
-
-<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/pysindy/pysindy.py:625,</span> in <span class="ni">SINDy.score</span><span class="nt">(self, x, t, x_dot, u, multiple_trajectories, metric, **metric_kws)</span>
-<span class="g g-Whitespace">    </span><span class="mi">622</span> <span class="n">x_dot_predict</span> <span class="o">=</span> <span class="n">concat_sample_axis</span><span class="p">(</span><span class="n">x_dot_predict</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">624</span> <span class="n">x_dot</span><span class="p">,</span> <span class="n">x_dot_predict</span> <span class="o">=</span> <span class="n">drop_nan_samples</span><span class="p">(</span><span class="n">x_dot</span><span class="p">,</span> <span class="n">x_dot_predict</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">625</span> <span class="k">return</span> <span class="n">metric</span><span class="p">(</span><span class="n">x_dot</span><span class="p">,</span> <span class="n">x_dot_predict</span><span class="p">,</span> <span class="o">**</span><span class="n">metric_kws</span><span class="p">)</span>
-
-<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/sklearn/utils/_param_validation.py:213,</span> in <span class="ni">validate_params.&lt;locals&gt;.decorator.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">207</span> <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">208</span>     <span class="k">with</span> <span class="n">config_context</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">209</span>         <span class="n">skip_parameter_validation</span><span class="o">=</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">210</span>             <span class="n">prefer_skip_nested_validation</span> <span class="ow">or</span> <span class="n">global_skip_validation</span>
-<span class="g g-Whitespace">    </span><span class="mi">211</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">212</span>     <span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">213</span>         <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">214</span> <span class="k">except</span> <span class="n">InvalidParameterError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">215</span>     <span class="c1"># When the function is just a wrapper around an estimator, we allow</span>
-<span class="g g-Whitespace">    </span><span class="mi">216</span>     <span class="c1"># the function to delegate validation to the estimator, but we replace</span>
-<span class="g g-Whitespace">    </span><span class="mi">217</span>     <span class="c1"># the name of the estimator by the name of the function in the error</span>
-<span class="g g-Whitespace">    </span><span class="mi">218</span>     <span class="c1"># message to avoid confusion.</span>
-<span class="g g-Whitespace">    </span><span class="mi">219</span>     <span class="n">msg</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">220</span>         <span class="sa">r</span><span class="s2">&quot;parameter of \w+ must be&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">221</span>         <span class="sa">f</span><span class="s2">&quot;parameter of </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__qualname__</span><span class="si">}</span><span class="s2"> must be&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">222</span>         <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
-<span class="g g-Whitespace">    </span><span class="mi">223</span>     <span class="p">)</span>
-
-<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/sklearn/metrics/_regression.py:1221,</span> in <span class="ni">r2_score</span><span class="nt">(y_true, y_pred, sample_weight, multioutput, force_finite)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1218</span>     <span class="n">weight</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="g g-Whitespace">   </span><span class="mi">1220</span> <span class="n">numerator</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weight</span> <span class="o">*</span> <span class="p">(</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1221</span> <span class="n">denominator</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1222</span>     <span class="n">weight</span> <span class="o">*</span> <span class="p">(</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">_average</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">,</span> <span class="n">xp</span><span class="o">=</span><span class="n">xp</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1223</span>     <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1224</span> <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1226</span> <span class="k">return</span> <span class="n">_assemble_r2_explained_variance</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1227</span>     <span class="n">numerator</span><span class="o">=</span><span class="n">numerator</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1228</span>     <span class="n">denominator</span><span class="o">=</span><span class="n">denominator</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1233</span>     <span class="n">device</span><span class="o">=</span><span class="n">device_</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1234</span> <span class="p">)</span>
-
-<span class="nn">File &lt;__array_function__ internals&gt;:180,</span> in <span class="ni">sum</span><span class="nt">(*args, **kwargs)</span>
-
-<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/numpy/core/fromnumeric.py:2298,</span> in <span class="ni">sum</span><span class="nt">(a, axis, dtype, out, keepdims, initial, where)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2295</span>         <span class="k">return</span> <span class="n">out</span>
-<span class="g g-Whitespace">   </span><span class="mi">2296</span>     <span class="k">return</span> <span class="n">res</span>
-<span class="ne">-&gt; </span><span class="mi">2298</span> <span class="k">return</span> <span class="n">_wrapreduction</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">,</span> <span class="s1">&#39;sum&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="n">keepdims</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2299</span>                       <span class="n">initial</span><span class="o">=</span><span class="n">initial</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="n">where</span><span class="p">)</span>
-
-<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/numpy/core/fromnumeric.py:86,</span> in <span class="ni">_wrapreduction</span><span class="nt">(obj, ufunc, method, axis, dtype, out, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">83</span>         <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">84</span>             <span class="k">return</span> <span class="n">reduction</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="p">,</span> <span class="o">**</span><span class="n">passkwargs</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">86</span> <span class="k">return</span> <span class="n">ufunc</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="o">**</span><span class="n">passkwargs</span><span class="p">)</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
@@ -933,7 +863,9 @@ PREDICTIONS:
 MSE =  42.63977802285405  R =  0.9869473946268292
 
 &gt;&gt;&gt;Poisson Noise:
-PREDICTIONS:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PREDICTIONS:
 (x)&#39; = 2356.569 1 + 669.471 x + -311.695 y + -330.430 z + 64.747 x^2 + -68.895 x y + -50.118 x z + 18.337 y^2 + 25.220 y z + 11.120 z^2
 (y)&#39; = 1120.104 1 + -158.058 x + 99.172 y + -110.616 z + -24.529 x^2 + 20.516 x y + 8.445 x z + -2.711 y^2 + -5.267 y z + 2.702 z^2
 (z)&#39; = -556.555 1 + -355.466 x + 209.624 y + 66.762 z + -9.540 x^2 + 16.047 x y + 13.094 x z + -3.438 y^2 + -9.650 y z + -1.643 z^2
@@ -1004,16 +936,16 @@ MSE =  0.02725011445966513  R =  0.9999920477619888
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "jupybook"
         },
         kernelOptions: {
-            name: "python3",
+            name: "jupybook",
             path: "./Exercise 7.4"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'jupybook'</script>
 
                 </article>
               

@@ -558,7 +558,7 @@ Instead it is possible to timestep in the frequency space (latent space) in orde
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>398 ms ± 84.6 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>355 ms ± 59.3 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -574,7 +574,7 @@ Instead it is possible to timestep in the frequency space (latent space) in orde
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.27 ms ± 109 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1 ms ± 126 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -608,38 +608,6 @@ Instead it is possible to timestep in the frequency space (latent space) in orde
         <span class="n">X_DMD</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="n">i</span> <span class="p">,</span> <span class="n">t</span> <span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span> <span class="n">x1</span> <span class="p">)</span>
         <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span> <span class="mi">1</span> <span class="p">]</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">:</span>
             <span class="n">X_DMD_error</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="n">i</span> <span class="p">,</span> <span class="n">t</span> <span class="p">]</span> <span class="o">=</span> <span class="n">X_DMD</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">t</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span> <span class="n">X</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="n">t</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">]</span> <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">13</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">b1</span> <span class="o">=</span> <span class="n">b</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span> <span class="n">T</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">):</span>
-<span class="ne">---&gt; </span><span class="mi">13</span>     <span class="n">b1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span> <span class="n">Phi</span> <span class="p">)</span> <span class="o">@</span> <span class="n">x1</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="n">x1</span> <span class="o">=</span> <span class="n">Phi</span> <span class="o">@</span> <span class="n">Lambda</span> <span class="o">@</span> <span class="n">b1</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="n">X_DMD</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="n">i</span> <span class="p">,</span> <span class="n">t</span> <span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span> <span class="n">x1</span> <span class="p">)</span>
-
-<span class="nn">File &lt;__array_function__ internals&gt;:180,</span> in <span class="ni">pinv</span><span class="nt">(*args, **kwargs)</span>
-
-<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/numpy/linalg/linalg.py:1998,</span> in <span class="ni">pinv</span><span class="nt">(a, rcond, hermitian)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1996</span>     <span class="k">return</span> <span class="n">wrap</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1997</span> <span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">conjugate</span><span class="p">()</span>
-<span class="ne">-&gt; </span><span class="mi">1998</span> <span class="n">u</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">vt</span> <span class="o">=</span> <span class="n">svd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">hermitian</span><span class="o">=</span><span class="n">hermitian</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2000</span> <span class="c1"># discard small singular values</span>
-<span class="g g-Whitespace">   </span><span class="mi">2001</span> <span class="n">cutoff</span> <span class="o">=</span> <span class="n">rcond</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">newaxis</span><span class="p">]</span> <span class="o">*</span> <span class="n">amax</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="nn">File &lt;__array_function__ internals&gt;:180,</span> in <span class="ni">svd</span><span class="nt">(*args, **kwargs)</span>
-
-<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/numpy/linalg/linalg.py:1657,</span> in <span class="ni">svd</span><span class="nt">(a, full_matrices, compute_uv, hermitian)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1654</span>         <span class="n">gufunc</span> <span class="o">=</span> <span class="n">_umath_linalg</span><span class="o">.</span><span class="n">svd_n_s</span>
-<span class="g g-Whitespace">   </span><span class="mi">1656</span> <span class="n">signature</span> <span class="o">=</span> <span class="s1">&#39;D-&gt;DdD&#39;</span> <span class="k">if</span> <span class="n">isComplexType</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;d-&gt;ddd&#39;</span>
-<span class="ne">-&gt; </span><span class="mi">1657</span> <span class="n">u</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">vh</span> <span class="o">=</span> <span class="n">gufunc</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">signature</span><span class="o">=</span><span class="n">signature</span><span class="p">,</span> <span class="n">extobj</span><span class="o">=</span><span class="n">extobj</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1658</span> <span class="n">u</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">result_t</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1659</span> <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">_realType</span><span class="p">(</span><span class="n">result_t</span><span class="p">),</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>

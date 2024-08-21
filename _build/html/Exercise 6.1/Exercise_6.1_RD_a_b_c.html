@@ -572,6 +572,18 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">35</span>
+<span class="g g-Whitespace">     </span><span class="mi">32</span>     <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span> <span class="n">video_name</span> <span class="o">=</span> <span class="s1">&#39;Initial_data_RD.mp4&#39;</span>
+<span class="ne">---&gt; </span><span class="mi">35</span> <span class="n">animate_flow</span><span class="p">(</span> <span class="n">U</span> <span class="p">,</span> <span class="p">(</span> <span class="n">U</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">U</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span> <span class="p">,</span> <span class="n">video_name</span> <span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;U&#39; is not defined
+</pre></div>
+</div>
+</div>
 </div>
 <p>Link to the video: <a class="reference external" href="https://youtube.com/shorts/9VoTKmVImlo?feature=share">Reaction Diffusion dynamic, raw data</a></p>
 <p>Prepare the input and output dataset; the input dataset contains the first <span class="math notranslate nohighlight">\((0:201 - \Delta T)\)</span> snips, while the output dataset contains the last <span class="math notranslate nohighlight">\((\Delta T:201)\)</span> snips.</p>
@@ -588,6 +600,20 @@ document.write(`
 
 <span class="n">UIN</span> <span class="o">=</span> <span class="n">UIN</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">X_dim</span> <span class="o">*</span> <span class="n">Y_dim</span> <span class="p">,</span> <span class="n">dataset_len</span> <span class="p">)</span>
 <span class="n">UOUT</span> <span class="o">=</span> <span class="n">UOUT</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">X_dim</span> <span class="o">*</span> <span class="n">Y_dim</span> <span class="p">,</span> <span class="n">dataset_len</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">DT</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># divide the dataset between input (past) and output (future).</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">UIN</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="p">:</span> <span class="p">,</span> <span class="p">:(</span> <span class="n">T_dim</span> <span class="o">-</span> <span class="n">DT</span> <span class="p">)</span> <span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">UOUT</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="p">:</span> <span class="p">,</span> <span class="n">DT</span> <span class="p">:</span> <span class="p">(</span> <span class="n">T_dim</span> <span class="p">)</span> <span class="p">]</span> 
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">dataset_len</span> <span class="o">=</span> <span class="n">T_dim</span> <span class="o">-</span> <span class="n">DT</span>
+
+<span class="ne">NameError</span>: name &#39;U&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -616,6 +642,19 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Divide the dataset between trining, validation and test sets.</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">train_len</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="n">dataset_len</span>  <span class="o">*</span> <span class="mf">0.8</span> <span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">val_len</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="n">dataset_len</span>  <span class="o">*</span> <span class="mf">0.1</span> <span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">test_len</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="n">dataset_len</span>  <span class="o">*</span> <span class="mf">0.1</span> <span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;dataset_len&#39; is not defined
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="model">
@@ -640,6 +679,20 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Define the hidden units</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">hidden_size</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">num_inputs</span> <span class="o">=</span> <span class="n">X_dim</span> <span class="o">*</span> <span class="n">Y_dim</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">num_outputs</span> <span class="o">=</span> <span class="n">X_dim</span> <span class="o">*</span> <span class="n">Y_dim</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1"># Create a sequential model</span>
+
+<span class="ne">NameError</span>: name &#39;X_dim&#39; is not defined
+</pre></div>
+</div>
+</div>
 </div>
 <p>Define the loss, the optimizer and compile the model with them.</p>
 <div class="cell docutils container">
@@ -651,6 +704,18 @@ document.write(`
 <span class="n">LOSS</span> <span class="o">=</span> <span class="n">MeanSquaredError</span><span class="p">()</span>
 
 <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span> <span class="n">optimizer</span> <span class="o">=</span> <span class="n">OPTIMIZER</span> <span class="p">,</span> <span class="n">loss</span> <span class="o">=</span> <span class="n">LOSS</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">OPTIMIZER</span> <span class="o">=</span> <span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">LOSS</span> <span class="o">=</span> <span class="n">MeanSquaredError</span><span class="p">()</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span> <span class="n">optimizer</span> <span class="o">=</span> <span class="n">OPTIMIZER</span> <span class="p">,</span> <span class="n">loss</span> <span class="o">=</span> <span class="n">LOSS</span> <span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;model&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -672,6 +737,24 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">keras.callbacks</span> <span class="kn">import</span> <span class="n">EarlyStopping</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">callback</span> <span class="o">=</span> <span class="n">EarlyStopping</span><span class="p">(</span> <span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span> <span class="p">,</span> <span class="n">patience</span> <span class="o">=</span> <span class="mi">5</span> <span class="p">,</span> <span class="n">min_delta</span> <span class="o">=</span> <span class="mf">0.0001</span> <span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">H</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">TRAIN_IN</span> <span class="p">,</span> <span class="n">TRAIN_OUT</span> <span class="p">,</span> 
+<span class="g g-Whitespace">      </span><span class="mi">6</span>                <span class="n">validation_data</span> <span class="o">=</span> <span class="p">(</span> <span class="n">VAL_IN</span> <span class="p">,</span> <span class="n">VAL_OUT</span> <span class="p">)</span> <span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>                <span class="n">validation_freq</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>                <span class="n">epochs</span> <span class="o">=</span> <span class="mi">600</span> <span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>                <span class="n">shuffle</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>                <span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="n">callback</span><span class="p">]</span> <span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>                <span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;model&#39; is not defined
+</pre></div>
+</div>
+</div>
 </div>
 <p>Plot the training history; there is <strong>no overfitting</strong> apparently.</p>
 <div class="cell docutils container">
@@ -690,7 +773,18 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/69283a05d7c51835f9a87c18ef70150f0bcdff59818566fdf76086fd65859355.png" src="../_images/69283a05d7c51835f9a87c18ef70150f0bcdff59818566fdf76086fd65859355.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">fig</span> <span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span> <span class="mi">1</span> <span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span> <span class="mi">5</span> <span class="p">,</span> <span class="mi">4</span> <span class="p">)</span> <span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">H</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">]</span> <span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;train loss&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;skyblue&quot;</span> <span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">H</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;val_loss&quot;</span><span class="p">]</span> <span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;val loss&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;orange&quot;</span> <span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;epoch&quot;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;H&#39; is not defined
+</pre></div>
+</div>
+<img alt="../_images/3253ecffbb9cf72d4b5cc93e5748a3136bb72707b7ee4ab1a0691580f4da7142.png" src="../_images/3253ecffbb9cf72d4b5cc93e5748a3136bb72707b7ee4ab1a0691580f4da7142.png" />
 </div>
 </div>
 <p>Import the trained model (if the training was not run) and compute the error over the test set and over the entire dataset.</p>
@@ -714,9 +808,21 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Making the predictions:
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Use the following line if you want to load the pretrained model.</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1">#model = tf.keras.models.load_model(&quot;Output/SimpleRNN_RD.h5&quot;)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> 
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1">#Make predictions.</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Making the predictions:&quot;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">TEST_PRED</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">TEST_IN</span> <span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">TOT_PRED</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">UIN</span><span class="o">.</span><span class="n">T</span> <span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">TEST_MSE</span> <span class="o">=</span> <span class="n">LOSS</span><span class="p">(</span> <span class="n">TEST_PRED</span> <span class="p">,</span> <span class="n">TEST_OUT</span> <span class="p">)</span>
 
----&gt;The MSE on the test set is: 0.012
----&gt;The MSE on the total dataset set is: 0.009
+<span class="ne">NameError</span>: name &#39;model&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -771,6 +877,20 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span> <span class="nn">mpl_toolkits.axes_grid1</span> <span class="kn">import</span> <span class="n">make_axes_locatable</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="n">real_data</span> <span class="o">=</span> <span class="n">UOUT</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">T_dim</span> <span class="o">-</span> <span class="n">DT</span> <span class="p">,</span> <span class="n">X_dim</span> <span class="p">,</span> <span class="n">Y_dim</span> <span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">predictions</span> <span class="o">=</span> <span class="n">TOT_PRED</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">T_dim</span> <span class="o">-</span> <span class="n">DT</span> <span class="p">,</span> <span class="n">X_dim</span> <span class="p">,</span> <span class="n">Y_dim</span> <span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">error</span> <span class="o">=</span> <span class="p">(</span> <span class="n">UOUT</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">TOT_PRED</span> <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">T_dim</span> <span class="o">-</span> <span class="n">DT</span> <span class="p">,</span> <span class="n">X_dim</span> <span class="p">,</span> <span class="n">Y_dim</span> <span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;UOUT&#39; is not defined
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -799,6 +919,18 @@ allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; pic
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span> <span class="mi">1</span> <span class="p">,</span> <span class="n">T_dim</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">):</span>
     <span class="n">FFNN_trajectory</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="n">i</span> <span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">APP</span><span class="p">[</span><span class="kc">None</span> <span class="p">,</span> <span class="p">:</span> <span class="p">]</span> <span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> 
     <span class="n">APP</span> <span class="o">=</span> <span class="n">FFNN_trajectory</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="n">i</span> <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">FFNN_trajectory</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="n">UIN</span><span class="o">.</span><span class="n">shape</span> <span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">FFNN_trajectory</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">0</span> <span class="p">]</span> <span class="o">=</span> <span class="n">UIN</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">0</span> <span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">APP</span> <span class="o">=</span> <span class="n">FFNN_trajectory</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">0</span> <span class="p">]</span>
+
+<span class="ne">NameError</span>: name &#39;UIN&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -852,6 +984,20 @@ allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; pic
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span> <span class="nn">mpl_toolkits.axes_grid1</span> <span class="kn">import</span> <span class="n">make_axes_locatable</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="n">real_data</span> <span class="o">=</span> <span class="n">UOUT</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">T_dim</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">,</span> <span class="n">X_dim</span> <span class="p">,</span> <span class="n">Y_dim</span> <span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">predictions</span> <span class="o">=</span> <span class="n">FFNN_trajectory</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">T_dim</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">,</span> <span class="n">X_dim</span> <span class="p">,</span> <span class="n">Y_dim</span> <span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">error</span> <span class="o">=</span> <span class="p">(</span> <span class="n">UOUT</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">FFNN_trajectory</span><span class="o">.</span><span class="n">T</span> <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">T_dim</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">,</span> <span class="n">X_dim</span> <span class="p">,</span> <span class="n">Y_dim</span> <span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;UOUT&#39; is not defined
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -884,7 +1030,60 @@ allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; pic
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;__header__&#39;, &#39;__version__&#39;, &#39;__globals__&#39;, &#39;t&#39;, &#39;u&#39;, &#39;v&#39;, &#39;x&#39;, &#39;y&#39;])
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/scipy/io/matlab/_mio.py:39,</span> in <span class="ni">_open_file</span><span class="nt">(file_like, appendmat, mode)</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">39</span>     <span class="k">return</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_like</span><span class="p">,</span> <span class="n">mode</span><span class="p">),</span> <span class="kc">True</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span> <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span>     <span class="c1"># Probably &quot;not found&quot;</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;../DATA/reaction_diffusion_big.mat&#39;
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">rd_data</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span><span class="s1">&#39;../DATA/reaction_diffusion_big.mat&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="n">rd_data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">u</span> <span class="o">=</span> <span class="n">rd_data</span><span class="p">[</span><span class="s1">&#39;u&#39;</span><span class="p">]</span>
+
+<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/scipy/io/matlab/_mio.py:224,</span> in <span class="ni">loadmat</span><span class="nt">(file_name, mdict, appendmat, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">87</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">88</span><span class="sd"> Load MATLAB file.</span>
+<span class="g g-Whitespace">     </span><span class="mi">89</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">221</span><span class="sd">     3.14159265+3.14159265j])</span>
+<span class="g g-Whitespace">    </span><span class="mi">222</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">223</span> <span class="n">variable_names</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;variable_names&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">224</span> <span class="k">with</span> <span class="n">_open_file_context</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">appendmat</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">225</span>     <span class="n">MR</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">mat_reader_factory</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">226</span>     <span class="n">matfile_dict</span> <span class="o">=</span> <span class="n">MR</span><span class="o">.</span><span class="n">get_variables</span><span class="p">(</span><span class="n">variable_names</span><span class="p">)</span>
+
+<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/contextlib.py:135,</span> in <span class="ni">_GeneratorContextManager.__enter__</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">133</span> <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwds</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span>
+<span class="g g-Whitespace">    </span><span class="mi">134</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">135</span>     <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gen</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">136</span> <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">137</span>     <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;generator didn&#39;t yield&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="kc">None</span>
+
+<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/scipy/io/matlab/_mio.py:17,</span> in <span class="ni">_open_file_context</span><span class="nt">(file_like, appendmat, mode)</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="nd">@contextmanager</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="k">def</span> <span class="nf">_open_file_context</span><span class="p">(</span><span class="n">file_like</span><span class="p">,</span> <span class="n">appendmat</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;rb&#39;</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">17</span>     <span class="n">f</span><span class="p">,</span> <span class="n">opened</span> <span class="o">=</span> <span class="n">_open_file</span><span class="p">(</span><span class="n">file_like</span><span class="p">,</span> <span class="n">appendmat</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span>         <span class="k">yield</span> <span class="n">f</span>
+
+<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/scipy/io/matlab/_mio.py:45,</span> in <span class="ni">_open_file</span><span class="nt">(file_like, appendmat, mode)</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span>     <span class="k">if</span> <span class="n">appendmat</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">file_like</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.mat&#39;</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">44</span>         <span class="n">file_like</span> <span class="o">+=</span> <span class="s1">&#39;.mat&#39;</span>
+<span class="ne">---&gt; </span><span class="mi">45</span>     <span class="k">return</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_like</span><span class="p">,</span> <span class="n">mode</span><span class="p">),</span> <span class="kc">True</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">47</span>     <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">48</span>         <span class="s1">&#39;Reader needs file name or open file-like object&#39;</span>
+<span class="g g-Whitespace">     </span><span class="mi">49</span>     <span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;../DATA/reaction_diffusion_big.mat&#39;
 </pre></div>
 </div>
 </div>
@@ -896,6 +1095,18 @@ Then the required modes to recover <span class="math notranslate nohighlight">\(
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
 <span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">VT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">X_u</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">17</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">X_u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">VT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">X_u</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;u&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -918,9 +1129,15 @@ Then the required modes to recover <span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>For 90.0% of the energy, 3.0 modes are required
-For 99.0% of the energy, 4.0 modes are required
-For 99.9% of the energy, 6.0 modes are required
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">18</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">U</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">E_org</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">X_u</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="c1"># Energy calculated as the squared Frobenius norm</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">U</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="c1"># X_approx = U[:, :r+1] @ S[:r+1, :r+1] @ VT[:r+1, :]</span>
+
+<span class="ne">NameError</span>: name &#39;U&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -937,7 +1154,19 @@ For 99.9% of the energy, 6.0 modes are required
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6df8a6e3a46ddf11711209525e5e1d9a06b2e3a54c25334b418705801b7831f7.png" src="../_images/6df8a6e3a46ddf11711209525e5e1d9a06b2e3a54c25334b418705801b7831f7.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">19</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">()):</span>
+<span class="ne">----&gt; </span><span class="mi">3</span>     <span class="n">eigen_vector_r</span> <span class="o">=</span> <span class="n">U</span><span class="p">[:,</span> <span class="n">r</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">eigen_vector_r</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Eigen Mode </span><span class="si">{</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;U&#39; is not defined
+</pre></div>
+</div>
+<img alt="../_images/e03c948316f1c55332e7ed2547ad1de1fcf899462093a2a74a518c789c97dcaf.png" src="../_images/e03c948316f1c55332e7ed2547ad1de1fcf899462093a2a74a518c789c97dcaf.png" />
 </div>
 </div>
 <p>The amplitude of the first six eigenmodes are calculated and then plotted.</p>
@@ -955,7 +1184,16 @@ For 99.9% of the energy, 6.0 modes are required
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e83114a927b60f17d503c488454a21b72478e20ba9758fbc2eb205718ba5077e.png" src="../_images/e83114a927b60f17d503c488454a21b72478e20ba9758fbc2eb205718ba5077e.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">SVT</span> <span class="o">=</span> <span class="n">S</span> <span class="o">@</span> <span class="n">VT</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="ne">NameError</span>: name &#39;S&#39; is not defined
+</pre></div>
+</div>
 </div>
 </div>
 <p>Now a FFNN is trained to step forward the latent space amplitudes.</p>
@@ -1010,7 +1248,18 @@ For 99.9% of the energy, 6.0 modes are required
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/11760a2d464708871c885c94209a6440e9f686be45a2480a9deb37991810d71a.png" src="../_images/11760a2d464708871c885c94209a6440e9f686be45a2480a9deb37991810d71a.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">21</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Prepare the dataset.</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">r_modes</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">features</span> <span class="o">=</span> <span class="n">SVT</span><span class="p">[:</span><span class="n">r_modes</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">targets</span> <span class="o">=</span> <span class="n">SVT</span><span class="p">[:</span><span class="n">r_modes</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">T</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="ne">NameError</span>: name &#39;SVT&#39; is not defined
+</pre></div>
+</div>
 </div>
 </div>
 <p>Plot the predictions against the real data. Looking at the funtions one would suspect that fitting a polynomial might yield better results than the current neural network. This knowledge could be implemented to chose more suitable activation functions.</p>
@@ -1033,10 +1282,16 @@ For 99.9% of the energy, 6.0 modes are required
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7/7 [==============================] - 0s 1ms/step
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">22</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="ne">NameError</span>: name &#39;model&#39; is not defined
 </pre></div>
 </div>
-<img alt="../_images/4ef81d6d08acdaef530f5e9d2fb102bba923e7d33aa333ef9a3fca7b2f0a1864.png" src="../_images/4ef81d6d08acdaef530f5e9d2fb102bba923e7d33aa333ef9a3fca7b2f0a1864.png" />
 </div>
 </div>
 <p>A movie of the reproduced reaction is shown below, please note that NN plot includes data from the training, test and validaton sets:</p>
@@ -1093,6 +1348,21 @@ For 99.9% of the energy, 6.0 modes are required
 <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">23</span><span class="p">],</span> <span class="n">line</span> <span class="mi">9</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># First set up the figure, the axis, and the plot element we want to animate</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="n">w_k</span> <span class="o">=</span> <span class="n">SVT</span><span class="p">[:</span><span class="n">r_modes</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">w_k_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">features</span><span class="p">))</span><span class="o">.</span><span class="n">T</span> <span class="c1"># reshape is to make it a 2D array</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">X_trunc</span> <span class="o">=</span> <span class="n">U</span><span class="p">[:,</span> <span class="p">:</span><span class="n">r_modes</span><span class="p">]</span> <span class="o">@</span> <span class="n">w_k</span>
+
+<span class="ne">NameError</span>: name &#39;SVT&#39; is not defined
+</pre></div>
+</div>
+<img alt="../_images/d4e4032dffc859ab8c999ed08cb412483fb4c9169c6c4d79f576324494a7308b.png" src="../_images/d4e4032dffc859ab8c999ed08cb412483fb4c9169c6c4d79f576324494a7308b.png" />
 </div>
 </div>
 <div class="cell docutils container">

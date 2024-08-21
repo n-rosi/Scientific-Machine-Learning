@@ -495,21 +495,21 @@ document.write(`
 <section id="physics-informed-least-square-regression">
 <h2>Physics-Informed Least Square Regression<a class="headerlink" href="#physics-informed-least-square-regression" title="Link to this heading">#</a></h2>
 <p>The parameters <span class="math notranslate nohighlight">\(\beta\)</span> and <span class="math notranslate nohighlight">\(\gamma\)</span> can be found using the PI-LSR (Physics Informed Least Square Regression):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f6d68160-c85c-4829-9a34-3e2cdb151a26">
-<span class="eqno">(1)<a class="headerlink" href="#equation-f6d68160-c85c-4829-9a34-3e2cdb151a26" title="Permalink to this equation">#</a></span>\[\begin{gather}
+<div class="amsmath math notranslate nohighlight" id="equation-4d9d82d6-fa8a-49a9-96d8-611a7cab5a72">
+<span class="eqno">(1)<a class="headerlink" href="#equation-4d9d82d6-fa8a-49a9-96d8-611a7cab5a72" title="Permalink to this equation">#</a></span>\[\begin{gather}
 b=Ax\Rightarrow x=(A^{+}A^{-1})A^{+}b
 \end{gather}\]</div>
 <p>where <span class="math notranslate nohighlight">\(+\)</span> indicates the complex conjugate and :</p>
-<div class="amsmath math notranslate nohighlight" id="equation-06f639eb-e90f-4e6f-adc5-d26b15f3e346">
-<span class="eqno">(2)<a class="headerlink" href="#equation-06f639eb-e90f-4e6f-adc5-d26b15f3e346" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-eb5146f9-0dd0-40a2-a208-12f9865b6699">
+<span class="eqno">(2)<a class="headerlink" href="#equation-eb5146f9-0dd0-40a2-a208-12f9865b6699" title="Permalink to this equation">#</a></span>\[\begin{equation}
 b = \begin{bmatrix}  \frac{\partial S}{\partial t} \\ \frac{\partial I}{\partial t} \\ \frac{\partial R}{\partial t}  \end{bmatrix}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-fa4269b1-b15e-495e-9981-2d3933f5b92c">
-<span class="eqno">(3)<a class="headerlink" href="#equation-fa4269b1-b15e-495e-9981-2d3933f5b92c" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-a1fc6f75-1130-4b49-8de3-98c374bbf304">
+<span class="eqno">(3)<a class="headerlink" href="#equation-a1fc6f75-1130-4b49-8de3-98c374bbf304" title="Permalink to this equation">#</a></span>\[\begin{align}
 A = \begin{bmatrix}  -\frac{SI}{N} &amp; 0 \\ \frac{SI}{N} &amp; -I \\ 0 &amp; I  \end{bmatrix}
 \end{align}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-86b66043-2bbf-4fb5-8e21-d5e7bd0ebc52">
-<span class="eqno">(4)<a class="headerlink" href="#equation-86b66043-2bbf-4fb5-8e21-d5e7bd0ebc52" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-d20cdab1-198a-4579-b868-6a2f3dafd408">
+<span class="eqno">(4)<a class="headerlink" href="#equation-d20cdab1-198a-4579-b868-6a2f3dafd408" title="Permalink to this equation">#</a></span>\[\begin{align}
 x = \begin{bmatrix} \beta \\ \gamma \end{bmatrix}
 \end{align}\]</div>
 <p>In particular, we build every derivative and physical quantity as a column vector, where each row is a step forward in time. So, given the vectors <span class="math notranslate nohighlight">\(S\)</span>, <span class="math notranslate nohighlight">\(I\)</span>, and <span class="math notranslate nohighlight">\(R\)</span>, which describe how these quantities develop in time, and using the forward finite difference method to compute the respective derivatives, we can compute <span class="math notranslate nohighlight">\(x\)</span> as shown below.</p>

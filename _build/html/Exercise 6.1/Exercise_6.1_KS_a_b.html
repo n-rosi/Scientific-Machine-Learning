@@ -701,7 +701,7 @@ NUMBER OF SPACE-POINTS: 1024
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6fb7866dc490da685a856a1b7b3f74b399b899d9b72c919839ae863d1c219590.png" src="../_images/6fb7866dc490da685a856a1b7b3f74b399b899d9b72c919839ae863d1c219590.png" />
+<img alt="../_images/155cb20ad859a2163d1c8cdd708e228d7c39322e65d7f562f9c61f95cd86601e.png" src="../_images/155cb20ad859a2163d1c8cdd708e228d7c39322e65d7f562f9c61f95cd86601e.png" />
 </div>
 </div>
 <p>Use the model to make predictions and evaluate them trought the MSE.</p>
@@ -722,7 +722,7 @@ NUMBER OF SPACE-POINTS: 1024
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 150ms/step
+1/1 [==============================] - 0s 147ms/step
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1/8 [==&gt;...........................] - ETA: 0s
@@ -732,8 +732,8 @@ NUMBER OF SPACE-POINTS: 1024
 8/8 [==============================] - 0s 3ms/step
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>---&gt;The MSE on the test set is: 0.058
----&gt;The MSE on the entire dataset is: 0.043
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>---&gt;The MSE on the test set is: 0.048
+---&gt;The MSE on the entire dataset is: 0.040
 </pre></div>
 </div>
 </div>
@@ -765,20 +765,6 @@ NUMBER OF SPACE-POINTS: 1024
 
 <span class="n">video_name</span> <span class="o">=</span> <span class="s2">&quot;RNN_performance_KS.mp4&quot;</span>
 <span class="n">ani</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">video_name</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>  <span class="n">extra_args</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;-vcodec&#39;</span><span class="p">,</span> <span class="s1">&#39;libx264&#39;</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exception ignored in: &lt;function TransformNode.set_children.&lt;locals&gt;.&lt;lambda&gt; at 0x7f107027ca60&gt;
-Traceback (most recent call last):
-  File &quot;/home/nrosi/conda/envs/jupybook/lib/python3.10/site-packages/matplotlib/transforms.py&quot;, line 209, in &lt;lambda&gt;
-    self, lambda _, pop=child._parents.pop, k=id(self): pop(k))
-KeyboardInterrupt: 
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MovieWriter stderr:
-Error writing trailer of RNN_performance_KS.mp4: Immediate exit requested
-Error closing file RNN_performance_KS.mp4: Immediate exit requested
 </pre></div>
 </div>
 </div>
@@ -818,7 +804,7 @@ allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; pic
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/41368e6394a5ee3369ba0049bfed580fc89cc711ec813945ae44497e39f3edaa.png" src="../_images/41368e6394a5ee3369ba0049bfed580fc89cc711ec813945ae44497e39f3edaa.png" />
+<img alt="../_images/6a835ab40530216c971d80f5281deab8783b3b017a0ff72fc8c6d5af018917d1.png" src="../_images/6a835ab40530216c971d80f5281deab8783b3b017a0ff72fc8c6d5af018917d1.png" />
 </div>
 </div>
 </section>
@@ -913,18 +899,42 @@ allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; pic
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_1&quot;
-_________________________________________________________________
- Layer (type)                Output Shape              Param #   
-=================================================================
- dense_1 (Dense)             (None, 512)               524800    
-                                                                 
- dense_2 (Dense)             (None, 1024)              525312    
-                                                                 
-=================================================================
-Total params: 1,050,112
-Trainable params: 1,050,112
-Non-trainable params: 0
-_________________________________________________________________
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>_________________________________________________________________
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Layer (type)                Output Shape              Param #   
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=================================================================
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> dense_1 (Dense)             (None, 512)               524800    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                                 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> dense_2 (Dense)             (None, 1024)              525312    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                                 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=================================================================
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total params: 1,050,112
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trainable params: 1,050,112
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Non-trainable params: 0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>_________________________________________________________________
 </pre></div>
 </div>
 </div>
@@ -980,7 +990,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7e56567c6e40ab87de15fcf2159b18ab541c4eda5a2f8513e1121bdf2bddcf11.png" src="../_images/7e56567c6e40ab87de15fcf2159b18ab541c4eda5a2f8513e1121bdf2bddcf11.png" />
+<img alt="../_images/1ab71a911f0b49d6efdd4c98c8306e24d0be0e29c6f8a1be13aa601c72fe463c.png" src="../_images/1ab71a911f0b49d6efdd4c98c8306e24d0be0e29c6f8a1be13aa601c72fe463c.png" />
 </div>
 </div>
 <p>Use the model to make predictions and the MSE to evaluate them.</p>
@@ -997,10 +1007,21 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1/1 [==============================] - 0s 49ms/step
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1/1 [==============================] - ETA: 0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+1/1 [==============================] - 0s 51ms/step
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1/7 [===&gt;..........................] - ETA: 0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 7/7 [==============================] - 0s 2ms/step
-
----&gt;The MSE on the test set is: 0.004
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>---&gt;The MSE on the test set is: 0.003
 ---&gt;The MSE on the entire dataset is: 0.003
 </pre></div>
 </div>
@@ -1070,7 +1091,7 @@ allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; pic
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/912dc536c65b4371891fcb6e93b2be14b53de0e4ae6e370911d2ab0c095eb93d.png" src="../_images/912dc536c65b4371891fcb6e93b2be14b53de0e4ae6e370911d2ab0c095eb93d.png" />
+<img alt="../_images/f2a6dc504b332d98e016ea44b5f7199be8d3adde97c0c1a3e1b8778f918f78c8.png" src="../_images/f2a6dc504b332d98e016ea44b5f7199be8d3adde97c0c1a3e1b8778f918f78c8.png" />
 </div>
 </div>
 <p>In summary the FFNN model worked better than the RNN. This is slightly surprsising as when considering time series one would expect an RNN structure to outperform a simple FFNN.
@@ -1164,7 +1185,7 @@ i.e. input <span class="math notranslate nohighlight">\(uu^{(j)}\)</span> and ou
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3f9fe2532d8bb59c9e1d822d1467beedbba9c3d717dc7e2331df02e130df4ca8.png" src="../_images/3f9fe2532d8bb59c9e1d822d1467beedbba9c3d717dc7e2331df02e130df4ca8.png" />
+<img alt="../_images/a361b09d2192789838d6f088decc6feba713f22cc87a8748af130dcc9c1ccf0a.png" src="../_images/a361b09d2192789838d6f088decc6feba713f22cc87a8748af130dcc9c1ccf0a.png" />
 </div>
 </div>
 <p>The model is not looking to generalize well. Almost imediately the model starts to make poor predictions and these are then further propogated downstream.
