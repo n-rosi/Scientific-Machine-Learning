@@ -1,0 +1,1123 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Exercise 7.4 - SINDy &#8212; sml report</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Exercise 7.4/Exercise_7.4_';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Exercise X02.1 - Fast Fourier Transform for Point-Wise Gradient Computations" href="../Exercise%20X02.1/Exercise_X02_1.html" />
+    <link rel="prev" title="Neural Network for Predicting the Lorenz System" href="../Exercise%206.1/Exercise6.1_L_d.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="sml report - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="sml report - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to the Scientific Machine Learning Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%20X01.1/ExerciseX01.1_.html">Exercise X01.1 - Integration of Dynamical Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%201.7/Exercise_1.7_.html">Exercise 1.7 - Singular Value Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%202.3/Exercise_2.3_.html">Exercise 2.3 - Fast Fourier Transform (FFT) for Numerical Integration</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Exercise%206.1/6.1_toc.html">Exercise 6.1</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Exercise%206.1/Exercise_6.1_KS_a_b.html">Neural Network for Numerical Integration on the Kuramoto–Sivashinsky (KS) PDE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Exercise%206.1/Exercise_6.1_RD_a_b_c.html">Neural Network for Numerical Integration on the Reaction Diffusion System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Exercise%206.1/Exercise6.1_L_d.html">Neural Network for Predicting the Lorenz System</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Exercise 7.4 - SINDy</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%20X02.1/Exercise_X02_1.html">Exercise X02.1 - Fast Fourier Transform for Point-Wise Gradient Computations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%20X03.1/Exercise_X03.1_.html">Exercise X03.1 - Dynamic Mode Decomposition (DMD)</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%2012.2/Exercise_12.2_.html">Exercise 12.2 - Galerkin method applied to the Kuramoto Sivashinsky dynamical system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%2012.3/Exercise_12.3_.html">Exercise 12.3 - Autoencoders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%2014.X01/Exercise_14.X01_.html">Exercise 14.X01</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%2014.X02/Exercise_14.X02_.html">Exercise 14.X02 - Physics-Informed Neural Networks for inverse problems</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FExercise 7.4/Exercise_7.4_.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Exercise 7.4/Exercise_7.4_.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Exercise 7.4 - SINDy</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Exercise 7.4 - SINDy</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a">(a)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#b">(b)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#c">(c)</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="exercise-7-4-sindy">
+<h1>Exercise 7.4 - SINDy<a class="headerlink" href="#exercise-7-4-sindy" title="Link to this heading">#</a></h1>
+<p>SINDy is an algorithm which allows to discover non-linear dynamic models from sparse data. It leverages the fact that dynamic systems, which can be generalized as <span class="math notranslate nohighlight">\( \frac{d\vec{x}}{dt} = \vec{f}(\vec{x})\)</span>, typically present a dynamics <span class="math notranslate nohighlight">\(f\)</span> with only a few active terms in the space of possible right-hand side functions. The idea behind Sindy is to find the approximation (1) with the highest number of <span class="math notranslate nohighlight">\(\xi_k\)</span> equal to <span class="math notranslate nohighlight">\(0\)</span> using <strong>sparse regression</strong>.</p>
+<div class="math notranslate nohighlight">
+\[ \vec{f}(\vec{x}) \sim \sum_{k=1}^p \theta_k(\vec{x}) \vec{\xi}_k = \vec{\Theta}\vec{\xi} \,\,\,\,\,\,\,\,\,\,\,(1)\]</div>
+<p>In order to apply sparse regression on a dynamic system, the set of equation is representd in the general form:</p>
+<div class="math notranslate nohighlight">
+\[\dot{X} = \vec{\Theta}(\vec{x})\vec{\Xi} \,\,\,\,\,\,\,\,\,\,\,(2)\]</div>
+<p>where <span class="math notranslate nohighlight">\( \dot{X} \)</span> is a matrix containing the derivative of the temporal sequence produced by the system, <span class="math notranslate nohighlight">\( \vec{\Theta}(\vec{x}) \)</span> is a fimily of candidate non-linear functions, which may be activated or not depending on <span class="math notranslate nohighlight">\( \vec{\Xi} \)</span>, and <span class="math notranslate nohighlight">\( \vec{\Xi} \)</span> is a matrix whose colums are the activator <span class="math notranslate nohighlight">\( \vec{\xi}_k \)</span>.</p>
+<p>Regression is then implemented through the minimization of the Euclidean norm between <span class="math notranslate nohighlight">\(\dot{X}\)</span> and its approximation plus a regularization term:</p>
+<div class="math notranslate nohighlight">
+\[\vec{\xi}_k = argmin_{\vec{\xi}_k'} ||\dot{X}_k- \vec{\Theta}\vec{\xi}_k' ||_2 + \lambda||\vec{\xi}_k' ||_1\,\,\,\,\,\,\,\,\,\,\,(3)\]</div>
+<section id="a">
+<h2>(a)<a class="headerlink" href="#a" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># From the book</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">integrate</span>
+<span class="kn">import</span> <span class="nn">pysindy</span> <span class="k">as</span> <span class="nn">ps</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span><span class="p">,</span> <span class="n">mean_squared_error</span>
+
+<span class="c1"># Import plotting libraries and tools.</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+<span class="kn">from</span> <span class="nn">matplotlib.animation</span> <span class="kn">import</span> <span class="n">FuncAnimation</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+
+<span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;font.size&#39;</span><span class="p">:</span> <span class="mi">18</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>STEP 1</strong></p>
+<p>The first thing to do is to produce a large dataset to train SINDy. Since we want to train SINDy on the solution of the Lorenz system the dataset will be composed of the trajectory evolution of <span class="math notranslate nohighlight">\( (x,y,z) \)</span> in time. Therefore, the relevant parameters which describe the dataset are:</p>
+<ul class="simple">
+<li><p>The total time-length of the trajectory that we simulate with numerical integration, which is called <span class="math notranslate nohighlight">\(T_{long}\)</span>.</p></li>
+<li><p>The time-length of a smaller trajectory, i.e. a subset of the initial dataset, which is indicated with <span class="math notranslate nohighlight">\(T&lt;T_{long}\)</span>.</p></li>
+<li><p>The number of point in the dataset which desctibe a trajectory with a certain time-length, <span class="math notranslate nohighlight">\(r\)</span>.</p></li>
+<li><p>The size of the time-step used for numerical integration, which is called <span class="math notranslate nohighlight">\(\Delta t\)</span>.</p></li>
+<li><p>The period underling the Lorenz dynamic, calculated by averaging over many trips around the attractor, <span class="math notranslate nohighlight">\(\tau\)</span>.</p></li>
+</ul>
+<p>In other words, <span class="math notranslate nohighlight">\( T \)</span> (or <span class="math notranslate nohighlight">\( T_{long} \)</span>), <span class="math notranslate nohighlight">\( r \)</span> and <span class="math notranslate nohighlight">\( \Delta t \)</span> respect the following mathematical relations: <span class="math notranslate nohighlight">\( T=r\cdot\Delta t \)</span>, <span class="math notranslate nohighlight">\( \Delta t = T / r \)</span> , <span class="math notranslate nohighlight">\( r=T/\Delta t \)</span>.</p>
+<p><strong>Note:</strong> The nomencalture we used is inspired to article <a class="reference external" href="https://arxiv.org/abs/1805.07411">Discovery of Non Linear Multiscale Systems: Sampling Strategies and Embeddings</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the time evolution of the Lorenz system. </span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">1e-4</span>
+<span class="n">tau</span> <span class="o">=</span> <span class="mf">0.759</span>
+<span class="n">T_long</span> <span class="o">=</span> <span class="n">tau</span> <span class="o">*</span> <span class="mi">20</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span> <span class="n">dt</span> <span class="p">,</span> <span class="n">T_long</span> <span class="p">,</span> <span class="n">dt</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>STEP 2</strong></p>
+<p>The dataset can be generated via numerical integration of the well-known Lorenz system:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-fc8631b8-1194-4fe1-85eb-21fc66c000ae">
+<span class="eqno">(5)<a class="headerlink" href="#equation-fc8631b8-1194-4fe1-85eb-21fc66c000ae" title="Permalink to this equation">#</a></span>\[\begin{align}
+\dot{x} = \sigma(y-x)
+\end{align}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-c327d212-bb69-42e6-b69a-cc68994484b0">
+<span class="eqno">(6)<a class="headerlink" href="#equation-c327d212-bb69-42e6-b69a-cc68994484b0" title="Permalink to this equation">#</a></span>\[\begin{align}
+\dot{y} = x ( \rho - z ) - y
+\end{align}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-2375a1a0-581e-49d9-8ad2-1ffe8e80cef8">
+<span class="eqno">(7)<a class="headerlink" href="#equation-2375a1a0-581e-49d9-8ad2-1ffe8e80cef8" title="Permalink to this equation">#</a></span>\[\begin{align}
+\dot{z} = xy - \beta z
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\( \beta \)</span>, <span class="math notranslate nohighlight">\( \sigma \)</span> and <span class="math notranslate nohighlight">\( \rho \)</span> define a particular dynamic ans <span class="math notranslate nohighlight">\( x_{0} \)</span> are the initial conditions. In the following block of code, the Right-Hand-Side (RHS) of the Lorenz System is defined and the PDEs are integrated using the <code class="docutils literal notranslate"><span class="pre">odeint</span></code> method over the total length of the trajectory <span class="math notranslate nohighlight">\( T_{long} \)</span>. Note that it is necessary to remove the first <span class="math notranslate nohighlight">\( t=1 \)</span> of the dataset itself as required from the exercise.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the system parameters.</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="mi">8</span><span class="o">/</span><span class="mi">3</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">rho</span> <span class="o">=</span> <span class="mi">28</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="c1"># Define the Lorenz system RHS.</span>
+<span class="k">def</span> <span class="nf">lorenz_deriv</span><span class="p">(</span> <span class="n">x_y_z</span> <span class="p">,</span> <span class="n">t0</span> <span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">sigma</span> <span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="n">beta</span><span class="p">,</span> <span class="n">rho</span> <span class="o">=</span> <span class="n">rho</span> <span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">x_y_z</span>
+    <span class="k">return</span> <span class="p">[</span> <span class="n">sigma</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="p">,</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="n">rho</span> <span class="o">-</span> <span class="n">z</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">-</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">z</span> <span class="p">]</span>
+
+<span class="c1"># Define the starting conditions.</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="p">(</span> <span class="o">-</span><span class="mi">8</span> <span class="p">,</span> <span class="mi">8</span> <span class="p">,</span> <span class="mi">27</span> <span class="p">)</span>
+
+<span class="c1"># Integrate the Lorenz PDEs.</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">odeint</span><span class="p">(</span> <span class="n">lorenz_deriv</span> <span class="p">,</span> <span class="n">x0</span> <span class="p">,</span> <span class="n">t</span> <span class="p">,</span> <span class="n">rtol</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">12</span><span class="p">)</span> <span class="p">,</span> <span class="n">atol</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">12</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="c1"># Remove the first 1 second of the simulation.</span>
+<span class="n">x_train</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span> <span class="nb">int</span><span class="p">(</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">dt</span> <span class="p">)</span> <span class="p">:</span> <span class="p">,</span> <span class="p">:</span> <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>STEP 3</strong></p>
+<p>The vector <span class="math notranslate nohighlight">\(R\)</span> contains a set of integers, <span class="math notranslate nohighlight">\((r_0,...,r_n)\)</span>, which define ordinate subsamples of the full-dataset. The elements of <span class="math notranslate nohighlight">\(R\)</span> are visited in a loop and used to cut the full dataset at different length. SINDy is trained on each of the <span class="math notranslate nohighlight">\(n\)</span> dataset and its performance are monitored computing the Mean Squared Error <span class="math notranslate nohighlight">\(MSE\)</span> and the r2 score <span class="math notranslate nohighlight">\(R2\)</span> between the predictions and the training dataset.</p>
+<p>The plots below show the metrics as functions of the different dataset sizes; it is possible to observe that the models predict with accuracy close to the full dataset even with a small fraction of the data. For the Lorenz System, <span class="math notranslate nohighlight">\( R2\sim1 \)</span> and <span class="math notranslate nohighlight">\( MSE&lt;&lt;1 \)</span> are already achieved around <span class="math notranslate nohighlight">\( r_{i}=6581 \)</span> time-steps, which corresponds to <span class="math notranslate nohighlight">\( T = \Delta t \cdot r_i \sim 0.65 \)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># train SINDy on several dataset with different length.</span>
+<span class="k">def</span> <span class="nf">trainer</span><span class="p">(</span> <span class="n">R</span> <span class="p">,</span> <span class="n">feature_names</span> <span class="p">,</span> <span class="n">sparse_regression_optimizer</span> <span class="p">):</span>
+
+    <span class="c1"># Compute the scores for different training set sizes.</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">R</span><span class="p">:</span>
+        <span class="n">x_frac</span> <span class="o">=</span> <span class="n">x_train</span><span class="p">[</span> <span class="p">:</span> <span class="n">r</span> <span class="p">,</span> <span class="p">:]</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">SINDy</span><span class="p">(</span> <span class="n">feature_names</span> <span class="o">=</span> <span class="n">feature_names</span> <span class="p">,</span> <span class="n">optimizer</span> <span class="o">=</span> <span class="n">sparse_regression_optimizer</span> <span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">x_frac</span> <span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">dt</span> <span class="p">)</span>
+        <span class="n">scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">[</span> <span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span> <span class="n">x_train</span> <span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">dt</span><span class="p">,</span> <span class="n">metric</span> <span class="o">=</span> <span class="n">metric</span><span class="p">)</span> <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="p">[</span> <span class="n">r2_score</span> <span class="p">,</span> <span class="n">mean_squared_error</span> <span class="p">]</span> <span class="p">]</span> <span class="p">)</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">scores</span>
+
+<span class="c1"># plot function.</span>
+<span class="k">def</span> <span class="nf">plot1</span><span class="p">(</span> <span class="n">R</span> <span class="p">,</span> <span class="n">dt</span> <span class="p">,</span> <span class="n">scores</span> <span class="p">):</span>
+    
+    <span class="c1"># Plot the scores as log-log plots.</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span> <span class="mi">10</span> <span class="p">,</span> <span class="mi">8</span> <span class="p">)</span> <span class="p">)</span>
+    <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">211</span><span class="p">)</span>
+    <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">212</span><span class="p">)</span>
+    
+    <span class="n">ax1</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span> <span class="n">R</span> <span class="o">*</span> <span class="n">dt</span> <span class="p">,</span> <span class="n">scores</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;$R^2$&#39;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span> <span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span> <span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span> <span class="n">R</span> <span class="o">*</span> <span class="n">dt</span> <span class="p">,</span> <span class="n">scores</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;MSE&#39;</span> <span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span> <span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span> <span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span> <span class="p">)</span>
+    
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span> <span class="sa">f</span><span class="s1">&#39;$T$ [s] @ $\Delta t = </span><span class="si">{</span><span class="n">dt</span><span class="si">}</span><span class="s1">$&#39;</span> <span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span> <span class="sa">f</span><span class="s1">&#39;$T$ [s] @ $\Delta t = </span><span class="si">{</span><span class="n">dt</span><span class="si">}</span><span class="s1">$&#39;</span> <span class="p">)</span>  
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span> <span class="s2">&quot;R2 score&quot;</span> <span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span> <span class="s2">&quot;MSE score&quot;</span> <span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="c1"># Define a set of shorter dataset.</span>
+<span class="n">R</span> <span class="o">=</span> <span class="p">(</span> <span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span> <span class="o">-</span> <span class="mi">3</span> <span class="p">,</span> <span class="mi">0</span> <span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">10</span> <span class="p">)</span> <span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> 
+<span class="c1"># Instantiate and fit the SINDy model.</span>
+<span class="n">feature_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">]</span>
+<span class="n">sparse_regression_optimizer</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">STLSQ</span><span class="p">(</span> <span class="n">threshold</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">)</span>  <span class="c1"># default is lambda = 0.1</span>
+<span class="c1"># Train SINDy on each dataset and evaluate the performance.</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">trainer</span><span class="p">(</span> <span class="n">R</span> <span class="p">,</span> <span class="n">feature_names</span> <span class="p">,</span> <span class="n">sparse_regression_optimizer</span> <span class="p">)</span>
+<span class="c1"># Plot the performance.</span>
+<span class="n">plot1</span><span class="p">(</span> <span class="n">R</span> <span class="p">,</span> <span class="n">dt</span> <span class="p">,</span> <span class="n">scores</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3230dbd9f2a1369452dcef8310b58451b38d3dfcbd86fcf993121a40b06ebb25.png" src="../_images/3230dbd9f2a1369452dcef8310b58451b38d3dfcbd86fcf993121a40b06ebb25.png" />
+</div>
+</div>
+<p><strong>STEP 4:</strong></p>
+<p>Assuming that <span class="math notranslate nohighlight">\( MSE \)</span> and <span class="math notranslate nohighlight">\( R2 \)</span> are good metrics to evaluate SINDy performance, the dataset corresponding to the <span class="math notranslate nohighlight">\( 5^{th} \)</span> point in the plots above is selected. It contains a trajectory of length <span class="math notranslate nohighlight">\( T \sim 0.8 \)</span> with time-step  <span class="math notranslate nohighlight">\( dt = 0.0001 \)</span>, corresponding to <span class="math notranslate nohighlight">\( r = T/dt \sim 8 \cdot 10^3 \)</span> points. Then, SINDy is trained and system dynamic is extracted.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select the shorter length of the dataset with r2_scose ~ 1.</span>
+<span class="n">r5</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">x_frac</span> <span class="o">=</span> <span class="n">x_train</span><span class="p">[</span> <span class="p">:</span> <span class="n">r5</span> <span class="p">,</span> <span class="p">:]</span>
+
+<span class="c1"># Fit the SINDy model over the short dataset.</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">SINDy</span><span class="p">(</span> <span class="n">feature_names</span> <span class="o">=</span> <span class="n">feature_names</span> <span class="p">,</span> <span class="n">optimizer</span> <span class="o">=</span> <span class="n">sparse_regression_optimizer</span> <span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">x_frac</span> <span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">dt</span> <span class="p">)</span>
+
+<span class="c1"># Print the model outcome.</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DYNAMIC SYSTEM PREDICTED BY SINDY:&quot;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> ALL COEFFICIENTS:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span> <span class="n">model</span><span class="o">.</span><span class="n">coefficients</span><span class="p">()</span> <span class="p">,</span> <span class="mi">3</span> <span class="p">)</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MODEL SPECIFICATIONS:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">differentiate</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DYNAMIC SYSTEM PREDICTED BY SINDY:
+(x)&#39; = -10.000 x + 10.000 y
+(y)&#39; = 28.000 x + -1.000 y + -1.000 x z
+(z)&#39; = -2.667 z + 1.000 x y
+
+ ALL COEFFICIENTS:
+ [[ -0.    -10.     10.      0.      0.     -0.     -0.     -0.     -0.
+   -0.   ]
+ [ -0.     28.     -1.      0.     -0.      0.     -1.     -0.     -0.
+   -0.   ]
+ [ -0.      0.     -0.     -2.667   0.      1.     -0.     -0.     -0.
+   -0.   ]]
+MODEL SPECIFICATIONS:
+&lt;bound method SINDy.differentiate of SINDy(differentiation_method=FiniteDifference(),
+      feature_library=PolynomialLibrary(), feature_names=[&#39;x&#39;, &#39;y&#39;, &#39;z&#39;],
+      optimizer=STLSQ(threshold=0))&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Recall that the problem was initialized with  <span class="math notranslate nohighlight">\( \sigma = 10 \)</span>, <span class="math notranslate nohighlight">\( \beta=8/3 \)</span> and <span class="math notranslate nohighlight">\( \rho=28 \)</span>. Consequently the Lorenz system can be written explicitely as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-dfab5477-d2e5-441c-a098-c8f7a652829d">
+<span class="eqno">(8)<a class="headerlink" href="#equation-dfab5477-d2e5-441c-a098-c8f7a652829d" title="Permalink to this equation">#</a></span>\[\begin{align}
+\dot{x} = 10(y-x)
+\end{align}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-4457892a-cd4f-4bb0-9ff7-b18bab0207cd">
+<span class="eqno">(9)<a class="headerlink" href="#equation-4457892a-cd4f-4bb0-9ff7-b18bab0207cd" title="Permalink to this equation">#</a></span>\[\begin{align}
+\dot{y} = x ( 28 - z ) - y
+\end{align}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-a3f0f8aa-eb29-47fc-b2dd-e9a3d11d6153">
+<span class="eqno">(10)<a class="headerlink" href="#equation-a3f0f8aa-eb29-47fc-b2dd-e9a3d11d6153" title="Permalink to this equation">#</a></span>\[\begin{align}
+\dot{z} = xy - 2.667 z
+\end{align}\]</div>
+<p>The result that we obtained above show that, for this choice of <span class="math notranslate nohighlight">\( r \)</span> , <span class="math notranslate nohighlight">\( T \)</span> and <span class="math notranslate nohighlight">\( \Delta t \)</span> , SINDy is perfectly able to recover the exact non-linear dynamics from the sparse data.</p>
+<p><strong>STEP 5:</strong></p>
+<p>The Lorenz Trajectories obtained with SINDy for the full dataset <span class="math notranslate nohighlight">\(T=15.18\)</span> and for the dataset used in <strong>STEP 4</strong> to train SINDy <span class="math notranslate nohighlight">\(T=0.65\)</span> are plotted together with the starting cinditions. It is very surprising that SINDy can discover the correct Lorenz dynamic when trained on a trajectory which lasts less than one period of the Lorenz system! This may depend on the fact that the Lorenz dynamic is strongly dependent on the starting conditions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot2</span><span class="p">(</span> <span class="n">SINDy_pred_Tmin</span> <span class="p">,</span> <span class="n">x0</span> <span class="p">):</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">fig1</span> <span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span> <span class="mi">1</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">,</span> <span class="n">subplot_kw</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;projection&#39;</span> <span class="p">:</span> <span class="s1">&#39;3d&#39;</span> <span class="p">}</span> <span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span> <span class="mi">7</span> <span class="p">,</span> <span class="mi">7</span> <span class="p">)</span> <span class="p">)</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">SINDy_pred_T</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">xmin</span> <span class="p">,</span> <span class="n">ymin</span> <span class="p">,</span> <span class="n">zmin</span> <span class="o">=</span> <span class="n">SINDy_pred_Tmin</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">y</span> <span class="p">,</span> <span class="n">z</span> <span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;T = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">T_long</span><span class="p">)</span> <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">xmin</span> <span class="p">,</span> <span class="n">ymin</span> <span class="p">,</span> <span class="n">zmin</span> <span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;T $\sim$ 0.65&quot;</span> <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">x0</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">x0</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">,</span> <span class="n">x0</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">,</span> <span class="s2">&quot;o&quot;</span> <span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span> <span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;starting conditions&quot;</span> <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span> <span class="s2">&quot;SINDy predictions&quot;</span> <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span> <span class="n">prop</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">}</span> <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Make predictions on the two trajectories using SINDy.</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span> <span class="n">dt</span> <span class="p">,</span> <span class="n">T_long</span> <span class="p">,</span> <span class="n">dt</span> <span class="p">)</span>
+<span class="n">SINDy_pred_T</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span> <span class="n">x0</span> <span class="p">,</span> <span class="n">t</span> <span class="p">)</span>
+<span class="n">SINDy_pred_Tmin</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span> <span class="n">x0</span> <span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span> <span class="n">dt</span> <span class="p">,</span> <span class="n">r5</span> <span class="o">*</span> <span class="n">dt</span> <span class="p">,</span> <span class="n">dt</span> <span class="p">)</span> <span class="p">)</span>
+
+<span class="c1"># Plot the predictions.</span>
+<span class="n">plot2</span><span class="p">(</span> <span class="n">SINDy_pred_Tmin</span><span class="o">.</span><span class="n">T</span> <span class="p">,</span> <span class="n">x0</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8fd3cbaa18d0700c923a8ea43503bdfe5e8ccd48cf7f40ab799f29929b259069.png" src="../_images/8fd3cbaa18d0700c923a8ea43503bdfe5e8ccd48cf7f40ab799f29929b259069.png" />
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="b">
+<h1>(b)<a class="headerlink" href="#b" title="Link to this heading">#</a></h1>
+<p>The relation which underlines the convergence of SINDy depending on <span class="math notranslate nohighlight">\( r \)</span> and <span class="math notranslate nohighlight">\( \Delta t \)</span> is discovered via the following algorithm:</p>
+<ol class="arabic simple">
+<li><p>We assume that the SINDy model converges to the Lorenz System when: <span class="math notranslate nohighlight">\( ( MSE&lt;10^{-4} )\wedge( 0.8&lt;R2&lt;1.2 ) \)</span>.</p></li>
+<li><p>Given a time-step magnitude <span class="math notranslate nohighlight">\( dt_i \)</span> , <span class="math notranslate nohighlight">\( i=0,...,k \)</span>, we train SINDy for progressively larger dataset <span class="math notranslate nohighlight">\( r_j \)</span>, <span class="math notranslate nohighlight">\( j=0,...,m \)</span> in a double for loop.</p></li>
+<li><p>Per each <span class="math notranslate nohighlight">\( dt_i \)</span> we keep only the smaller <span class="math notranslate nohighlight">\( r_j \)</span> which satisfies point (1).</p></li>
+</ol>
+<p>Now we can plot all the pairs <span class="math notranslate nohighlight">\( (T,\Delta t) \)</span> and <span class="math notranslate nohighlight">\( (T,\Delta t) \)</span> which respect condition (1). The result shows that SINDy is very sensible to the size of the time step <span class="math notranslate nohighlight">\(\Delta t\)</span>. The result we obtained is not trivial because it shows that:</p>
+<ul class="simple">
+<li><p><strong>Plot 1:</strong> It looks as if there are different ranges where <span class="math notranslate nohighlight">\( r \)</span> progressively dicrease as <span class="math notranslate nohighlight">\( dt \)</span>, for example <span class="math notranslate nohighlight">\( \Delta t \in (10^{-4} , 2\cdot 10^{-4}) \)</span> or in <span class="math notranslate nohighlight">\( \Delta t \in (2\cdot 10^{-4},10^{-3}) \)</span>. However, this may depend also on how we defined <code class="docutils literal notranslate"><span class="pre">R</span></code> and <code class="docutils literal notranslate"><span class="pre">Dt</span></code> in the algorithm.</p></li>
+<li><p><strong>Plot 2:</strong> as <span class="math notranslate nohighlight">\( dt \)</span> increases, the length of the trajectory <span class="math notranslate nohighlight">\( T \)</span> also increases. This is an anexpected result, because it means that SINDy is more sensible to the size of the time-step than to the length of the trajectory. It prefers smaller time-step than longer trajectories. However, once again this may depend on how we defined <code class="docutils literal notranslate"><span class="pre">R</span></code> and <code class="docutils literal notranslate"><span class="pre">Dt</span></code> and a deeper study should be necessary to give a more appropriated answer.</p></li>
+</ul>
+<p><strong>Recall that:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Dt</span></code> is a vector which contains <span class="math notranslate nohighlight">\( dt_0,...dt_k \)</span>, i.e. different time-step.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">R</span></code> is a vector which contains <span class="math notranslate nohighlight">\( r_0, ..., r_m \)</span>, i.e. different number of points to define the dataset.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">relation_discover</span><span class="p">(</span> <span class="n">Dt</span> <span class="p">,</span> <span class="n">tau</span> <span class="o">=</span> <span class="n">tau</span> <span class="p">,</span> <span class="n">x0</span> <span class="o">=</span> <span class="n">x0</span> <span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="n">beta</span> <span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">sigma</span> <span class="p">,</span> <span class="n">rho</span> <span class="o">=</span> <span class="n">rho</span> <span class="p">,</span> <span class="n">feature_names</span> <span class="o">=</span> <span class="n">feature_names</span> <span class="p">,</span> <span class="n">sparse_regression_optimizer</span> <span class="o">=</span> <span class="n">sparse_regression_optimizer</span><span class="p">):</span>
+
+    <span class="c1"># Define the Lorenz system RHS.</span>
+    <span class="k">def</span> <span class="nf">lorenz_deriv</span><span class="p">(</span> <span class="n">x_y_z</span> <span class="p">,</span> <span class="n">t0</span> <span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">sigma</span> <span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="n">beta</span><span class="p">,</span> <span class="n">rho</span> <span class="o">=</span> <span class="n">rho</span> <span class="p">):</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">x_y_z</span>
+        <span class="k">return</span> <span class="p">[</span> <span class="n">sigma</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="p">,</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="n">rho</span> <span class="o">-</span> <span class="n">z</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">-</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">z</span> <span class="p">]</span>
+
+    <span class="n">rs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">dts</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+     
+    <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">Dt</span><span class="p">:</span> 
+        
+        <span class="c1"># Create a new dataset with temporal spacing dt.</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span> <span class="n">dt</span> <span class="p">,</span> <span class="n">tau</span> <span class="o">*</span> <span class="mi">20</span> <span class="p">,</span> <span class="n">dt</span> <span class="p">)</span>
+        <span class="n">x_train</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">odeint</span><span class="p">(</span> <span class="n">lorenz_deriv</span> <span class="p">,</span> <span class="n">x0</span> <span class="p">,</span> <span class="n">t</span> <span class="p">,</span> <span class="n">rtol</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">12</span><span class="p">)</span> <span class="p">,</span> <span class="n">atol</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">12</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span> <span class="p">)</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span> <span class="p">(</span> <span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span> <span class="o">-</span> <span class="mi">2</span> <span class="p">,</span> <span class="mi">0</span> <span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">200</span> <span class="p">)</span> <span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="p">)</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span> <span class="mi">3</span> <span class="o">&lt;</span> <span class="n">R</span> <span class="p">]</span>
+        
+        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">R</span><span class="p">:</span>    
+            
+            <span class="c1"># Select dataset with r points.</span>
+            <span class="n">x_frac</span> <span class="o">=</span> <span class="n">x_train</span><span class="p">[</span> <span class="p">:</span> <span class="n">r</span> <span class="p">,</span> <span class="p">:]</span>
+
+            <span class="c1"># Train Sindy </span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">SINDy</span><span class="p">(</span> <span class="n">feature_names</span> <span class="o">=</span> <span class="n">feature_names</span> <span class="p">,</span> <span class="n">optimizer</span> <span class="o">=</span> <span class="n">sparse_regression_optimizer</span> <span class="p">)</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">x_frac</span> <span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">dt</span>  <span class="p">)</span>
+            <span class="n">MSE</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span> <span class="n">x_train</span> <span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">dt</span> <span class="p">,</span> <span class="n">metric</span> <span class="o">=</span> <span class="n">mean_squared_error</span> <span class="p">)</span>
+            <span class="n">R2</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span> <span class="n">x_train</span> <span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">dt</span> <span class="p">,</span> <span class="n">metric</span> <span class="o">=</span> <span class="n">r2_score</span> <span class="p">)</span>
+        
+            <span class="k">if</span> <span class="p">(</span> <span class="n">MSE</span> <span class="o">&lt;</span> <span class="mf">1e-4</span> <span class="p">)</span> <span class="ow">and</span> <span class="p">(</span> <span class="mf">0.8</span> <span class="o">&lt;</span> <span class="n">R2</span> <span class="o">&lt;</span> <span class="mf">1.2</span> <span class="p">):</span>
+                <span class="n">dts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">dt</span> <span class="p">)</span>
+                <span class="n">rs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">r</span> <span class="p">)</span> 
+                <span class="k">break</span>
+                
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dts</span><span class="p">)</span> <span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rs</span><span class="p">)</span>
+
+<span class="c1"># Define different time-step size.</span>
+<span class="n">Dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span> <span class="o">-</span> <span class="mi">4</span> <span class="p">,</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">100</span> <span class="p">)</span>
+<span class="c1"># Implement the algorithm in the description.</span>
+<span class="n">dts</span> <span class="p">,</span> <span class="n">rs</span> <span class="o">=</span> <span class="n">relation_discover</span><span class="p">(</span> <span class="n">Dt</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">41</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span> <span class="n">Dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span> <span class="o">-</span> <span class="mi">4</span> <span class="p">,</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">100</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span> <span class="c1"># Implement the algorithm in the description.</span>
+<span class="ne">---&gt; </span><span class="mi">41</span> <span class="n">dts</span> <span class="p">,</span> <span class="n">rs</span> <span class="o">=</span> <span class="n">relation_discover</span><span class="p">(</span> <span class="n">Dt</span> <span class="p">)</span>
+
+<span class="nn">Cell In[7], line 29,</span> in <span class="ni">relation_discover</span><span class="nt">(Dt, tau, x0, beta, sigma, rho, feature_names, sparse_regression_optimizer)</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">x_frac</span> <span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">dt</span>  <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span> <span class="n">MSE</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span> <span class="n">x_train</span> <span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">dt</span> <span class="p">,</span> <span class="n">metric</span> <span class="o">=</span> <span class="n">mean_squared_error</span> <span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">29</span> <span class="n">R2</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span> <span class="n">x_train</span> <span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">dt</span> <span class="p">,</span> <span class="n">metric</span> <span class="o">=</span> <span class="n">r2_score</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span> <span class="k">if</span> <span class="p">(</span> <span class="n">MSE</span> <span class="o">&lt;</span> <span class="mf">1e-4</span> <span class="p">)</span> <span class="ow">and</span> <span class="p">(</span> <span class="mf">0.8</span> <span class="o">&lt;</span> <span class="n">R2</span> <span class="o">&lt;</span> <span class="mf">1.2</span> <span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">32</span>     <span class="n">dts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">dt</span> <span class="p">)</span>
+
+<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/pysindy/pysindy.py:625,</span> in <span class="ni">SINDy.score</span><span class="nt">(self, x, t, x_dot, u, multiple_trajectories, metric, **metric_kws)</span>
+<span class="g g-Whitespace">    </span><span class="mi">622</span> <span class="n">x_dot_predict</span> <span class="o">=</span> <span class="n">concat_sample_axis</span><span class="p">(</span><span class="n">x_dot_predict</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">624</span> <span class="n">x_dot</span><span class="p">,</span> <span class="n">x_dot_predict</span> <span class="o">=</span> <span class="n">drop_nan_samples</span><span class="p">(</span><span class="n">x_dot</span><span class="p">,</span> <span class="n">x_dot_predict</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">625</span> <span class="k">return</span> <span class="n">metric</span><span class="p">(</span><span class="n">x_dot</span><span class="p">,</span> <span class="n">x_dot_predict</span><span class="p">,</span> <span class="o">**</span><span class="n">metric_kws</span><span class="p">)</span>
+
+<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/sklearn/utils/_param_validation.py:213,</span> in <span class="ni">validate_params.&lt;locals&gt;.decorator.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">207</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">208</span>     <span class="k">with</span> <span class="n">config_context</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">209</span>         <span class="n">skip_parameter_validation</span><span class="o">=</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">210</span>             <span class="n">prefer_skip_nested_validation</span> <span class="ow">or</span> <span class="n">global_skip_validation</span>
+<span class="g g-Whitespace">    </span><span class="mi">211</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">212</span>     <span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">213</span>         <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">214</span> <span class="k">except</span> <span class="n">InvalidParameterError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">215</span>     <span class="c1"># When the function is just a wrapper around an estimator, we allow</span>
+<span class="g g-Whitespace">    </span><span class="mi">216</span>     <span class="c1"># the function to delegate validation to the estimator, but we replace</span>
+<span class="g g-Whitespace">    </span><span class="mi">217</span>     <span class="c1"># the name of the estimator by the name of the function in the error</span>
+<span class="g g-Whitespace">    </span><span class="mi">218</span>     <span class="c1"># message to avoid confusion.</span>
+<span class="g g-Whitespace">    </span><span class="mi">219</span>     <span class="n">msg</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">220</span>         <span class="sa">r</span><span class="s2">&quot;parameter of \w+ must be&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">221</span>         <span class="sa">f</span><span class="s2">&quot;parameter of </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__qualname__</span><span class="si">}</span><span class="s2"> must be&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">222</span>         <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">223</span>     <span class="p">)</span>
+
+<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/sklearn/metrics/_regression.py:1221,</span> in <span class="ni">r2_score</span><span class="nt">(y_true, y_pred, sample_weight, multioutput, force_finite)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1218</span>     <span class="n">weight</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="g g-Whitespace">   </span><span class="mi">1220</span> <span class="n">numerator</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weight</span> <span class="o">*</span> <span class="p">(</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1221</span> <span class="n">denominator</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1222</span>     <span class="n">weight</span> <span class="o">*</span> <span class="p">(</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">_average</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">,</span> <span class="n">xp</span><span class="o">=</span><span class="n">xp</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1223</span>     <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1224</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1226</span> <span class="k">return</span> <span class="n">_assemble_r2_explained_variance</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1227</span>     <span class="n">numerator</span><span class="o">=</span><span class="n">numerator</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1228</span>     <span class="n">denominator</span><span class="o">=</span><span class="n">denominator</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1233</span>     <span class="n">device</span><span class="o">=</span><span class="n">device_</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1234</span> <span class="p">)</span>
+
+<span class="nn">File &lt;__array_function__ internals&gt;:180,</span> in <span class="ni">sum</span><span class="nt">(*args, **kwargs)</span>
+
+<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/numpy/core/fromnumeric.py:2298,</span> in <span class="ni">sum</span><span class="nt">(a, axis, dtype, out, keepdims, initial, where)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2295</span>         <span class="k">return</span> <span class="n">out</span>
+<span class="g g-Whitespace">   </span><span class="mi">2296</span>     <span class="k">return</span> <span class="n">res</span>
+<span class="ne">-&gt; </span><span class="mi">2298</span> <span class="k">return</span> <span class="n">_wrapreduction</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">,</span> <span class="s1">&#39;sum&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="n">keepdims</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2299</span>                       <span class="n">initial</span><span class="o">=</span><span class="n">initial</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="n">where</span><span class="p">)</span>
+
+<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/numpy/core/fromnumeric.py:86,</span> in <span class="ni">_wrapreduction</span><span class="nt">(obj, ufunc, method, axis, dtype, out, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">83</span>         <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">84</span>             <span class="k">return</span> <span class="n">reduction</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="p">,</span> <span class="o">**</span><span class="n">passkwargs</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">86</span> <span class="k">return</span> <span class="n">ufunc</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="o">**</span><span class="n">passkwargs</span><span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot3</span><span class="p">(</span> <span class="n">dts</span> <span class="p">,</span> <span class="n">rs</span> <span class="p">):</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span> <span class="mi">13</span> <span class="p">,</span> <span class="mi">4</span> <span class="p">)</span> <span class="p">)</span>
+    <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span> <span class="mi">121</span> <span class="p">)</span>
+    <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span> <span class="mi">122</span> <span class="p">)</span>
+    
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">dts</span> <span class="p">,</span> <span class="n">rs</span> <span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s2">&quot;s&quot;</span> <span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s2">&quot;--&quot;</span> <span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span> <span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span> <span class="s2">&quot;log&quot;</span> <span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$r$&quot;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$\Delta t$ &quot;</span><span class="p">)</span>
+    
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">dts</span> <span class="p">,</span> <span class="n">dts</span> <span class="o">*</span> <span class="n">rs</span> <span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s2">&quot;s&quot;</span> <span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s2">&quot;--&quot;</span> <span class="p">,</span><span class="n">linewidth</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span> <span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span> <span class="s2">&quot;log&quot;</span> <span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$T = \Delta t * r$&quot;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$\Delta t$ &quot;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+<span class="c1"># Plot the result.</span>
+<span class="n">plot3</span><span class="p">(</span> <span class="n">dts</span> <span class="p">,</span> <span class="n">rs</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e9a3f74538a566d3531922604bd3454dfceae8c5a96411736e0da10f5e6c9232.png" src="../_images/e9a3f74538a566d3531922604bd3454dfceae8c5a96411736e0da10f5e6c9232.png" />
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="c">
+<h1>(c)<a class="headerlink" href="#c" title="Link to this heading">#</a></h1>
+<p><strong>STEP 1</strong></p>
+<p>Firstly, three different distibutions are chosen, ( the Gaussian, the Exponential and the Poisson) with different means and standard deviations. The corresponding numpy functions are used to produce noise according to these distributions and the noise is summed to the shorter Lorenz trajectory <span class="math notranslate nohighlight">\( T=0.65 \)</span>. Below, both the noise itself and the corresponding “Lorenz randomised trajectories” are plotted:</p>
+<ul class="simple">
+<li><p><strong>NOISE 1</strong> : Gaussian distribution with <span class="math notranslate nohighlight">\( \mu=0 \)</span> and <span class="math notranslate nohighlight">\( \sigma = 0.001 \)</span>.</p></li>
+<li><p><strong>NOISE 2</strong> : Exponential distribution with <span class="math notranslate nohighlight">\( \mu = 0.1 \)</span> and <span class="math notranslate nohighlight">\( \sigma = 0.01 \)</span>.</p></li>
+<li><p><strong>NOISE 3</strong> : Poisson distribution with <span class="math notranslate nohighlight">\( \mu=0.5 \)</span> and <span class="math notranslate nohighlight">\( \sigma = 0.5 \)</span>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot function.</span>
+<span class="k">def</span> <span class="nf">plot4</span><span class="p">(</span> <span class="n">noise1</span> <span class="p">,</span> <span class="n">x_frac1</span> <span class="p">,</span> <span class="n">noise2</span> <span class="p">,</span> <span class="n">x_frac2</span> <span class="p">,</span> <span class="n">noise3</span> <span class="p">,</span> <span class="n">x_frac3</span> <span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span> <span class="mi">10</span> <span class="p">,</span> <span class="mi">7</span> <span class="p">)</span> <span class="p">)</span>
+    <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span> <span class="mi">231</span> <span class="p">)</span>
+    <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span> <span class="mi">232</span> <span class="p">)</span>
+    <span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span> <span class="mi">233</span> <span class="p">)</span>
+    <span class="n">ax4</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span> <span class="mi">234</span> <span class="p">,</span> <span class="n">projection</span> <span class="o">=</span> <span class="s1">&#39;3d&#39;</span> <span class="p">)</span>
+    <span class="n">ax5</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span> <span class="mi">235</span> <span class="p">,</span> <span class="n">projection</span> <span class="o">=</span> <span class="s1">&#39;3d&#39;</span> <span class="p">)</span>
+    <span class="n">ax6</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span> <span class="mi">236</span> <span class="p">,</span> <span class="n">projection</span> <span class="o">=</span> <span class="s1">&#39;3d&#39;</span> <span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">ax</span> <span class="p">,</span> <span class="n">noise</span> <span class="p">,</span> <span class="n">label</span> <span class="p">,</span>  <span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span> <span class="p">[</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">]</span> <span class="p">,</span> <span class="p">[</span><span class="n">noise1</span> <span class="p">,</span> <span class="n">noise2</span> <span class="p">,</span> <span class="n">noise3</span> <span class="p">]</span> <span class="p">,</span> <span class="p">[</span><span class="s2">&quot;gaussian&quot;</span> <span class="p">,</span> <span class="s2">&quot;exponential&quot;</span> <span class="p">,</span> <span class="s2">&quot;poisson&quot;</span> <span class="p">]</span> <span class="p">,</span> <span class="p">[</span><span class="s2">&quot;red&quot;</span> <span class="p">,</span> <span class="s2">&quot;blue&quot;</span> <span class="p">,</span> <span class="s2">&quot;yellow&quot;</span><span class="p">]):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span> <span class="n">noise</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="p">,</span> <span class="mi">100</span> <span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">c</span> <span class="p">,</span> <span class="n">density</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">label</span><span class="o">+</span><span class="s2">&quot; disrt.&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;major&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">ax</span> <span class="p">,</span> <span class="n">data</span> <span class="p">,</span> <span class="n">label</span> <span class="p">,</span>  <span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span> <span class="p">[</span><span class="n">ax4</span><span class="p">,</span> <span class="n">ax5</span><span class="p">,</span> <span class="n">ax6</span><span class="p">]</span> <span class="p">,</span> <span class="p">[</span><span class="n">x_frac1</span> <span class="p">,</span> <span class="n">x_frac2</span> <span class="p">,</span> <span class="n">x_frac3</span> <span class="p">]</span> <span class="p">,</span> <span class="p">[</span><span class="s2">&quot;gaussian&quot;</span> <span class="p">,</span> <span class="s2">&quot;exponential&quot;</span> <span class="p">,</span> <span class="s2">&quot;poisson&quot;</span> <span class="p">]</span> <span class="p">,</span> <span class="p">[</span><span class="s2">&quot;red&quot;</span> <span class="p">,</span> <span class="s2">&quot;blue&quot;</span> <span class="p">,</span> <span class="s2">&quot;yellow&quot;</span><span class="p">]):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">x_frac</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">0</span> <span class="p">]</span> <span class="p">,</span> <span class="n">x_frac</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">]</span> <span class="p">,</span> <span class="n">x_frac</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">2</span> <span class="p">]</span> <span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span> <span class="p">,</span>  <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;true data&quot;</span> <span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">data</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">0</span> <span class="p">]</span> <span class="p">,</span> <span class="n">data</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">]</span> <span class="p">,</span> <span class="n">data</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">2</span> <span class="p">]</span> <span class="p">,</span> <span class="s2">&quot;.&quot;</span> <span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">c</span> <span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;noisy data&quot;</span> <span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span> <span class="n">loc</span> <span class="o">=</span> <span class="s2">&quot;upper right&quot;</span> <span class="p">,</span> <span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">})</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;major&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Define the dataset dimension.</span>
+<span class="n">x_frac</span> <span class="o">=</span> <span class="n">x_train</span><span class="p">[</span> <span class="p">:</span> <span class="mi">6581</span> <span class="p">,</span> <span class="p">:</span> <span class="p">]</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.0001</span>
+
+<span class="c1"># Produce noise.</span>
+<span class="n">noise1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span> <span class="mi">0</span> <span class="p">,</span> <span class="mf">0.001</span> <span class="p">,</span> <span class="n">x_frac</span><span class="o">.</span><span class="n">shape</span> <span class="p">)</span>
+<span class="n">noise2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span> <span class="mf">0.1</span> <span class="p">,</span> <span class="n">x_frac</span><span class="o">.</span><span class="n">shape</span> <span class="p">)</span>
+<span class="n">noise3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span> <span class="mf">0.5</span> <span class="p">,</span> <span class="n">x_frac</span><span class="o">.</span><span class="n">shape</span> <span class="p">)</span>
+
+<span class="c1"># Add noise to the dataset.</span>
+<span class="n">x_frac1</span> <span class="o">=</span> <span class="n">x_frac</span> <span class="o">+</span> <span class="n">noise1</span>
+<span class="n">x_frac2</span> <span class="o">=</span> <span class="n">x_frac</span> <span class="o">+</span> <span class="n">noise2</span>
+<span class="n">x_frac3</span> <span class="o">=</span> <span class="n">x_frac</span> <span class="o">+</span> <span class="n">noise3</span>
+
+<span class="c1"># Plot noisy dataset.</span>
+<span class="n">plot4</span><span class="p">(</span> <span class="n">noise1</span> <span class="p">,</span> <span class="n">x_frac1</span> <span class="p">,</span> <span class="n">noise2</span> <span class="p">,</span> <span class="n">x_frac2</span> <span class="p">,</span> <span class="n">noise3</span> <span class="p">,</span> <span class="n">x_frac3</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/fb447818ee798cf3dc030b8b71ce9fe3c0ae271a9b4abebbe1be44948931d684.png" src="../_images/fb447818ee798cf3dc030b8b71ce9fe3c0ae271a9b4abebbe1be44948931d684.png" />
+</div>
+</div>
+<p><strong>STEP 2</strong></p>
+<p>The randomized trajectories are used to fit SINDy, the <span class="math notranslate nohighlight">\( MSE \)</span> and the <span class="math notranslate nohighlight">\( R2 \)</span> are evaluated afterwards. By plotting the model results, the <span class="math notranslate nohighlight">\( MSE \)</span> and the <span class="math notranslate nohighlight">\( R2 \)</span>, we can observe that noisy data strongly compomise SINDy outcome. Reasonable performance are obtained only with <strong>NOISE 1</strong>, this is not surprising because we used a null mean and a very small variance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">noisy_trainer</span><span class="p">(</span>  <span class="n">x_frac_noisy</span> <span class="p">,</span> <span class="n">dt</span> <span class="o">=</span> <span class="n">dt</span> <span class="p">,</span> <span class="n">x_frac</span> <span class="o">=</span> <span class="n">x_frac</span> <span class="p">,</span> <span class="n">feature_names</span> <span class="o">=</span> <span class="n">feature_names</span> <span class="p">,</span> <span class="n">optimizer</span> <span class="o">=</span> <span class="n">sparse_regression_optimizer</span> <span class="p">):</span>
+    
+    <span class="c1"># Fit the SINDy model over the short dataset.</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">SINDy</span><span class="p">(</span> <span class="n">feature_names</span> <span class="o">=</span> <span class="n">feature_names</span> <span class="p">,</span> <span class="n">optimizer</span> <span class="o">=</span> <span class="n">sparse_regression_optimizer</span> <span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">x_frac_noisy</span> <span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">dt</span> <span class="p">)</span>
+    <span class="n">MSE</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span> <span class="n">x_frac</span> <span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">dt</span> <span class="p">,</span> <span class="n">metric</span> <span class="o">=</span> <span class="n">mean_squared_error</span> <span class="p">)</span>
+    <span class="n">R2</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span> <span class="n">x_frac</span> <span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">dt</span> <span class="p">,</span> <span class="n">metric</span> <span class="o">=</span> <span class="n">r2_score</span> <span class="p">)</span>
+
+    <span class="c1"># Print the model outcome.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PREDICTIONS:&quot;</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MSE = &quot;</span><span class="p">,</span> <span class="n">MSE</span> <span class="p">,</span> <span class="s2">&quot; R = &quot;</span><span class="p">,</span> <span class="n">R2</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">model</span>
+
+<span class="c1"># Evaluate SINDy on the noisy trajectories. </span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&gt;&gt;&gt;Gaussian Noise:&quot;</span><span class="p">)</span>
+<span class="n">model1</span> <span class="o">=</span> <span class="n">noisy_trainer</span><span class="p">(</span> <span class="n">x_frac1</span> <span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&gt;&gt;&gt;Exponential Noise:&quot;</span><span class="p">)</span>
+<span class="n">model2</span> <span class="o">=</span> <span class="n">noisy_trainer</span><span class="p">(</span> <span class="n">x_frac2</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&gt;&gt;&gt;Poisson Noise:&quot;</span><span class="p">)</span>
+<span class="n">model3</span> <span class="o">=</span> <span class="n">noisy_trainer</span><span class="p">(</span> <span class="n">x_frac3</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt;Gaussian Noise:
+PREDICTIONS:
+(x)&#39; = -5.897 1 + 2.140 x + 4.264 y + 1.119 z + 0.655 x^2 + -0.136 x y + -0.409 x z + -0.095 y^2 + 0.107 y z + -0.050 z^2
+(y)&#39; = -0.951 1 + 35.951 x + -4.832 y + 0.522 z + 0.464 x^2 + -0.049 x y + -1.278 x z + -0.069 y^2 + 0.052 y z + -0.029 z^2
+(z)&#39; = -1.077 1 + 4.025 x + -1.887 y + -2.448 z + 0.219 x^2 + 0.925 x y + -0.145 x z + -0.021 y^2 + 0.047 y z + -0.011 z^2
+MSE =  0.00103569773125482  R =  0.9999995478122181
+
+&gt;&gt;&gt;Exponential Noise:
+PREDICTIONS:
+(x)&#39; = 101.030 1 + -109.390 x + 63.394 y + -5.021 z + -5.453 x^2 + 8.853 x y + 4.097 x z + -1.786 y^2 + -3.508 y z + 0.087 z^2
+(y)&#39; = 168.583 1 + -164.360 x + 92.782 y + -2.129 z + -9.755 x^2 + 17.078 x y + 7.283 x z + -3.206 y^2 + -6.999 y z + -0.143 z^2
+(z)&#39; = 453.547 1 + -127.843 x + 53.611 y + -43.191 z + -2.093 x^2 + 8.350 x y + 2.814 x z + -0.102 y^2 + -3.726 y z + 1.159 z^2
+MSE =  42.63977802285405  R =  0.9869473946268292
+
+&gt;&gt;&gt;Poisson Noise:
+PREDICTIONS:
+(x)&#39; = 2356.569 1 + 669.471 x + -311.695 y + -330.430 z + 64.747 x^2 + -68.895 x y + -50.118 x z + 18.337 y^2 + 25.220 y z + 11.120 z^2
+(y)&#39; = 1120.104 1 + -158.058 x + 99.172 y + -110.616 z + -24.529 x^2 + 20.516 x y + 8.445 x z + -2.711 y^2 + -5.267 y z + 2.702 z^2
+(z)&#39; = -556.555 1 + -355.466 x + 209.624 y + 66.762 z + -9.540 x^2 + 16.047 x y + 13.094 x z + -3.438 y^2 + -9.650 y z + -1.643 z^2
+MSE =  2757.8383360942166  R =  -0.23759119972840015
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>STEP 3</strong></p>
+<p>The entire Lorenz trajectory (with <span class="math notranslate nohighlight">\( T=15.18 \)</span>) was then used to fit the SINDy model, with results which are nicer but not perfect yet. This highlight that SINDy is highly instable in the face of noisy data, but as the tragectory get longer, it can still learn the dynamic fearly well.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add small gaussian noise to the full trajectory.</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span> <span class="mi">0</span> <span class="p">,</span> <span class="mf">0.1</span> <span class="p">,</span> <span class="n">x_train</span><span class="o">.</span><span class="n">shape</span> <span class="p">)</span>
+<span class="n">x_train_noisy</span> <span class="o">=</span> <span class="n">x_train</span> <span class="o">+</span> <span class="n">noise</span>
+<span class="c1"># Evaluate SINDy performance.</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&gt;&gt;&gt;Small Gaussian Noise:&quot;</span><span class="p">)</span>
+<span class="n">model4</span> <span class="o">=</span> <span class="n">noisy_trainer</span><span class="p">(</span> <span class="n">x_train_noisy</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt;Small Gaussian Noise:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PREDICTIONS:
+(x)&#39; = 0.094 1 + -9.554 x + 9.720 y + 0.007 x^2 + -0.002 x y + -0.012 x z + -0.002 y^2 + 0.007 y z + -0.001 z^2
+(y)&#39; = 1.010 1 + 28.156 x + -1.083 y + -0.149 z + -0.027 x^2 + 0.027 x y + -1.004 x z + -0.007 y^2 + 0.002 y z + 0.005 z^2
+(z)&#39; = 1.836 1 + -0.036 x + 0.036 y + -2.937 z + -0.050 x^2 + 1.043 x y + 0.001 x z + -0.007 y^2 + -0.001 y z + 0.009 z^2
+MSE =  0.02725011445966513  R =  0.9999920477619888
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span> <span class="n">dt</span> <span class="p">,</span> <span class="n">T_long</span> <span class="p">,</span> <span class="n">dt</span> <span class="p">)</span>
+<span class="n">pred</span> <span class="o">=</span> <span class="n">model4</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span> <span class="n">x0</span> <span class="p">,</span> <span class="n">t</span> <span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">plot5</span><span class="p">(</span> <span class="n">x_train</span> <span class="p">,</span> <span class="n">x_train_noisy</span> <span class="p">,</span> <span class="n">pred</span> <span class="p">):</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">fig</span> <span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span> <span class="mi">1</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">,</span> <span class="n">subplot_kw</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;projection&#39;</span> <span class="p">:</span> <span class="s1">&#39;3d&#39;</span> <span class="p">}</span> <span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span> <span class="mi">7</span> <span class="p">,</span> <span class="mi">7</span> <span class="p">)</span> <span class="p">)</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">SINDy_pred_T</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">x_train_noisy</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">0</span> <span class="p">]</span> <span class="p">,</span> <span class="n">x_train_noisy</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">]</span> <span class="p">,</span> <span class="n">x_train_noisy</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">2</span> <span class="p">]</span> <span class="p">,</span> <span class="s1">&#39;.&#39;</span> <span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;blue&quot;</span> <span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;noisy trajectories&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">x_train</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">0</span> <span class="p">]</span> <span class="p">,</span> <span class="n">x_train</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">]</span> <span class="p">,</span> <span class="n">x_train</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">2</span> <span class="p">]</span>  <span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;yellow&quot;</span> <span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;real data&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">pred</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">0</span> <span class="p">]</span> <span class="p">,</span> <span class="n">pred</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">]</span> <span class="p">,</span> <span class="n">pred</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">2</span> <span class="p">]</span>  <span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span> <span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;predictions&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span> <span class="s2">&quot;SINDy predictions&quot;</span> <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span> <span class="n">prop</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">}</span> <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">plot5</span><span class="p">(</span> <span class="n">x_train</span> <span class="p">,</span> <span class="n">x_train_noisy</span> <span class="p">,</span> <span class="n">pred</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/c5312b73f1cf63d7c74d42c425e1260816924e033ca8b4e1c04537dc8cad49f4.png" src="../_images/c5312b73f1cf63d7c74d42c425e1260816924e033ca8b4e1c04537dc8cad49f4.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Exercise 7.4"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Exercise%206.1/Exercise6.1_L_d.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Neural Network for Predicting the Lorenz System</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Exercise%20X02.1/Exercise_X02_1.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Exercise X02.1 - Fast Fourier Transform for Point-Wise Gradient Computations</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Exercise 7.4 - SINDy</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a">(a)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#b">(b)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#c">(c)</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Nicole Rosi & Jens Peter Schøler
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

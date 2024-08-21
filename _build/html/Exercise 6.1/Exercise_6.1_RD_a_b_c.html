@@ -1,0 +1,1238 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Neural Network for Numerical Integration on the Reaction Diffusion System &#8212; sml report</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Exercise 6.1/Exercise_6.1_RD_a_b_c';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Neural Network for Predicting the Lorenz System" href="Exercise6.1_L_d.html" />
+    <link rel="prev" title="Neural Network for Numerical Integration on the Kuramoto–Sivashinsky (KS) PDE" href="Exercise_6.1_KS_a_b.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="sml report - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="sml report - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to the Scientific Machine Learning Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%20X01.1/ExerciseX01.1_.html">Exercise X01.1 - Integration of Dynamical Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%201.7/Exercise_1.7_.html">Exercise 1.7 - Singular Value Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%202.3/Exercise_2.3_.html">Exercise 2.3 - Fast Fourier Transform (FFT) for Numerical Integration</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="6.1_toc.html">Exercise 6.1</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Exercise_6.1_KS_a_b.html">Neural Network for Numerical Integration on the Kuramoto–Sivashinsky (KS) PDE</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Neural Network for Numerical Integration on the Reaction Diffusion System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Exercise6.1_L_d.html">Neural Network for Predicting the Lorenz System</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%207.4/Exercise_7.4_.html">Exercise 7.4 - SINDy</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%20X02.1/Exercise_X02_1.html">Exercise X02.1 - Fast Fourier Transform for Point-Wise Gradient Computations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%20X03.1/Exercise_X03.1_.html">Exercise X03.1 - Dynamic Mode Decomposition (DMD)</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%2012.2/Exercise_12.2_.html">Exercise 12.2 - Galerkin method applied to the Kuramoto Sivashinsky dynamical system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%2012.3/Exercise_12.3_.html">Exercise 12.3 - Autoencoders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%2014.X01/Exercise_14.X01_.html">Exercise 14.X01</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%2014.X02/Exercise_14.X02_.html">Exercise 14.X02 - Physics-Informed Neural Networks for inverse problems</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FExercise 6.1/Exercise_6.1_RD_a_b_c.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Exercise 6.1/Exercise_6.1_RD_a_b_c.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Neural Network for Numerical Integration on the Reaction Diffusion System</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a">(a)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model">Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b">(b)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#point-c">point (c)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="neural-network-for-numerical-integration-on-the-reaction-diffusion-system">
+<h1>Neural Network for Numerical Integration on the Reaction Diffusion System<a class="headerlink" href="#neural-network-for-numerical-integration-on-the-reaction-diffusion-system" title="Link to this heading">#</a></h1>
+<p>This notebook contains the solution to part (a), (b) and (c) of exercise 6.1 for the KS equations.</p>
+<section id="a">
+<h2>(a)<a class="headerlink" href="#a" title="Link to this heading">#</a></h2>
+<p><strong>Reaction–diffusion systems</strong> are mathematical models which correspond to several physical phenomena. Mathematically, reaction–diffusion systems take the form of semi-linear parabolic partial differential equations. They can be represented in the general form:</p>
+<div class="math notranslate nohighlight">
+\[ \partial_t \vec{q} = D \nabla^2 \vec{q}  +  \vec{R}(\vec{q}) \]</div>
+<p>where <span class="math notranslate nohighlight">\(\vec{q}(x, t)\)</span> represents the unknown vector function, <span class="math notranslate nohighlight">\(D\)</span> is a diagonal matrix of diffusion coefficients, and <span class="math notranslate nohighlight">\(\vec{R}\)</span> accounts for all local reactions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the necessary libraries.</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.io</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;KMP_DUPLICATE_LIB_OK&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;TRUE&quot;</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1"># Import plotting libraries and tools.</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+<span class="kn">from</span> <span class="nn">matplotlib.animation</span> <span class="kn">import</span> <span class="n">FuncAnimation</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dataset">
+<h2>Dataset<a class="headerlink" href="#dataset" title="Link to this heading">#</a></h2>
+<p>The dataset is composed of <span class="math notranslate nohighlight">\(201\)</span> frames (temporal dimension) with <span class="math notranslate nohighlight">\((251 \times 251)\)</span> pixels each (space dimension). The dependent variables of the problem, whose dynamic is collected in the aforementioned frameworks, are <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span>; in the following we will analyse only <span class="math notranslate nohighlight">\(U\)</span>, which is represented in the video below.</p>
+<p>While we dedicated exercise 6.1 with the Kuramoto–Sivashinsky to compare the performances of two neural networks ( RNN and FFNN), we will implement here only the case of FFNN, because it matches better what was required from the exercise, in addition, to make the exercise more compact, we will only explore the casistic <span class="math notranslate nohighlight">\(\Delta T = 1\)</span>; then, given <span class="math notranslate nohighlight">\(\Delta T\)</span>:</p>
+<ul class="simple">
+<li><p>The network takes as input a single snips at time <span class="math notranslate nohighlight">\(j\)</span>, <span class="math notranslate nohighlight">\(U^{(j)}\in\,M(251\times 251)\)</span>.</p></li>
+<li><p>The network is required to predict <span class="math notranslate nohighlight">\(U^{(j+\Delta T)}\in\,M(251\times 251)\)</span>.</p></li>
+</ul>
+<p>Import and plot the dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import data.</span>
+
+<span class="c1"># get the right path to the data.</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="p">,</span> <span class="s2">&quot;..\DATA</span><span class="se">\\</span><span class="s2">reaction_diffusion_big.mat&quot;</span> <span class="p">)</span>
+
+<span class="c1"># load the data.</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span> <span class="n">data_path</span> <span class="p">)</span>
+
+<span class="c1"># assign the problem variables.</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;t&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+<span class="n">U</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;u&quot;</span><span class="p">]</span>
+<span class="n">T_dim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="n">X_dim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">Y_dim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/scipy/io/matlab/_mio.py:39,</span> in <span class="ni">_open_file</span><span class="nt">(file_like, appendmat, mode)</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">39</span>     <span class="k">return</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_like</span><span class="p">,</span> <span class="n">mode</span><span class="p">),</span> <span class="kc">True</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span> <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span>     <span class="c1"># Probably &quot;not found&quot;</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;/home/nrosi/NRprojects/Scientific-Machine-Learning/Exercise 6.1/..\\DATA\\reaction_diffusion_big.mat&#39;
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">data_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="p">,</span> <span class="s2">&quot;..\DATA</span><span class="se">\\</span><span class="s2">reaction_diffusion_big.mat&quot;</span> <span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># load the data.</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="n">data</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span> <span class="n">data_path</span> <span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1"># assign the problem variables.</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">T</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;t&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+
+<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/scipy/io/matlab/_mio.py:224,</span> in <span class="ni">loadmat</span><span class="nt">(file_name, mdict, appendmat, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">87</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">88</span><span class="sd"> Load MATLAB file.</span>
+<span class="g g-Whitespace">     </span><span class="mi">89</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">221</span><span class="sd">     3.14159265+3.14159265j])</span>
+<span class="g g-Whitespace">    </span><span class="mi">222</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">223</span> <span class="n">variable_names</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;variable_names&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">224</span> <span class="k">with</span> <span class="n">_open_file_context</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">appendmat</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">225</span>     <span class="n">MR</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">mat_reader_factory</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">226</span>     <span class="n">matfile_dict</span> <span class="o">=</span> <span class="n">MR</span><span class="o">.</span><span class="n">get_variables</span><span class="p">(</span><span class="n">variable_names</span><span class="p">)</span>
+
+<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/contextlib.py:135,</span> in <span class="ni">_GeneratorContextManager.__enter__</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">133</span> <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwds</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span>
+<span class="g g-Whitespace">    </span><span class="mi">134</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">135</span>     <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gen</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">136</span> <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">137</span>     <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;generator didn&#39;t yield&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="kc">None</span>
+
+<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/scipy/io/matlab/_mio.py:17,</span> in <span class="ni">_open_file_context</span><span class="nt">(file_like, appendmat, mode)</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="nd">@contextmanager</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="k">def</span> <span class="nf">_open_file_context</span><span class="p">(</span><span class="n">file_like</span><span class="p">,</span> <span class="n">appendmat</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;rb&#39;</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">17</span>     <span class="n">f</span><span class="p">,</span> <span class="n">opened</span> <span class="o">=</span> <span class="n">_open_file</span><span class="p">(</span><span class="n">file_like</span><span class="p">,</span> <span class="n">appendmat</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span>         <span class="k">yield</span> <span class="n">f</span>
+
+<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/scipy/io/matlab/_mio.py:45,</span> in <span class="ni">_open_file</span><span class="nt">(file_like, appendmat, mode)</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span>     <span class="k">if</span> <span class="n">appendmat</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">file_like</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.mat&#39;</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">44</span>         <span class="n">file_like</span> <span class="o">+=</span> <span class="s1">&#39;.mat&#39;</span>
+<span class="ne">---&gt; </span><span class="mi">45</span>     <span class="k">return</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_like</span><span class="p">,</span> <span class="n">mode</span><span class="p">),</span> <span class="kc">True</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">47</span>     <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">48</span>         <span class="s1">&#39;Reader needs file name or open file-like object&#39;</span>
+<span class="g g-Whitespace">     </span><span class="mi">49</span>     <span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;/home/nrosi/NRprojects/Scientific-Machine-Learning/Exercise 6.1/..\\DATA\\reaction_diffusion_big.mat&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib.animation</span> <span class="kn">import</span> <span class="n">FuncAnimation</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.facecolor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.axes_grid1</span> <span class="kn">import</span> <span class="n">make_axes_locatable</span>
+
+<span class="c1"># First set up the figure, the axis, and the plot element we want to animate</span>
+<span class="k">def</span> <span class="nf">animate_flow</span><span class="p">(</span> <span class="n">arr</span> <span class="p">,</span> <span class="n">dims</span> <span class="p">,</span> <span class="n">video_name</span> <span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">10</span> <span class="p">):</span>
+    <span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">dims</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="mi">120</span><span class="p">,</span> <span class="n">m</span><span class="o">/</span><span class="mi">120</span><span class="p">)</span> <span class="c1"># sets size relative to image size</span>
+
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">)[:,:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> 
+                    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">,</span>
+                    <span class="n">vmin</span><span class="o">=</span> <span class="n">U</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>
+                    <span class="n">vmax</span><span class="o">=</span> <span class="n">U</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+
+    <span class="n">div</span> <span class="o">=</span> <span class="n">make_axes_locatable</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">cax</span> <span class="o">=</span> <span class="n">div</span><span class="o">.</span><span class="n">append_axes</span><span class="p">(</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="s1">&#39;5%&#39;</span><span class="p">,</span> <span class="s1">&#39;5%&#39;</span><span class="p">)</span>
+    <span class="n">cb</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">cax</span><span class="o">=</span><span class="n">cax</span><span class="p">)</span>
+    <span class="n">total_frames</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># animation function.  This is called sequentially</span>
+    <span class="k">def</span> <span class="nf">animate</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+        <span class="n">pos</span><span class="o">.</span><span class="n">set_array</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">)[:,:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">cax</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">cax</span><span class="o">=</span><span class="n">cax</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pos</span>
+        
+    <span class="n">anim</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">animate</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="n">total_frames</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">anim</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">video_name</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="n">total_frames</span><span class="o">/</span><span class="n">t</span><span class="p">,</span> <span class="n">extra_args</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;-vcodec&#39;</span><span class="p">,</span> <span class="s1">&#39;libx264&#39;</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">video_name</span> <span class="o">=</span> <span class="s1">&#39;Initial_data_RD.mp4&#39;</span>
+<span class="n">animate_flow</span><span class="p">(</span> <span class="n">U</span> <span class="p">,</span> <span class="p">(</span> <span class="n">U</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">U</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span> <span class="p">,</span> <span class="n">video_name</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Link to the video: <a class="reference external" href="https://youtube.com/shorts/9VoTKmVImlo?feature=share">Reaction Diffusion dynamic, raw data</a></p>
+<p>Prepare the input and output dataset; the input dataset contains the first <span class="math notranslate nohighlight">\((0:201 - \Delta T)\)</span> snips, while the output dataset contains the last <span class="math notranslate nohighlight">\((\Delta T:201)\)</span> snips.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Choose a DELTA T (from 0 to 251)</span>
+<span class="n">DT</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># divide the dataset between input (past) and output (future).</span>
+<span class="n">UIN</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="p">:</span> <span class="p">,</span> <span class="p">:(</span> <span class="n">T_dim</span> <span class="o">-</span> <span class="n">DT</span> <span class="p">)</span> <span class="p">]</span>
+<span class="n">UOUT</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="p">:</span> <span class="p">,</span> <span class="n">DT</span> <span class="p">:</span> <span class="p">(</span> <span class="n">T_dim</span> <span class="p">)</span> <span class="p">]</span> 
+
+<span class="n">dataset_len</span> <span class="o">=</span> <span class="n">T_dim</span> <span class="o">-</span> <span class="n">DT</span>
+
+<span class="n">UIN</span> <span class="o">=</span> <span class="n">UIN</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">X_dim</span> <span class="o">*</span> <span class="n">Y_dim</span> <span class="p">,</span> <span class="n">dataset_len</span> <span class="p">)</span>
+<span class="n">UOUT</span> <span class="o">=</span> <span class="n">UOUT</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">X_dim</span> <span class="o">*</span> <span class="n">Y_dim</span> <span class="p">,</span> <span class="n">dataset_len</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once the input and output datset are created, they are shuffled and divided into the <strong>training</strong>, <strong>validation</strong> and <strong>test sets</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Divide the dataset between trining, validation and test sets.</span>
+<span class="n">train_len</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="n">dataset_len</span>  <span class="o">*</span> <span class="mf">0.8</span> <span class="p">)</span>
+<span class="n">val_len</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="n">dataset_len</span>  <span class="o">*</span> <span class="mf">0.1</span> <span class="p">)</span>
+<span class="n">test_len</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="n">dataset_len</span>  <span class="o">*</span> <span class="mf">0.1</span> <span class="p">)</span>
+
+<span class="c1"># Random shuffle to select the pairs non-sequentially.</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span> <span class="n">dataset_len</span> <span class="p">,</span> <span class="n">dataset_len</span> <span class="p">,</span> <span class="n">replace</span> <span class="o">=</span> <span class="kc">False</span> <span class="p">)</span>
+<span class="n">idx_train</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[</span> <span class="mi">0</span> <span class="p">:</span> <span class="n">train_len</span> <span class="p">]</span>
+<span class="n">idx_val</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[</span> <span class="n">train_len</span> <span class="p">:</span> <span class="p">(</span> <span class="n">train_len</span> <span class="o">+</span> <span class="n">val_len</span> <span class="p">)</span> <span class="p">]</span>
+<span class="n">idx_test</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[</span> <span class="p">(</span> <span class="n">train_len</span> <span class="o">+</span> <span class="n">val_len</span> <span class="p">):</span> <span class="p">]</span>
+
+<span class="c1"># Get the dataset done.</span>
+<span class="n">TRAIN_IN</span> <span class="o">=</span> <span class="n">UIN</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="n">idx_train</span> <span class="p">]</span><span class="o">.</span><span class="n">T</span>
+<span class="n">TRAIN_OUT</span> <span class="o">=</span> <span class="n">UOUT</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="n">idx_train</span> <span class="p">]</span><span class="o">.</span><span class="n">T</span>  
+<span class="n">VAL_IN</span> <span class="o">=</span> <span class="n">UIN</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="n">idx_val</span> <span class="p">]</span><span class="o">.</span><span class="n">T</span>    
+<span class="n">VAL_OUT</span> <span class="o">=</span> <span class="n">UOUT</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="n">idx_val</span> <span class="p">]</span><span class="o">.</span><span class="n">T</span>    
+<span class="n">TEST_IN</span> <span class="o">=</span> <span class="n">UIN</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="n">idx_test</span> <span class="p">]</span><span class="o">.</span><span class="n">T</span>  
+<span class="n">TEST_OUT</span> <span class="o">=</span> <span class="n">UOUT</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="n">idx_test</span> <span class="p">]</span><span class="o">.</span><span class="n">T</span>  
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="model">
+<h2>Model<a class="headerlink" href="#model" title="Link to this heading">#</a></h2>
+<p>The model is a simple <strong>FFNN</strong>, with a single hidden-layer of 100 units and the hyperbolic tangent as activation function; It takes as input the <span class="math notranslate nohighlight">\(j^{th}\)</span> flattnend snips and gives as output the <span class="math notranslate nohighlight">\((j+\Delta T)^{th}\)</span> snip. We are using <code class="docutils literal notranslate"><span class="pre">Adam</span></code> as optimizer and the <code class="docutils literal notranslate"><span class="pre">MSE</span></code> as objective function.</p>
+<p>Define the model and print the summary.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span>
+
+<span class="c1"># Define the hidden units</span>
+<span class="n">hidden_size</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">num_inputs</span> <span class="o">=</span> <span class="n">X_dim</span> <span class="o">*</span> <span class="n">Y_dim</span>
+<span class="n">num_outputs</span> <span class="o">=</span> <span class="n">X_dim</span> <span class="o">*</span> <span class="n">Y_dim</span>
+
+<span class="c1"># Create a sequential model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span> <span class="n">Dense</span><span class="p">(</span> <span class="n">hidden_size</span> <span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s1">&#39;tanh&#39;</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span> <span class="n">num_inputs</span> <span class="p">,</span> <span class="p">)</span> <span class="p">)</span> <span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span> <span class="n">Dense</span><span class="p">(</span> <span class="n">num_outputs</span> <span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s1">&#39;linear&#39;</span> <span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Define the loss, the optimizer and compile the model with them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">keras.optimizers</span> <span class="kn">import</span> <span class="n">Adam</span>
+<span class="kn">from</span> <span class="nn">keras.losses</span> <span class="kn">import</span> <span class="n">MeanSquaredError</span>
+
+<span class="n">OPTIMIZER</span> <span class="o">=</span> <span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="n">LOSS</span> <span class="o">=</span> <span class="n">MeanSquaredError</span><span class="p">()</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span> <span class="n">optimizer</span> <span class="o">=</span> <span class="n">OPTIMIZER</span> <span class="p">,</span> <span class="n">loss</span> <span class="o">=</span> <span class="n">LOSS</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Fit the model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">keras.callbacks</span> <span class="kn">import</span> <span class="n">EarlyStopping</span>
+
+<span class="n">callback</span> <span class="o">=</span> <span class="n">EarlyStopping</span><span class="p">(</span> <span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span> <span class="p">,</span> <span class="n">patience</span> <span class="o">=</span> <span class="mi">5</span> <span class="p">,</span> <span class="n">min_delta</span> <span class="o">=</span> <span class="mf">0.0001</span> <span class="p">)</span>
+
+<span class="n">H</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">TRAIN_IN</span> <span class="p">,</span> <span class="n">TRAIN_OUT</span> <span class="p">,</span> 
+               <span class="n">validation_data</span> <span class="o">=</span> <span class="p">(</span> <span class="n">VAL_IN</span> <span class="p">,</span> <span class="n">VAL_OUT</span> <span class="p">)</span> <span class="p">,</span>
+               <span class="n">validation_freq</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">,</span>
+               <span class="n">epochs</span> <span class="o">=</span> <span class="mi">600</span> <span class="p">,</span>
+               <span class="n">shuffle</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">,</span>
+               <span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="n">callback</span><span class="p">]</span> <span class="p">,</span>
+               <span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>  
+</pre></div>
+</div>
+</div>
+</div>
+<p>Plot the training history; there is <strong>no overfitting</strong> apparently.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span> <span class="mi">1</span> <span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span> <span class="mi">5</span> <span class="p">,</span> <span class="mi">4</span> <span class="p">)</span> <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">H</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">]</span> <span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;train loss&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;skyblue&quot;</span> <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">H</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;val_loss&quot;</span><span class="p">]</span> <span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;val loss&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;orange&quot;</span> <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;epoch&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Training histor (FFNN)&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/69283a05d7c51835f9a87c18ef70150f0bcdff59818566fdf76086fd65859355.png" src="../_images/69283a05d7c51835f9a87c18ef70150f0bcdff59818566fdf76086fd65859355.png" />
+</div>
+</div>
+<p>Import the trained model (if the training was not run) and compute the error over the test set and over the entire dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the following line if you want to load the pretrained model.</span>
+<span class="c1">#model = tf.keras.models.load_model(&quot;Output/SimpleRNN_RD.h5&quot;)</span>
+
+<span class="c1">#Make predictions.</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Making the predictions:&quot;</span><span class="p">)</span>
+<span class="n">TEST_PRED</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">TEST_IN</span> <span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">)</span>
+<span class="n">TOT_PRED</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">UIN</span><span class="o">.</span><span class="n">T</span> <span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">TEST_MSE</span> <span class="o">=</span> <span class="n">LOSS</span><span class="p">(</span> <span class="n">TEST_PRED</span> <span class="p">,</span> <span class="n">TEST_OUT</span> <span class="p">)</span>
+<span class="n">TOT_MSE</span> <span class="o">=</span> <span class="n">LOSS</span><span class="p">(</span> <span class="n">TOT_PRED</span> <span class="p">,</span> <span class="n">UOUT</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+<span class="c1">#Print the results.</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">---&gt;The MSE on the test set is: </span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">TEST_MSE</span><span class="o">.</span><span class="n">numpy</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---&gt;The MSE on the total dataset set is: </span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">TOT_MSE</span><span class="o">.</span><span class="n">numpy</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Making the predictions:
+
+---&gt;The MSE on the test set is: 0.012
+---&gt;The MSE on the total dataset set is: 0.009
+</pre></div>
+</div>
+</div>
+</div>
+<p>Plot the real data, the pedictins and the training error per each snip as movies.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib.animation</span> <span class="kn">import</span> <span class="n">FuncAnimation</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.facecolor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.axes_grid1</span> <span class="kn">import</span> <span class="n">make_axes_locatable</span>
+
+<span class="n">real_data</span> <span class="o">=</span> <span class="n">UOUT</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">T_dim</span> <span class="o">-</span> <span class="n">DT</span> <span class="p">,</span> <span class="n">X_dim</span> <span class="p">,</span> <span class="n">Y_dim</span> <span class="p">)</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">TOT_PRED</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">T_dim</span> <span class="o">-</span> <span class="n">DT</span> <span class="p">,</span> <span class="n">X_dim</span> <span class="p">,</span> <span class="n">Y_dim</span> <span class="p">)</span>
+<span class="n">error</span> <span class="o">=</span> <span class="p">(</span> <span class="n">UOUT</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">TOT_PRED</span> <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">T_dim</span> <span class="o">-</span> <span class="n">DT</span> <span class="p">,</span> <span class="n">X_dim</span> <span class="p">,</span> <span class="n">Y_dim</span> <span class="p">)</span>
+
+<span class="n">total_frames</span> <span class="o">=</span> <span class="n">predictions</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># First set up the figure, the axis, and the plot element we want to animate</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span> <span class="mi">1</span> <span class="p">,</span> <span class="mi">3</span> <span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span> <span class="mi">10</span> <span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="p">,</span> <span class="n">sharey</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">)</span>
+
+
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Real Data&#39;</span><span class="p">,</span> <span class="s1">&#39;Prediction&#39;</span><span class="p">,</span> <span class="s1">&#39;Error&#39;</span><span class="p">]</span>
+<span class="n">zz</span> <span class="o">=</span> <span class="p">[</span><span class="n">real_data</span><span class="p">,</span><span class="n">predictions</span><span class="p">,</span><span class="n">error</span><span class="p">]</span>
+<span class="n">images</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">tt</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">z</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">labels</span><span class="p">,</span> <span class="n">zz</span><span class="p">):</span>
+    <span class="n">vmin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">tt</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span>
+    <span class="n">vmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">tt</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">tt</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">tt</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span> <span class="n">X_dim</span> <span class="p">,</span> <span class="n">Y_dim</span> <span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">tt</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+    <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">div</span> <span class="o">=</span> <span class="n">make_axes_locatable</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="n">tt</span><span class="p">])</span>
+    <span class="n">cax</span> <span class="o">=</span> <span class="n">div</span><span class="o">.</span><span class="n">append_axes</span><span class="p">(</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="s1">&#39;5%&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">cax</span><span class="o">=</span><span class="n">cax</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+
+<span class="c1"># animation function.  This is called sequentially</span>
+<span class="k">def</span> <span class="nf">animate</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">zz</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">idx_im</span><span class="p">,</span> <span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span> <span class="nb">zip</span><span class="p">(</span> <span class="n">images</span> <span class="p">,</span> <span class="n">zz</span> <span class="p">)</span> <span class="p">):</span>
+        <span class="n">image</span><span class="o">.</span><span class="n">set_array</span><span class="p">(</span><span class="n">z</span><span class="p">[</span> <span class="n">i</span> <span class="p">,</span> <span class="p">:</span> <span class="p">,</span> <span class="p">:</span> <span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">X_dim</span><span class="p">,</span> <span class="n">Y_dim</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+
+<span class="n">anim</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">animate</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">zz</span><span class="p">),</span> <span class="n">frames</span><span class="o">=</span><span class="n">total_frames</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">video_name</span> <span class="o">=</span> <span class="s1">&#39;NN_predictions_RD.mp4&#39;</span>
+<span class="n">anim</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">video_name</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="n">total_frames</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span> <span class="n">extra_args</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;-vcodec&#39;</span><span class="p">,</span> <span class="s1">&#39;libx264&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%HTML</span>
+<span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">width</span><span class="o">=</span><span class="s">&quot;560&quot;</span> <span class="na">height</span><span class="o">=</span><span class="s">&quot;315&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://www.youtube.com/embed/pz2eLs6uKcI&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;YouTube video player&quot;</span> <span class="na">frameborder</span><span class="o">=</span><span class="s">&quot;0&quot;</span> 
+<span class="na">allow</span><span class="o">=</span><span class="s">&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot;</span> <span class="na">allowfullscreen</span><span class="p">&gt;&lt;/</span><span class="nt">iframe</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><iframe width="560" height="315" src="https://www.youtube.com/embed/pz2eLs6uKcI" title="YouTube video player" frameborder="0" 
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div></div>
+</div>
+<p>Link to the video: <a class="reference external" href="https://youtu.be/pz2eLs6uKcI">Neural Network predictions of the Reaction Diffusion dynamic</a></p>
+</section>
+<section id="b">
+<h2>(b)<a class="headerlink" href="#b" title="Link to this heading">#</a></h2>
+<p>Now, we compare the trajectories of the ODE with the trajctories of the FFNN, where the trajector of the FFNN was obtained by feeding the network with its own outputs at the previous step. The video below shows clearly how the error accumulates in time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">FFNN_trajectory</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="n">UIN</span><span class="o">.</span><span class="n">shape</span> <span class="p">)</span>
+<span class="n">FFNN_trajectory</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">0</span> <span class="p">]</span> <span class="o">=</span> <span class="n">UIN</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">0</span> <span class="p">]</span>
+<span class="n">APP</span> <span class="o">=</span> <span class="n">FFNN_trajectory</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">0</span> <span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span> <span class="mi">1</span> <span class="p">,</span> <span class="n">T_dim</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">):</span>
+    <span class="n">FFNN_trajectory</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="n">i</span> <span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">APP</span><span class="p">[</span><span class="kc">None</span> <span class="p">,</span> <span class="p">:</span> <span class="p">]</span> <span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> 
+    <span class="n">APP</span> <span class="o">=</span> <span class="n">FFNN_trajectory</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="n">i</span> <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib.animation</span> <span class="kn">import</span> <span class="n">FuncAnimation</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.facecolor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.axes_grid1</span> <span class="kn">import</span> <span class="n">make_axes_locatable</span>
+    
+<span class="n">real_data</span> <span class="o">=</span> <span class="n">UOUT</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">T_dim</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">,</span> <span class="n">X_dim</span> <span class="p">,</span> <span class="n">Y_dim</span> <span class="p">)</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">FFNN_trajectory</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">T_dim</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">,</span> <span class="n">X_dim</span> <span class="p">,</span> <span class="n">Y_dim</span> <span class="p">)</span>
+<span class="n">error</span> <span class="o">=</span> <span class="p">(</span> <span class="n">UOUT</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">FFNN_trajectory</span><span class="o">.</span><span class="n">T</span> <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">T_dim</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">,</span> <span class="n">X_dim</span> <span class="p">,</span> <span class="n">Y_dim</span> <span class="p">)</span>
+
+<span class="n">total_frames</span> <span class="o">=</span> <span class="n">predictions</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># First set up the figure, the axis, and the plot element we want to animate</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span> <span class="mi">1</span> <span class="p">,</span> <span class="mi">3</span> <span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span> <span class="mi">10</span> <span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="p">,</span> <span class="n">sharey</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">)</span>
+
+
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Real Data&#39;</span><span class="p">,</span> <span class="s1">&#39;Prediction&#39;</span><span class="p">,</span> <span class="s1">&#39;Error&#39;</span><span class="p">]</span>
+<span class="n">zz</span> <span class="o">=</span> <span class="p">[</span><span class="n">real_data</span><span class="p">,</span><span class="n">predictions</span><span class="p">,</span><span class="n">error</span><span class="p">]</span>
+<span class="n">images</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">tt</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">z</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">labels</span><span class="p">,</span> <span class="n">zz</span><span class="p">):</span>
+    <span class="n">vmin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">tt</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span>
+    <span class="n">vmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">tt</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">tt</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">tt</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span> <span class="n">X_dim</span> <span class="p">,</span> <span class="n">Y_dim</span> <span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">tt</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+    <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">div</span> <span class="o">=</span> <span class="n">make_axes_locatable</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="n">tt</span><span class="p">])</span>
+    <span class="n">cax</span> <span class="o">=</span> <span class="n">div</span><span class="o">.</span><span class="n">append_axes</span><span class="p">(</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="s1">&#39;5%&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">cax</span><span class="o">=</span><span class="n">cax</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+
+<span class="c1"># animation function.  This is called sequentially</span>
+<span class="k">def</span> <span class="nf">animate</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">zz</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">idx_im</span><span class="p">,</span> <span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span> <span class="nb">zip</span><span class="p">(</span> <span class="n">images</span> <span class="p">,</span> <span class="n">zz</span> <span class="p">)</span> <span class="p">):</span>
+        <span class="n">image</span><span class="o">.</span><span class="n">set_array</span><span class="p">(</span><span class="n">z</span><span class="p">[</span> <span class="n">i</span> <span class="p">,</span> <span class="p">:</span> <span class="p">,</span> <span class="p">:</span> <span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">X_dim</span><span class="p">,</span> <span class="n">Y_dim</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+
+<span class="n">anim</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">animate</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">zz</span><span class="p">),</span> <span class="n">frames</span><span class="o">=</span><span class="n">total_frames</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">video_name</span> <span class="o">=</span> <span class="s1">&#39;NN_predictions_RD_2.mp4&#39;</span>
+<span class="n">anim</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">video_name</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="n">total_frames</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span> <span class="n">extra_args</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;-vcodec&#39;</span><span class="p">,</span> <span class="s1">&#39;libx264&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%HTML</span> 
+<span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">width</span><span class="o">=</span><span class="s">&quot;560&quot;</span> <span class="na">height</span><span class="o">=</span><span class="s">&quot;315&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://www.youtube.com/embed/29hF-toSpAI&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;YouTube video player&quot;</span> <span class="na">frameborder</span><span class="o">=</span><span class="s">&quot;0&quot;</span>
+<span class="na">allow</span><span class="o">=</span><span class="s">&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot;</span> <span class="na">allowfullscreen</span><span class="p">&gt;&lt;/</span><span class="nt">iframe</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><iframe width="560" height="315" src="https://www.youtube.com/embed/29hF-toSpAI" title="YouTube video player" frameborder="0"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div></div>
+</div>
+<p>Link to the video: <a class="reference external" href="https://youtu.be/29hF-toSpAI">Feed Forward Neural Network feed with its own output, Reaction Diffusion Equation</a></p>
+</section>
+<section id="point-c">
+<h2>point (c)<a class="headerlink" href="#point-c" title="Link to this heading">#</a></h2>
+<p>In this exercise we must project the trajectories obtained via the Reaction Diffusion equation into low dimensional latent space and a train neural network to make time predictions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rd_data</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span><span class="s1">&#39;../DATA/reaction_diffusion_big.mat&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rd_data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">rd_data</span><span class="p">[</span><span class="s1">&#39;u&#39;</span><span class="p">]</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">rd_data</span><span class="p">[</span><span class="s1">&#39;v&#39;</span><span class="p">]</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">rd_data</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">rd_data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">rd_data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;__header__&#39;, &#39;__version__&#39;, &#39;__globals__&#39;, &#39;t&#39;, &#39;u&#39;, &#39;v&#39;, &#39;x&#39;, &#39;y&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+<p>The SVD is calculated and the conserved energy is calculated per included eigenmode.
+Then the required modes to recover <span class="math notranslate nohighlight">\(90\%, 99\%\)</span> and <span class="math notranslate nohighlight">\(99.9\%\)</span> of the energy are calulated.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+<span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">VT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">X_u</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">U</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">E_org</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">X_u</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="c1"># Energy calculated as the squared Frobenius norm</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">U</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="c1"># X_approx = U[:, :r+1] @ S[:r+1, :r+1] @ VT[:r+1, :]</span>
+    <span class="n">X_approx</span> <span class="o">=</span> <span class="n">U</span><span class="p">[:,</span> <span class="p">:</span><span class="n">r</span><span class="p">]</span> <span class="o">@</span> <span class="n">S</span><span class="p">[:</span><span class="n">r</span><span class="p">,</span> <span class="p">:</span><span class="n">r</span><span class="p">]</span> <span class="o">@</span> <span class="n">VT</span><span class="p">[:</span><span class="n">r</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">E</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">X_approx</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">E_org</span> <span class="c1"># Energy as a fraction of the original energy</span>
+
+<span class="n">energy_targets</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">,</span> <span class="mf">0.999</span><span class="p">]</span>
+<span class="n">r_modes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">energy_targets</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">energy_target</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">energy_targets</span><span class="p">):</span>
+    <span class="n">r_modes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">E</span> <span class="o">&gt;=</span><span class="n">energy_target</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;For </span><span class="si">{</span><span class="n">energy_target</span><span class="o">*</span><span class="mi">100</span><span class="si">}</span><span class="s2">% of the energy, </span><span class="si">{</span><span class="n">r_modes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> modes are required&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>For 90.0% of the energy, 3.0 modes are required
+For 99.0% of the energy, 4.0 modes are required
+For 99.9% of the energy, 6.0 modes are required
+</pre></div>
+</div>
+</div>
+</div>
+<p>The first six eigenmodes are plotted.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">()):</span>
+    <span class="n">eigen_vector_r</span> <span class="o">=</span> <span class="n">U</span><span class="p">[:,</span> <span class="n">r</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">eigen_vector_r</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Eigen Mode </span><span class="si">{</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6df8a6e3a46ddf11711209525e5e1d9a06b2e3a54c25334b418705801b7831f7.png" src="../_images/6df8a6e3a46ddf11711209525e5e1d9a06b2e3a54c25334b418705801b7831f7.png" />
+</div>
+</div>
+<p>The amplitude of the first six eigenmodes are calculated and then plotted.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SVT</span> <span class="o">=</span> <span class="n">S</span> <span class="o">@</span> <span class="n">VT</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">()):</span>
+    <span class="n">eigen_vector_r</span> <span class="o">=</span> <span class="n">SVT</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">eigen_vector_r</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Eigen Amplitude </span><span class="si">{</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e83114a927b60f17d503c488454a21b72478e20ba9758fbc2eb205718ba5077e.png" src="../_images/e83114a927b60f17d503c488454a21b72478e20ba9758fbc2eb205718ba5077e.png" />
+</div>
+</div>
+<p>Now a FFNN is trained to step forward the latent space amplitudes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prepare the dataset.</span>
+<span class="n">r_modes</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">SVT</span><span class="p">[:</span><span class="n">r_modes</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
+<span class="n">targets</span> <span class="o">=</span> <span class="n">SVT</span><span class="p">[:</span><span class="n">r_modes</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">T</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">train_idx</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[:</span><span class="nb">int</span><span class="p">(</span><span class="mf">0.8</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">))]</span>
+<span class="n">test_idx</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="mf">0.8</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">)):</span><span class="nb">int</span><span class="p">(</span><span class="mf">0.95</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">))]</span>
+<span class="n">val_idx</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="mf">0.95</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">)):]</span>
+
+<span class="n">feature_train</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="n">train_idx</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">target_train</span> <span class="o">=</span> <span class="n">targets</span><span class="p">[</span><span class="n">train_idx</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">feature_test</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="n">test_idx</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">target_test</span> <span class="o">=</span> <span class="n">targets</span><span class="p">[</span><span class="n">test_idx</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">feature_val</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="n">val_idx</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">target_val</span> <span class="o">=</span> <span class="n">targets</span><span class="p">[</span><span class="n">val_idx</span><span class="p">,</span> <span class="p">:]</span>
+
+<span class="c1"># Implement the tensorflow model.</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="c1"># from tensorflow.keras.layers import Dense</span>
+
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">InputLayer</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="n">features</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                                    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">log_sigmoid</span><span class="p">),</span>
+                                    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">),</span>
+                                    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">targets</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])])</span>  
+
+<span class="n">compile_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;loss&quot;</span><span class="p">:</span> <span class="s1">&#39;mse&#39;</span><span class="p">,</span>
+                  <span class="s2">&quot;optimizer&quot;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">)}</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="o">**</span><span class="n">compile_kwargs</span><span class="p">)</span>
+
+
+<span class="n">fit_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;epochs&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+              <span class="s2">&quot;verbose&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="c1"># ! no printing of the training process (takes 18s on my machine)</span>
+              <span class="s2">&quot;validation_data&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">feature_val</span><span class="p">,</span> <span class="n">target_val</span><span class="p">)}</span>
+
+<span class="c1"># Fit the model and plot the training history.</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">feature_train</span><span class="p">,</span> <span class="n">target_train</span><span class="p">,</span> <span class="o">**</span><span class="n">fit_kwargs</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_loss&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;loss&#39;</span><span class="p">,</span> <span class="s1">&#39;val_loss&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/11760a2d464708871c885c94209a6440e9f686be45a2480a9deb37991810d71a.png" src="../_images/11760a2d464708871c885c94209a6440e9f686be45a2480a9deb37991810d71a.png" />
+</div>
+</div>
+<p>Plot the predictions against the real data. Looking at the funtions one would suspect that fitting a polynomial might yield better results than the current neural network. This knowledge could be implemented to chose more suitable activation functions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">colors</span><span class="p">)):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">pred</span><span class="p">[:,</span> <span class="n">r</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">targets</span><span class="p">[:,</span> <span class="n">r</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Eigen Amplitude </span><span class="si">{</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">leg</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;NN&#39;</span><span class="p">,</span> <span class="s1">&#39;ODE&#39;</span><span class="p">])</span>
+<span class="n">leg</span><span class="o">.</span><span class="n">legendHandles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">leg</span><span class="o">.</span><span class="n">legendHandles</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7/7 [==============================] - 0s 1ms/step
+</pre></div>
+</div>
+<img alt="../_images/4ef81d6d08acdaef530f5e9d2fb102bba923e7d33aa333ef9a3fca7b2f0a1864.png" src="../_images/4ef81d6d08acdaef530f5e9d2fb102bba923e7d33aa333ef9a3fca7b2f0a1864.png" />
+</div>
+</div>
+<p>A movie of the reproduced reaction is shown below, please note that NN plot includes data from the training, test and validaton sets:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib.animation</span> <span class="kn">import</span> <span class="n">FuncAnimation</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.facecolor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.axes_grid1</span> <span class="kn">import</span> <span class="n">make_axes_locatable</span>
+
+<span class="c1"># First set up the figure, the axis, and the plot element we want to animate</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">w_k</span> <span class="o">=</span> <span class="n">SVT</span><span class="p">[:</span><span class="n">r_modes</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span>
+<span class="n">w_k_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">features</span><span class="p">))</span><span class="o">.</span><span class="n">T</span> <span class="c1"># reshape is to make it a 2D array</span>
+<span class="n">X_trunc</span> <span class="o">=</span> <span class="n">U</span><span class="p">[:,</span> <span class="p">:</span><span class="n">r_modes</span><span class="p">]</span> <span class="o">@</span> <span class="n">w_k</span>
+<span class="n">X_trunc</span> <span class="o">=</span> <span class="n">U</span><span class="p">[:,</span> <span class="p">:</span><span class="n">r_modes</span><span class="p">]</span> <span class="o">@</span> <span class="n">w_k</span>
+<span class="n">X_trunc_pred</span> <span class="o">=</span> <span class="n">U</span><span class="p">[:,</span> <span class="p">:</span><span class="n">r_modes</span><span class="p">]</span> <span class="o">@</span> <span class="n">w_k_pred</span>
+<span class="n">zzs</span> <span class="o">=</span> <span class="p">[</span><span class="n">X_u</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:],</span> <span class="n">X_trunc</span><span class="p">,</span> <span class="n">X_trunc_pred</span><span class="p">,</span> <span class="p">(</span><span class="n">X_trunc</span> <span class="o">-</span> <span class="n">X_u</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:])]</span>
+
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Original&#39;</span><span class="p">,</span> <span class="s1">&#39;Truncated&#39;</span><span class="p">,</span> <span class="s1">&#39;NN Truncacted&#39;</span><span class="p">,</span> <span class="s1">&#39;Error&#39;</span><span class="p">]</span>
+
+<span class="n">extent</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">y</span><span class="p">)]),</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">images</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">zz</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">zzs</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">zz</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="n">extent</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+    <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+
+<span class="n">div</span> <span class="o">=</span> <span class="n">make_axes_locatable</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">cax</span> <span class="o">=</span> <span class="n">div</span><span class="o">.</span><span class="n">append_axes</span><span class="p">(</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="s1">&#39;5%&#39;</span><span class="p">,</span> <span class="s1">&#39;5%&#39;</span><span class="p">)</span>
+<span class="n">cb</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">cax</span><span class="o">=</span><span class="n">cax</span><span class="p">)</span>
+
+<span class="n">total_frames</span> <span class="o">=</span> <span class="n">X_trunc</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># animation function.  This is called sequentially</span>
+<span class="k">def</span> <span class="nf">animate</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">idx_im</span><span class="p">,</span> <span class="n">image</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">images</span><span class="p">):</span>
+        <span class="n">image</span><span class="o">.</span><span class="n">set_array</span><span class="p">(</span><span class="n">zzs</span><span class="p">[</span><span class="n">idx_im</span><span class="p">][:,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">images</span><span class="p">[</span><span class="n">idx_im</span><span class="p">]</span> <span class="o">=</span> <span class="n">image</span>
+    <span class="n">cax</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">images</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">cax</span><span class="o">=</span><span class="n">cax</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">images</span>
+
+<span class="n">anim</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">animate</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">frames</span><span class="o">=</span><span class="n">total_frames</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">1000</span><span class="o">/</span><span class="n">total_frames</span><span class="p">)</span>
+
+<span class="n">video_name</span> <span class="o">=</span> <span class="s1">&#39;NN_predictions_RD_SVD.mp4&#39;</span>
+<span class="n">anim</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">video_name</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">extra_args</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;-vcodec&#39;</span><span class="p">,</span> <span class="s1">&#39;libx264&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%HTML</span>
+<span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">width</span><span class="o">=</span><span class="s">&quot;560&quot;</span> <span class="na">height</span><span class="o">=</span><span class="s">&quot;315&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://www.youtube.com/embed/FJV9dVd1i3I&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;YouTube video player&quot;</span> <span class="na">frameborder</span><span class="o">=</span><span class="s">&quot;0&quot;</span> 
+<span class="na">allow</span><span class="o">=</span><span class="s">&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot;</span> <span class="na">allowfullscreen</span><span class="p">&gt;&lt;/</span><span class="nt">iframe</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><iframe width="560" height="315" src="https://www.youtube.com/embed/FJV9dVd1i3I" title="YouTube video player" frameborder="0" 
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div></div>
+</div>
+<p>Link to the video: <a class="reference external" href="https://youtu.be/FJV9dVd1i3I">Feed Forward Neural Network predictions of the SVD reduced Reaction Diffusion dynamic</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Exercise 6.1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Exercise_6.1_KS_a_b.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Neural Network for Numerical Integration on the Kuramoto–Sivashinsky (KS) PDE</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Exercise6.1_L_d.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Neural Network for Predicting the Lorenz System</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a">(a)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model">Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b">(b)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#point-c">point (c)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Nicole Rosi & Jens Peter Schøler
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

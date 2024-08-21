@@ -1,0 +1,1114 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Exercise 12.2 - Galerkin method applied to the Kuramoto Sivashinsky dynamical system &#8212; sml report</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Exercise 12.2/Exercise_12.2_';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Exercise 12.3 - Autoencoders" href="../Exercise%2012.3/Exercise_12.3_.html" />
+    <link rel="prev" title="Exercise X03.1 - Dynamic Mode Decomposition (DMD)" href="../Exercise%20X03.1/Exercise_X03.1_.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="sml report - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="sml report - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to the Scientific Machine Learning Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%20X01.1/ExerciseX01.1_.html">Exercise X01.1 - Integration of Dynamical Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%201.7/Exercise_1.7_.html">Exercise 1.7 - Singular Value Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%202.3/Exercise_2.3_.html">Exercise 2.3 - Fast Fourier Transform (FFT) for Numerical Integration</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Exercise%206.1/6.1_toc.html">Exercise 6.1</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Exercise%206.1/Exercise_6.1_KS_a_b.html">Neural Network for Numerical Integration on the Kuramoto–Sivashinsky (KS) PDE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Exercise%206.1/Exercise_6.1_RD_a_b_c.html">Neural Network for Numerical Integration on the Reaction Diffusion System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Exercise%206.1/Exercise6.1_L_d.html">Neural Network for Predicting the Lorenz System</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%207.4/Exercise_7.4_.html">Exercise 7.4 - SINDy</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%20X02.1/Exercise_X02_1.html">Exercise X02.1 - Fast Fourier Transform for Point-Wise Gradient Computations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%20X03.1/Exercise_X03.1_.html">Exercise X03.1 - Dynamic Mode Decomposition (DMD)</a></li>
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Exercise 12.2 - Galerkin method applied to the Kuramoto Sivashinsky dynamical system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%2012.3/Exercise_12.3_.html">Exercise 12.3 - Autoencoders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%2014.X01/Exercise_14.X01_.html">Exercise 14.X01</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Exercise%2014.X02/Exercise_14.X02_.html">Exercise 14.X02 - Physics-Informed Neural Networks for inverse problems</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FExercise 12.2/Exercise_12.2_.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Exercise 12.2/Exercise_12.2_.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Exercise 12.2 - Galerkin method applied to the Kuramoto Sivashinsky dynamical system</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#short-teorethical-summary">Short teorethical summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-generation">Data generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-pod">(a) POD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b">(b)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="exercise-12-2-galerkin-method-applied-to-the-kuramoto-sivashinsky-dynamical-system">
+<h1>Exercise 12.2 - Galerkin method applied to the Kuramoto Sivashinsky dynamical system<a class="headerlink" href="#exercise-12-2-galerkin-method-applied-to-the-kuramoto-sivashinsky-dynamical-system" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import some necessary libraries</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span> 
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;KMP_DUPLICATE_LIB_OK&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;True&#39;</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span><span class="p">,</span> <span class="n">solve_ivp</span>
+
+<span class="c1"># Import plotting tools.</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1"># from IPython.display import HTML</span>
+<span class="c1"># from matplotlib.animation import FuncAnimation</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="short-teorethical-summary">
+<h2>Short teorethical summary<a class="headerlink" href="#short-teorethical-summary" title="Link to this heading">#</a></h2>
+<p>In exercise 12.2 the Galerkin method is used to solve the Kuramoto Sivashinsky PDE in a reduced space i.e. as a Reduced Order Model (ROM):</p>
+<div class="math notranslate nohighlight">
+\[ u_t = - u_{xx} - u_{xxxx} - u\cdot u_{x} \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,(1)\]</div>
+<div class="math notranslate nohighlight">
+\[ u(x,t) \sim \sum_{k = 0}^n a_k(t)\psi_k(x) \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,(2) \]</div>
+<p>Here, <span class="math notranslate nohighlight">\(\psi_0(x),...,\psi_n(x)\)</span> are orthonormal basis modes and <span class="math notranslate nohighlight">\(a_j(t)\)</span> a time dependent modal amplitude. By expressing the PDE in terms of Orthonormal modes and amplitudes the PDE can be linearized and solved as a system of ODEs.</p>
+<p>By inserting the Galerkin expansion (2) pinto the governing equation (1) the <strong>Galerkin projected dynamic</strong> of the system is obtained. Further applying Sturm-Liouviulle theory to separate the linear and Non-linear parts of the system the following expansion is obtained:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{da(t)}{dt} = \Psi^TL\Psi a(t) + \Psi^TN(\Psi a(t), \beta) 
+\]</div>
+</section>
+<section id="data-generation">
+<h2>Data generation<a class="headerlink" href="#data-generation" title="Link to this heading">#</a></h2>
+<p>Before the data driven methods can be applied synthetic data has to be generated.</p>
+<p>As first step, we use the <strong>FFT method</strong> to compute the solution of the Kuramoto Sivashinsky equation numerically, with:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(t\in[0,100]\)</span> , <span class="math notranslate nohighlight">\(dt = 0.24\)</span> , for a total of <span class="math notranslate nohighlight">\(400\)</span> evaluation points.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x\in[0,100]\)</span> , <span class="math notranslate nohighlight">\(dx \sim 0.1\)</span> , for a total of <span class="math notranslate nohighlight">\(1024\)</span> evaluation points.</p></li>
+</ul>
+<p><strong>Note about the code:</strong> This way of solving the system is quite slow because it requires many evaluations of the system. In Kutz implementation he stays in the frequency space and only evaluates the time space every <span class="math notranslate nohighlight">\(n\)</span> evaluations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="c1"># Function which defines RHS of ODE system using the FFT.</span>
+<span class="k">def</span> <span class="nf">RHS_KS</span><span class="p">(</span> <span class="n">u</span> <span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">kappa</span> <span class="p">):</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    INPUTS:</span>
+<span class="sd">    u (np array) : starting conditions.</span>
+<span class="sd">    t (scalar) : time step.</span>
+<span class="sd">    kappa (np array) : wavenumbers.</span>
+<span class="sd">    </span>
+<span class="sd">    OUTPUT:</span>
+<span class="sd">    du_dt (np array) : temporal derivative at time t.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># map into the Fourier space.</span>
+    <span class="n">uhat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>  
+    <span class="n">uhat_x</span> <span class="o">=</span> <span class="p">(</span> <span class="mi">1</span><span class="n">j</span> <span class="p">)</span> <span class="o">*</span> <span class="n">kappa</span> <span class="o">*</span> <span class="n">uhat</span> 
+    <span class="n">uhat_xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span> <span class="p">(</span> <span class="mi">1</span><span class="n">j</span> <span class="p">)</span> <span class="o">*</span> <span class="n">kappa</span> <span class="p">,</span> <span class="mi">2</span> <span class="p">)</span> <span class="o">*</span> <span class="n">uhat</span>
+    <span class="n">uhat_xxxx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span> <span class="p">(</span> <span class="mi">1</span><span class="n">j</span> <span class="p">)</span> <span class="o">*</span> <span class="n">kappa</span> <span class="p">,</span> <span class="mi">4</span> <span class="p">)</span> <span class="o">*</span> <span class="n">uhat</span>
+    <span class="c1"># map outside the Fourier space.</span>
+    <span class="n">u_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft</span><span class="p">(</span> <span class="n">uhat_x</span> <span class="p">)</span>
+    <span class="n">u_xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft</span><span class="p">(</span> <span class="n">uhat_xx</span> <span class="p">)</span>
+    <span class="n">u_xxxx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft</span><span class="p">(</span> <span class="n">uhat_xxxx</span> <span class="p">)</span>
+    <span class="n">du_dt</span> <span class="o">=</span> <span class="o">-</span> <span class="n">u_xx</span> <span class="o">-</span> <span class="n">u_xxxx</span> <span class="o">-</span> <span class="n">u_x</span> <span class="o">*</span> <span class="n">u</span>
+    
+    <span class="k">return</span> <span class="n">du_dt</span><span class="o">.</span><span class="n">real</span> 
+
+<span class="c1"># Define the problem constants.                 </span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">1024</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">100</span>                 
+<span class="n">x</span> <span class="o">=</span> <span class="mi">32</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span> <span class="mi">1</span> <span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">)</span> <span class="o">/</span> <span class="n">N</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.25</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span> <span class="mi">0</span> <span class="p">,</span> <span class="n">T</span> <span class="p">,</span> <span class="n">dt</span> <span class="p">)</span>
+
+<span class="c1"># Define discrete wavenumbers.</span>
+<span class="n">kappa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span> <span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span> <span class="mi">0</span> <span class="p">,</span> <span class="n">N</span> <span class="o">//</span> <span class="mi">2</span> <span class="p">),</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span> <span class="o">-</span> <span class="n">N</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">,</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">)</span> <span class="p">)</span> <span class="o">/</span> <span class="mi">16</span> 
+
+<span class="c1"># Define the starting conditions.</span>
+<span class="n">u0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span> <span class="n">x</span> <span class="o">/</span> <span class="mi">16</span> <span class="p">)</span> <span class="o">*</span> <span class="p">(</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span> <span class="n">x</span> <span class="o">/</span> <span class="mi">16</span> <span class="p">)</span> <span class="p">)</span>
+
+<span class="c1"># Simulate in Fourier frequency domain.</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span> <span class="n">RHS_KS</span> <span class="p">,</span> <span class="n">u0</span> <span class="p">,</span> <span class="n">t</span> <span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="p">(</span> <span class="n">kappa</span> <span class="p">,</span> <span class="p">)</span> <span class="p">)</span> 
+<span class="n">u</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">File</span> <span class="o">&lt;</span><span class="n">timed</span> <span class="n">exec</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">41</span>
+
+<span class="nn">File ~/conda/envs/jupybook/lib/python3.10/site-packages/scipy/integrate/_odepack_py.py:241,</span> in <span class="ni">odeint</span><span class="nt">(func, y0, t, args, Dfun, col_deriv, full_output, ml, mu, rtol, atol, tcrit, h0, hmax, hmin, ixpr, mxstep, mxhnil, mxordn, mxords, printmessg, tfirst)</span>
+<span class="g g-Whitespace">    </span><span class="mi">239</span> <span class="n">t</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">240</span> <span class="n">y0</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">y0</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">241</span> <span class="n">output</span> <span class="o">=</span> <span class="n">_odepack</span><span class="o">.</span><span class="n">odeint</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">Dfun</span><span class="p">,</span> <span class="n">col_deriv</span><span class="p">,</span> <span class="n">ml</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">242</span>                          <span class="n">full_output</span><span class="p">,</span> <span class="n">rtol</span><span class="p">,</span> <span class="n">atol</span><span class="p">,</span> <span class="n">tcrit</span><span class="p">,</span> <span class="n">h0</span><span class="p">,</span> <span class="n">hmax</span><span class="p">,</span> <span class="n">hmin</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">243</span>                          <span class="n">ixpr</span><span class="p">,</span> <span class="n">mxstep</span><span class="p">,</span> <span class="n">mxhnil</span><span class="p">,</span> <span class="n">mxordn</span><span class="p">,</span> <span class="n">mxords</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">244</span>                          <span class="nb">int</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">tfirst</span><span class="p">)))</span>
+<span class="g g-Whitespace">    </span><span class="mi">245</span> <span class="k">if</span> <span class="n">output</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">246</span>     <span class="n">warning_msg</span> <span class="o">=</span> <span class="n">_msgs</span><span class="p">[</span><span class="n">output</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="s2">&quot; Run with full_output = 1 to get quantitative information.&quot;</span>
+
+<span class="nn">File &lt;timed exec&gt;:2,</span> in <span class="ni">RHS_KS</span><span class="nt">(u, t, kappa)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<p>The solution can be visualized in the plots below from two different perspectives.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot function.</span>
+<span class="k">def</span> <span class="nf">plot1</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">t</span> <span class="p">,</span> <span class="n">u</span> <span class="p">):</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; This function plot the solution of the Kuramato Sivashinsky equation &quot;&quot;&quot;</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span> <span class="mi">10</span> <span class="p">,</span> <span class="mi">6</span> <span class="p">)</span> <span class="p">)</span>
+    <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span> <span class="mi">121</span> <span class="p">,</span> <span class="n">projection</span> <span class="o">=</span> <span class="s1">&#39;3d&#39;</span> <span class="p">)</span>
+    <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span> <span class="mi">122</span> <span class="p">)</span>
+    <span class="n">time</span> <span class="p">,</span> <span class="n">space</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span> <span class="n">t</span> <span class="p">,</span> <span class="n">x</span> <span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span> <span class="n">space</span> <span class="p">,</span> <span class="n">time</span> <span class="p">,</span> <span class="n">u</span> <span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;inferno&#39;</span> <span class="p">,</span> <span class="n">rstride</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">cstride</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">antialiased</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">invert_xaxis</span><span class="p">()</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;u(x,t)&#39;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_zlim</span><span class="p">(</span> <span class="o">-</span><span class="mi">5</span> <span class="p">,</span> <span class="mi">10</span> <span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span> <span class="mi">30</span> <span class="p">,</span> <span class="mi">45</span> <span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span> <span class="n">time</span> <span class="p">,</span> <span class="n">space</span> <span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">u</span> <span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;inferno&quot;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">edgecolor</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;u(x,t)&quot;</span><span class="p">)</span>
+    <span class="n">cbar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span> <span class="n">s</span> <span class="p">,</span><span class="n">fraction</span> <span class="o">=</span> <span class="mf">0.046</span><span class="p">,</span> <span class="n">pad</span> <span class="o">=</span> <span class="mf">0.04</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span> <span class="s1">&#39;box&#39;</span><span class="p">)</span>
+    
+    <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span> <span class="s2">&quot;Kuramoto Sivashinsky evolution&quot;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">14</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mf">0.88</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="mi">0</span>
+    
+<span class="c1"># Plot the solution u(x,t)    </span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plot1</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">t</span> <span class="p">,</span> <span class="n">u</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d3e3d7da7a2f93c44d2cd438d3e88996cff1a0a3b5e56e15ad019fcffa75ca5d.png" src="../_images/d3e3d7da7a2f93c44d2cd438d3e88996cff1a0a3b5e56e15ad019fcffa75ca5d.png" />
+</div>
+</div>
+</section>
+<section id="a-pod">
+<h2>(a) POD<a class="headerlink" href="#a-pod" title="Link to this heading">#</a></h2>
+<p>The objective of this exercise is to compute the leading POD modes of the Kuramoto Sivashinsky solution and produce a rank-r Galerkin-POD approximation of the equation evolution.</p>
+<p>SVD is used to obtain the modes (also see exercise 1.7 on SVD).</p>
+<div class="math notranslate nohighlight">
+\[u(x,t) = U \Sigma V^*\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}U = \begin{bmatrix} | &amp; | &amp; | \\ \psi_0 &amp; ... &amp; \psi_n \\ | &amp; | &amp; | \end{bmatrix}\end{split}\]</div>
+<p>We compute the SVD of the Kuramoto Sivashinsky equation and plot both the <em>singular value spectrum</em> and its <em>cumulative function</em>. Then, we search the rank <span class="math notranslate nohighlight">\(r\)</span> which allows to retain the <span class="math notranslate nohighlight">\(99.X\%\)</span> of the information.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function which compute the SVD of a system.</span>
+<span class="k">def</span> <span class="nf">SVD</span><span class="p">(</span> <span class="n">u</span> <span class="p">):</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    INPUTS:</span>
+<span class="sd">    u (np array) : matrix with PDE solution.</span>
+<span class="sd">    </span>
+<span class="sd">    OUTPUT:</span>
+<span class="sd">    U (np array) : left singular values.</span>
+<span class="sd">    S (np array) : array with eigenvalues ordered from the most to the less important.</span>
+<span class="sd">    Sd (np array) : matrix with eigenvalues on the diagonal and 0 elsewhere.</span>
+<span class="sd">    VT (np array) : complex conjugate of right singular values. </span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    
+    <span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">VT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span> <span class="n">u</span> <span class="p">)</span> 
+    <span class="n">Sd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span> <span class="n">S</span> <span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">U</span> <span class="p">,</span> <span class="n">S</span> <span class="p">,</span> <span class="n">Sd</span> <span class="p">,</span> <span class="n">VT</span>
+    
+
+<span class="c1"># Function to find the rank which allows to retain the 99.X% of the system energy.</span>
+<span class="k">def</span> <span class="nf">SVD_rrank_approx</span><span class="p">(</span> <span class="n">u</span> <span class="p">,</span> <span class="n">U</span> <span class="p">,</span> <span class="n">Sd</span> <span class="p">,</span> <span class="n">VT</span> <span class="p">,</span> <span class="n">reatined_energy</span> <span class="p">):</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    INPUTS:</span>
+<span class="sd">    U (np array) : left singular values.</span>
+<span class="sd">    S (np array) : array with eigenvalues ordered from the most to the less important.</span>
+<span class="sd">    Sd (np array) : matrix with eigenvalues on the diagonal and 0 elsewhere.</span>
+<span class="sd">    VT (np array) : complex conjugate of right singular values. </span>
+<span class="sd">    retained_energy (scalar) : percentage of the total energy that we want to retain in the approximation.</span>
+<span class="sd">    </span>
+<span class="sd">    OUTPUTS:</span>
+<span class="sd">    R (int scalar) : rank value.</span>
+<span class="sd">    psi (np array) : first R left singular values.</span>
+<span class="sd">    u_R (np array) : r-rank reconstruction of u(x,t).</span>
+<span class="sd">    &quot;&quot;&quot;</span>       
+    
+    <span class="n">Etot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span> <span class="n">u</span> <span class="p">,</span> <span class="s1">&#39;fro&#39;</span> <span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="n">ER</span> <span class="o">=</span> <span class="n">Etot</span> <span class="o">*</span> <span class="p">(</span> <span class="n">reatined_energy</span> <span class="o">/</span> <span class="mi">100</span> <span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span> <span class="n">N</span> <span class="p">):</span>    
+        <span class="c1"># Compute the r-rank approximation.</span>
+        <span class="n">Rrank_approx</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="p">:</span><span class="n">r</span> <span class="p">]</span> <span class="o">@</span> <span class="n">Sd</span><span class="p">[</span> <span class="mi">0</span><span class="p">:</span><span class="n">r</span> <span class="p">,</span> <span class="p">:</span><span class="n">r</span> <span class="p">]</span> <span class="o">@</span> <span class="n">VT</span><span class="p">[</span> <span class="p">:</span><span class="n">r</span> <span class="p">,</span> <span class="p">:</span> <span class="p">]</span>                     
+        <span class="c1"># Compute the Frobenius norm.</span>
+        <span class="n">Rrank_energy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span> <span class="n">Rrank_approx</span> <span class="p">,</span> <span class="s1">&#39;fro&#39;</span> <span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="c1"># Implement the inequality.</span>
+        <span class="k">if</span> <span class="n">Rrank_energy</span> <span class="o">&gt;=</span> <span class="n">ER</span><span class="p">:</span>
+            <span class="n">R</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">psi</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="p">:</span><span class="n">r</span> <span class="p">]</span>
+            <span class="n">u_R</span> <span class="o">=</span> <span class="n">Rrank_approx</span>
+            <span class="k">break</span>
+    
+    <span class="k">return</span> <span class="n">R</span> <span class="p">,</span> <span class="n">psi</span> <span class="p">,</span> <span class="n">u_R</span>
+
+<span class="c1"># Plot function.</span>
+<span class="k">def</span> <span class="nf">plot2</span><span class="p">(</span> <span class="n">S</span> <span class="p">):</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; This function plots the SVD spectrum and its cumulative function &quot;&quot;&quot;</span>
+
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">S</span><span class="p">)</span> <span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="s2">&quot;float64&quot;</span> <span class="p">)</span>
+    <span class="n">y1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="n">S</span> <span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="s2">&quot;float64&quot;</span> <span class="p">)</span>
+    <span class="n">y2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">S</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">fig</span> <span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span> <span class="mi">1</span> <span class="p">,</span> <span class="mi">2</span> <span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span> <span class="mi">10</span> <span class="p">,</span> <span class="mi">3</span> <span class="p">)</span> <span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">X</span> <span class="p">,</span> <span class="n">y1</span> <span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span> <span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">5</span> <span class="p">,</span>
+             <span class="n">markerfacecolor</span> <span class="o">=</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>  <span class="n">markeredgecolor</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span> <span class="p">,</span> 
+             <span class="n">linestyle</span> <span class="o">=</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span> <span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">X</span><span class="p">[</span><span class="n">R</span><span class="p">]</span> <span class="p">,</span> <span class="n">y1</span><span class="p">[</span><span class="n">R</span><span class="p">]</span> <span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;r = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$\sigma_</span><span class="si">{r}</span><span class="s2">$ singular value&quot;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Singular value spectrum&quot;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span> <span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span> <span class="n">loc</span> <span class="o">=</span> <span class="s2">&quot;upper right&quot;</span> <span class="p">)</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">X</span> <span class="p">,</span> <span class="n">y2</span> <span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span> <span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">5</span> <span class="p">,</span>
+             <span class="n">markerfacecolor</span> <span class="o">=</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>  <span class="n">markeredgecolor</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span> <span class="p">,</span> 
+             <span class="n">linestyle</span> <span class="o">=</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span> <span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">X</span><span class="p">[</span><span class="n">R</span><span class="p">]</span> <span class="p">,</span> <span class="n">y2</span><span class="p">[</span><span class="n">R</span><span class="p">]</span> <span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;r = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Cumulative value&quot;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Cumulative&quot;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span> <span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span> <span class="n">loc</span> <span class="o">=</span> <span class="s2">&quot;lower right&quot;</span> <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="mi">0</span>
+
+<span class="c1"># Apply SVD to u(x,t).</span>
+<span class="n">U</span> <span class="p">,</span> <span class="n">S</span> <span class="p">,</span> <span class="n">Sd</span> <span class="p">,</span> <span class="n">VT</span> <span class="o">=</span> <span class="n">SVD</span><span class="p">(</span> <span class="n">u</span> <span class="p">)</span>
+
+<span class="c1"># Define how much enrgy to retain in the u approximation.</span>
+<span class="n">rrank_energy</span> <span class="o">=</span> <span class="mf">99.999</span>
+
+<span class="c1"># Find the rrank approximation which allows to retain the defined energy percentage.</span>
+<span class="n">R</span> <span class="p">,</span> <span class="n">psi</span> <span class="p">,</span> <span class="n">u_R</span> <span class="o">=</span> <span class="n">SVD_rrank_approx</span><span class="p">(</span> <span class="n">u</span> <span class="p">,</span> <span class="n">U</span> <span class="p">,</span> <span class="n">Sd</span> <span class="p">,</span> <span class="n">VT</span> <span class="p">,</span> <span class="n">rrank_energy</span> <span class="p">)</span>
+
+<span class="c1"># Plot the Singular Value Spectrum and the Cumulative function.</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plot2</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/c1e20c775084ddd06f36a53584803cf6f192c98fee2b883d4d3b51ebb90afdd8.png" src="../_images/c1e20c775084ddd06f36a53584803cf6f192c98fee2b883d4d3b51ebb90afdd8.png" />
+</div>
+</div>
+<p>We use the modes <span class="math notranslate nohighlight">\(\psi_0,...,\psi_n\)</span> that we obtained by applying the SVD to <span class="math notranslate nohighlight">\(u(x,t)\)</span> to produce its <span class="math notranslate nohighlight">\(r-rank\)</span> Galerkin approximation. We compute the starting condition for <span class="math notranslate nohighlight">\(a_{r-rank}(0)\)</span> as <span class="math notranslate nohighlight">\(a_{r-rank}(0) = \psi^{-1} u_{r-rank}(x,0)\)</span> and we use it to reconstruct <span class="math notranslate nohighlight">\(u(x,0)\)</span>. Then we plot the two curves againts each other to demonstrate that the starting condition can be recovered nicely with the rank we choose.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot function.</span>
+<span class="k">def</span> <span class="nf">plot3</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">u_R0</span> <span class="p">,</span> <span class="n">u0</span> <span class="p">):</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; This function plot the true strating conditios u(x,0) and its r-rank reconstruction. &quot;&quot;&quot;</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span> <span class="mi">5</span> <span class="p">,</span> <span class="mi">2</span> <span class="p">)</span> <span class="p">)</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">u_R0</span> <span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span> <span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;r = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="p">)</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">u0</span>  <span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span> <span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s2">&quot;--&quot;</span> <span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;full rank&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;u(x,0)&quot;</span><span class="p">)</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Starting conditions&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="mi">0</span>
+
+<span class="c1"># Recover the starting condition for a.</span>
+<span class="n">psi_inverse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span> <span class="n">psi</span> <span class="p">,</span> <span class="n">rcond</span> <span class="o">=</span> <span class="mf">1e-15</span> <span class="p">,</span> <span class="n">hermitian</span> <span class="o">=</span> <span class="kc">False</span> <span class="p">)</span>
+<span class="n">a0</span> <span class="o">=</span> <span class="n">psi_inverse</span> <span class="o">@</span> <span class="n">u_R</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">0</span> <span class="p">]</span> 
+
+<span class="c1"># Reconstruct the starting condition u0 and plot it..</span>
+<span class="n">u_R0</span> <span class="o">=</span> <span class="n">psi</span> <span class="o">@</span> <span class="n">a0</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plot3</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">u_R0</span> <span class="p">,</span> <span class="n">u0</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1bf26aef27656fe48797faff4adae19867d7774b409890f7068d96cd3be18944.png" src="../_images/1bf26aef27656fe48797faff4adae19867d7774b409890f7068d96cd3be18944.png" />
+</div>
+</div>
+<p>We define the RHS of the Galerkin decomposition of <span class="math notranslate nohighlight">\(u(x,t)\)</span> using finite difference to compute derivatives and we integrate the system using the <code class="docutils literal notranslate"><span class="pre">odeint</span></code> method from <code class="docutils literal notranslate"><span class="pre">scipy</span></code>, which provides us with <span class="math notranslate nohighlight">\(a_{r-rank}(t)\)</span>. The system dynamic approximated to the <span class="math notranslate nohighlight">\(r-rank\)</span>, <span class="math notranslate nohighlight">\(u_{r-rank}(x,t)\)</span>, is therefore fully reconstructed via:</p>
+<div class="math notranslate nohighlight">
+\[
+u_{r-rank}(x,t) = \Psi_{r-rank} a_{r-rank}(t)
+\]</div>
+<p>and again the result is plotted with the associated error.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="k">class</span> <span class="nc">Galerkin_POD_KS</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A class to setup and solve the POD based Galerkin Kuramato-Sivishinsky system setup with Sturm-Liouville theory.</span>
+<span class="sd">    This was made as a class to make it easiser to store pre-computed derivatives of the POD modes. (See exercise 6.1 for a deeper explanation of the KS system.)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Psi</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialization of the parameters required and the pre-computable derivatives.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Psi</span> <span class="o">=</span> <span class="n">Psi</span>
+        <span class="c1"># Derivatives can be pre-computed for the linear part of the system this is due to the fact that linear systems can be superimposed.</span>
+        <span class="n">Psi_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">Psi</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>             <span class="c1"># Not required for the Linear operator and therefore not saved</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Psi_xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">Psi_x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">Psi_xxx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Psi_xx</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>   <span class="c1"># Not required for the KS equation hence not saved</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Psi_xxxx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">Psi_xxx</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">L</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Linear operation of the KS system</span>
+<span class="sd">            -u_xx - u_xxxx</span>
+<span class="sd">            Note that the derivatives of the POD modes are pre-computed</span>
+<span class="sd">            therefore the input can be &quot;a&quot;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">Psi_xx</span> <span class="o">@</span> <span class="n">a</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">Psi_xxxx</span> <span class="o">@</span> <span class="n">a</span>
+
+    <span class="k">def</span> <span class="nf">N</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;&quot;Non-linear operation of the KS system</span>
+<span class="sd">            u*u_x</span>
+<span class="sd">            Note that the derivatives are not pre-computed due to the non-linearity </span>
+<span class="sd">            therefore the input has to be &quot;u&quot;. (or at least the approximation of u (Psi @ a))</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">u_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">u</span><span class="o">*</span><span class="n">u_x</span>
+
+    <span class="k">def</span> <span class="nf">a_t</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;RHS of the KS system written in the &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Psi</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">Psi</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Psi</span> <span class="o">@</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="n">GPOD_KS</span> <span class="o">=</span> <span class="n">Galerkin_POD_KS</span><span class="p">(</span> <span class="n">psi</span> <span class="p">,</span> <span class="n">x</span> <span class="p">)</span>    <span class="c1"># Initialize the class (pre-computes derivatives and stores x)</span>
+<span class="n">a_POD</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span> <span class="n">GPOD_KS</span><span class="o">.</span><span class="n">a_t</span> <span class="p">,</span> <span class="n">a0</span><span class="p">,</span> <span class="n">t</span> <span class="p">)</span>      <span class="c1"># Solve the Galerkin POD system in the latent space</span>
+<span class="n">u_POD</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span> <span class="n">psi</span><span class="p">,</span> <span class="n">a_POD</span><span class="o">.</span><span class="n">T</span> <span class="p">)</span>          <span class="c1"># Apply the Galerkin method to obtain the approximation of the solution in the original space.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 14.2 s, sys: 696 ms, total: 14.9 s
+Wall time: 1.49 s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot function.</span>
+<span class="k">def</span> <span class="nf">plot4</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">t</span> <span class="p">,</span> <span class="n">u</span> <span class="p">,</span> <span class="n">u_POD</span> <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; This function plot the POD of u(x,t), the original solution u(x,t) and the error between them &quot;&quot;&quot;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="c1"># Plot the data.</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span> <span class="mi">12</span> <span class="p">,</span> <span class="mi">4</span> <span class="p">)</span> <span class="p">)</span>
+    <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span> <span class="mi">131</span> <span class="p">,</span> <span class="n">projection</span> <span class="o">=</span> <span class="s1">&#39;3d&#39;</span> <span class="p">)</span>
+    <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span> <span class="mi">132</span> <span class="p">,</span> <span class="n">projection</span> <span class="o">=</span> <span class="s1">&#39;3d&#39;</span> <span class="p">)</span>
+    <span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span> <span class="mi">133</span> <span class="p">,</span> <span class="n">projection</span> <span class="o">=</span> <span class="s1">&#39;3d&#39;</span> <span class="p">)</span>
+    <span class="n">time</span> <span class="p">,</span> <span class="n">space</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span> <span class="n">t</span> <span class="p">,</span> <span class="n">x</span> <span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">ax</span> <span class="p">,</span> <span class="n">uu</span> <span class="p">,</span> <span class="n">label</span> <span class="p">,</span> <span class="n">title</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span> <span class="p">[</span> <span class="n">ax1</span> <span class="p">,</span> <span class="n">ax2</span> <span class="p">,</span> <span class="n">ax3</span><span class="p">]</span> <span class="p">,</span> <span class="p">[</span> <span class="n">u_POD</span> <span class="p">,</span> <span class="n">u</span> <span class="p">,</span> <span class="n">u_POD</span> <span class="o">-</span> <span class="n">u</span> <span class="p">]</span> <span class="p">,</span> <span class="p">[</span><span class="s1">&#39;$u_{r-rank}(x,t)$&#39;</span> <span class="p">,</span> <span class="s1">&#39;$u(x,t)$&#39;</span> <span class="p">,</span> <span class="s1">&#39;$u_{r-rank}(x,t) - u(x,t)$&#39;</span><span class="p">]</span> <span class="p">,</span> <span class="p">[</span> <span class="s2">&quot;POD&quot;</span> <span class="p">,</span> <span class="s2">&quot;Real Data&quot;</span> <span class="p">,</span> <span class="s2">&quot;Error&quot;</span> <span class="p">]):</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span> <span class="n">space</span> <span class="p">,</span> <span class="n">time</span> <span class="p">,</span> <span class="n">uu</span> <span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;inferno&#39;</span> <span class="p">,</span> <span class="n">rstride</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">cstride</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">antialiased</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">invert_xaxis</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span> <span class="n">label</span> <span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span> <span class="n">title</span> <span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_zlim</span><span class="p">(</span> <span class="o">-</span><span class="mi">5</span> <span class="p">,</span> <span class="mi">10</span> <span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span> <span class="mi">45</span> <span class="p">,</span> <span class="mi">45</span> <span class="p">)</span>
+    
+    <span class="k">return</span> <span class="mi">0</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">plot4</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">t</span> <span class="p">,</span> <span class="n">u</span> <span class="p">,</span> <span class="n">u_POD</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2a087c4a2020c09e5c44205286c5a6e827b82d5268b47706c1ffaee60c5904cd.png" src="../_images/2a087c4a2020c09e5c44205286c5a6e827b82d5268b47706c1ffaee60c5904cd.png" />
+</div>
+</div>
+</section>
+<section id="b">
+<h2>(b)<a class="headerlink" href="#b" title="Link to this heading">#</a></h2>
+<p>Compute a ROM by using the snapshots to produce a rank-r DMD model to characterize the evolution.</p>
+<p>Avance the DMD method as presented in the book (page 269) and apply it to the solution of the Kuramoto Sivashinsky equation. Two dataset, out of phase of a single time-step one respect to the other, are defined and manipulated with DMD in order to recover <span class="math notranslate nohighlight">\(\Phi\)</span>, ( high dimensional DMD modes ), <span class="math notranslate nohighlight">\(\Lambda\)</span> ( square matrix which contains the DMD eigenvalues on its diagonal ) and <span class="math notranslate nohighlight">\(b\)</span> ( high dimensional mode amplitudes ).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">DMD</span><span class="p">(</span> <span class="n">X</span> <span class="p">,</span> <span class="n">X_prime</span> <span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">43</span> <span class="p">):</span>
+    <span class="c1"># STEP 1: compute the SVD of X and the r-rank approximation.</span>
+    <span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">VT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span> <span class="n">X</span> <span class="p">,</span> <span class="n">full_matrices</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">)</span>
+    <span class="n">Sd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span> <span class="n">S</span> <span class="p">)</span>
+
+    <span class="c1"># R rank approximation.</span>
+    <span class="n">Ur</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="p">:</span><span class="n">r</span> <span class="p">]</span> 
+    <span class="n">Sdr</span> <span class="o">=</span> <span class="n">Sd</span><span class="p">[</span> <span class="mi">0</span><span class="p">:</span><span class="n">r</span> <span class="p">,</span> <span class="p">:</span><span class="n">r</span> <span class="p">]</span>
+    <span class="n">VTr</span> <span class="o">=</span> <span class="n">VT</span><span class="p">[</span> <span class="p">:</span><span class="n">r</span> <span class="p">,</span> <span class="p">:</span> <span class="p">]</span>
+
+    <span class="c1"># Hermitian of R rank approximations.</span>
+    <span class="n">Vr</span> <span class="o">=</span> <span class="n">VTr</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">conjugate</span><span class="p">()</span> 
+    <span class="n">UTr</span> <span class="o">=</span> <span class="n">Ur</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">conjugate</span><span class="p">()</span>
+    <span class="n">Sdr_inverse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span> <span class="n">Sdr</span> <span class="p">)</span>
+
+    <span class="c1"># STEP 2: build the POD reconstruction of matrix A.</span>
+    <span class="n">Ar</span> <span class="o">=</span> <span class="n">UTr</span> <span class="o">@</span> <span class="n">X_prime</span> <span class="o">@</span> <span class="n">Vr</span> <span class="o">@</span> <span class="n">Sdr_inverse</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">X_prime</span> <span class="o">@</span> <span class="n">Vr</span> <span class="o">@</span> <span class="n">Sdr_inverse</span> <span class="o">@</span> <span class="n">UTr</span> <span class="c1"># This is the full reconstruction of A and wants to be a demostration that eigenvalues stays the same. </span>
+
+    <span class="c1"># STEP 4: get the eigenvalues and eigenvectors of Ar and A respectively.</span>
+    <span class="n">Lambdas</span> <span class="p">,</span> <span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span> <span class="n">Ar</span> <span class="p">)</span>
+    <span class="n">Lambdas_A</span> <span class="p">,</span> <span class="n">Phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span> <span class="n">A</span> <span class="p">)</span>
+
+
+    <span class="c1"># STEP 4: Phi reconstruction.</span>
+    <span class="n">Phi</span> <span class="o">=</span> <span class="n">X_prime</span> <span class="o">@</span> <span class="n">Vr</span> <span class="o">@</span> <span class="n">Sdr_inverse</span> <span class="o">@</span> <span class="n">W</span>
+    
+    <span class="k">return</span> <span class="n">Phi</span> <span class="p">,</span> <span class="n">Lambdas</span> <span class="p">,</span> <span class="n">Lambdas_A</span> <span class="p">,</span> <span class="n">Ur</span> <span class="p">,</span> <span class="n">Ar</span> <span class="p">,</span> <span class="n">r</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span> <span class="p">]</span>
+<span class="n">X_prime</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="p">]</span>
+
+<span class="n">Phi</span> <span class="p">,</span> <span class="n">Lambdas</span> <span class="p">,</span> <span class="n">Lambdas_A</span> <span class="p">,</span> <span class="n">Ur</span> <span class="p">,</span> <span class="n">Ar</span> <span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">DMD</span><span class="p">(</span> <span class="n">X</span> <span class="p">,</span> <span class="n">X_prime</span> <span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">43</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Perform dynamic diagnostic plotting the DMD modes and the DMD spectrum.</p>
+<ul class="simple">
+<li><p>Plot DMD modes, i.e. the eigenvector of the full matrix <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot5</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">Phi</span> <span class="p">):</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">fig</span> <span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span> <span class="mi">3</span> <span class="p">,</span> <span class="mi">3</span> <span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span> <span class="mi">12</span> <span class="p">,</span> <span class="mi">7</span> <span class="p">)</span> <span class="p">)</span>
+    <span class="n">mode_num</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span> <span class="mi">0</span> <span class="p">,</span> <span class="mi">42</span> <span class="p">,</span> <span class="mi">9</span> <span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">kk</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+            <span class="n">ax</span><span class="p">[</span> <span class="n">ii</span> <span class="p">,</span> <span class="n">jj</span> <span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">Phi</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="n">mode_num</span><span class="p">[</span><span class="n">kk</span><span class="p">]</span> <span class="p">]</span><span class="o">.</span><span class="n">real</span> <span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="s2">&quot;blue&quot;</span> <span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;real&quot;</span> <span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span> <span class="n">ii</span> <span class="p">,</span> <span class="n">jj</span> <span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">Phi</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="n">mode_num</span><span class="p">[</span><span class="n">kk</span><span class="p">]</span> <span class="p">]</span><span class="o">.</span><span class="n">imag</span> <span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span> <span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;imag&quot;</span> <span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span> <span class="n">ii</span> <span class="p">,</span> <span class="n">jj</span> <span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span> <span class="n">loc</span> <span class="o">=</span> <span class="s2">&quot;upper right&quot;</span> <span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span> <span class="n">ii</span> <span class="p">,</span> <span class="n">jj</span> <span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span> <span class="s2">&quot;x&quot;</span> <span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span> <span class="n">ii</span> <span class="p">,</span> <span class="n">jj</span> <span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span> <span class="s2">&quot;$\Phi$ # &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mode_num</span><span class="p">[</span><span class="n">kk</span><span class="p">])</span> <span class="p">)</span>
+            <span class="n">kk</span> <span class="o">=</span> <span class="n">kk</span> <span class="o">+</span> <span class="mi">1</span>
+    
+    <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span> <span class="s2">&quot;Eigenmodes diagnostic&quot;</span> <span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">14</span> <span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mf">0.88</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>        
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">plot5</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">Phi</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/b23d3a5299613ab76a9e77a53a15a3dbc1a0c0add146c427f3a89abc61fd0e8b.png" src="../_images/b23d3a5299613ab76a9e77a53a15a3dbc1a0c0add146c427f3a89abc61fd0e8b.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Plot DMD spectrum, i.e. the eigenvalues of the full matrix <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot6</span><span class="p">(</span> <span class="n">Lambdas</span> <span class="p">,</span> <span class="n">Lambdas_A</span><span class="p">):</span>
+    <span class="c1"># Extract real and imaginary parts</span>
+    <span class="n">Re_Ar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">Lambdas</span><span class="p">)</span>
+    <span class="n">Im_Ar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">Lambdas</span><span class="p">)</span>
+
+    <span class="n">Re_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">Lambdas_A</span><span class="p">)</span>
+    <span class="n">Im_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">Lambdas_A</span><span class="p">)</span>
+
+    <span class="c1"># Create a scatter plot</span>
+    <span class="n">fig</span> <span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span> <span class="mi">1</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span> <span class="mi">4</span> <span class="p">,</span> <span class="mi">4</span> <span class="p">)</span> <span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span> <span class="n">Re_A</span> <span class="p">,</span> <span class="n">Im_A</span> <span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;*&#39;</span> <span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">100</span> <span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Eigenvalues&#39;</span> <span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span> <span class="n">Re_Ar</span> <span class="p">,</span> <span class="n">Im_Ar</span> <span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;*&#39;</span> <span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">10</span> <span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Eigenvalues ROM&#39;</span> <span class="p">)</span>
+
+    <span class="c1"># Add labels and title</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Real Part&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Imaginary Part&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Complex Eigenvalues&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Add legend</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+    <span class="c1"># Show plot</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+<span class="n">plot6</span><span class="p">(</span> <span class="n">Lambdas</span> <span class="p">,</span> <span class="n">Lambdas_A</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9aa8dbc47f99ed2d6fc8da7948eebd56cac2966ed482dc11ab91da9e62c5078e.png" src="../_images/9aa8dbc47f99ed2d6fc8da7948eebd56cac2966ed482dc11ab91da9e62c5078e.png" />
+</div>
+</div>
+<p>Recontruct dynamic with the following workflow:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\tilde{x}_0 = \tilde{U}^{-1}x\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\tilde{x}_k = \tilde{A}\tilde{x}_{k-1} \Rightarrow \tilde{X} = [\tilde{x}_0,...,\tilde{x}_T] \)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(X_{DMD} = \tilde{U}\tilde{X}\)</span></p></li>
+</ol>
+<p>and plot the result.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reconstruction try 1.</span>
+<span class="n">xr_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span> <span class="n">Ur</span> <span class="p">)</span> <span class="o">@</span> <span class="n">X</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">0</span> <span class="p">]</span>
+
+<span class="n">Xr_DMD</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="p">(</span> <span class="n">r</span> <span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span>
+<span class="n">Xr_DMD</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">0</span> <span class="p">]</span> <span class="o">=</span> <span class="n">xr_0</span>
+
+<span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span> <span class="mi">1</span> <span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">):</span>
+    <span class="n">Xr_DMD</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="n">ii</span> <span class="p">]</span> <span class="o">=</span> <span class="n">Ar</span> <span class="o">@</span> <span class="n">Xr_DMD</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="n">ii</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">]</span>
+    
+<span class="n">X_DMD</span> <span class="o">=</span> <span class="n">Ur</span> <span class="o">@</span> <span class="n">Xr_DMD</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot function.</span>
+<span class="k">def</span> <span class="nf">plot7</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">t</span> <span class="p">,</span> <span class="n">X_DMD</span> <span class="p">,</span> <span class="n">u</span> <span class="p">):</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; This function plot the DMD of u(x,t), the original solution u(x,t) and the error between them &quot;&quot;&quot;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="c1"># Plot the data.</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span> <span class="mi">13</span> <span class="p">,</span> <span class="mi">5</span> <span class="p">)</span> <span class="p">)</span>
+    <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span> <span class="mi">131</span> <span class="p">,</span> <span class="n">projection</span> <span class="o">=</span> <span class="s1">&#39;3d&#39;</span> <span class="p">)</span>
+    <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span> <span class="mi">132</span> <span class="p">,</span> <span class="n">projection</span> <span class="o">=</span> <span class="s1">&#39;3d&#39;</span> <span class="p">)</span>
+    <span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span> <span class="mi">133</span> <span class="p">,</span> <span class="n">projection</span> <span class="o">=</span> <span class="s1">&#39;3d&#39;</span> <span class="p">)</span>
+    <span class="n">time</span> <span class="p">,</span> <span class="n">space</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span> <span class="n">t</span> <span class="p">,</span> <span class="n">x</span> <span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">ax</span> <span class="p">,</span> <span class="n">uu</span> <span class="p">,</span> <span class="n">label</span> <span class="p">,</span> <span class="n">title</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span> <span class="p">[</span> <span class="n">ax1</span> <span class="p">,</span> <span class="n">ax2</span> <span class="p">,</span> <span class="n">ax3</span> <span class="p">]</span> <span class="p">,</span> <span class="p">[</span> <span class="n">X_DMD</span> <span class="p">,</span> <span class="n">u</span> <span class="p">,</span> <span class="n">X_DMD</span> <span class="o">-</span> <span class="n">u</span><span class="p">]</span> <span class="p">,</span> <span class="p">[</span><span class="s2">&quot;$u_</span><span class="si">{DMD}</span><span class="s2">(x,t)$&quot;</span> <span class="p">,</span> <span class="s2">&quot;$u(x,t)$&quot;</span>  <span class="p">,</span> <span class="s2">&quot;$u_</span><span class="si">{DMD}</span><span class="s2">(x,t)- u(x,t)$&quot;</span> <span class="p">]</span> <span class="p">,</span> <span class="p">[</span> <span class="s2">&quot;DMD&quot;</span> <span class="p">,</span> <span class="s2">&quot;Data&quot;</span> <span class="p">,</span> <span class="s2">&quot;Error&quot;</span> <span class="p">]):</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span> <span class="n">space</span> <span class="p">,</span> <span class="n">time</span> <span class="p">,</span> <span class="n">uu</span> <span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;inferno&#39;</span> <span class="p">,</span> <span class="n">rstride</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">cstride</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">antialiased</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">invert_xaxis</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span> <span class="n">label</span> <span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span> <span class="n">title</span> <span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_zlim</span><span class="p">(</span> <span class="o">-</span><span class="mi">5</span> <span class="p">,</span> <span class="mi">10</span> <span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span> <span class="mi">45</span> <span class="p">,</span> <span class="mi">45</span> <span class="p">)</span>
+    
+    <span class="k">return</span> <span class="mi">0</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">plot7</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">t</span> <span class="p">,</span> <span class="n">X_DMD</span> <span class="p">,</span> <span class="n">u</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8ffd3ce2249fc7e93ebb88c6e3b4d4bd7dceb5ec8b2a2e9923863ea35282704e.png" src="../_images/8ffd3ce2249fc7e93ebb88c6e3b4d4bd7dceb5ec8b2a2e9923863ea35282704e.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Exercise 12.2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Exercise%20X03.1/Exercise_X03.1_.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Exercise X03.1 - Dynamic Mode Decomposition (DMD)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Exercise%2012.3/Exercise_12.3_.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Exercise 12.3 - Autoencoders</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#short-teorethical-summary">Short teorethical summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-generation">Data generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-pod">(a) POD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b">(b)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Nicole Rosi & Jens Peter Schøler
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
