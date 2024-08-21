@@ -188,7 +188,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../Exercise%202.3/Exercise_2.3_.html">Exercise 2.3 - Fast Fourier Transform (FFT) for Numerical Integration</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Exercise%206.1/6.1_toc.html">Exercise 6.1</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Exercise%206.1/Exercise_6.1_KS_a_b.html">Neural Network for Numerical Integration on the Kuramoto–Sivashinsky (KS) PDE</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Exercise%206.1/Exercise_6.1_RD_a_b_c.html">Neural Network for Numerical Integration on the Reaction Diffusion System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Exercise%206.1/Exercise6.1_L_d.html">Neural Network for Predicting the Lorenz System</a></li>
 </ul>
 </details></li>
@@ -477,16 +476,16 @@ document.write(`
 </div>
 <p><strong>STEP 2</strong></p>
 <p>The dataset can be generated via numerical integration of the well-known Lorenz system:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a6252120-9384-48c9-b452-f4dac573fbfb">
-<span class="eqno">(5)<a class="headerlink" href="#equation-a6252120-9384-48c9-b452-f4dac573fbfb" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-5639000d-8306-4c89-a35f-c46af00ddb1b">
+<span class="eqno">(5)<a class="headerlink" href="#equation-5639000d-8306-4c89-a35f-c46af00ddb1b" title="Permalink to this equation">#</a></span>\[\begin{align}
 \dot{x} = \sigma(y-x)
 \end{align}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-c85e6714-d0c8-43ef-aa0e-49aa341de0d4">
-<span class="eqno">(6)<a class="headerlink" href="#equation-c85e6714-d0c8-43ef-aa0e-49aa341de0d4" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-636d435d-7fc3-46d7-bedd-f3ef5a4212ff">
+<span class="eqno">(6)<a class="headerlink" href="#equation-636d435d-7fc3-46d7-bedd-f3ef5a4212ff" title="Permalink to this equation">#</a></span>\[\begin{align}
 \dot{y} = x ( \rho - z ) - y
 \end{align}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-76a00975-2a54-4da4-b9a3-be7e61c6838e">
-<span class="eqno">(7)<a class="headerlink" href="#equation-76a00975-2a54-4da4-b9a3-be7e61c6838e" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-341c0bad-434e-4f5e-9518-158d1a49b8a4">
+<span class="eqno">(7)<a class="headerlink" href="#equation-341c0bad-434e-4f5e-9518-158d1a49b8a4" title="Permalink to this equation">#</a></span>\[\begin{align}
 \dot{z} = xy - \beta z
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\( \beta \)</span>, <span class="math notranslate nohighlight">\( \sigma \)</span> and <span class="math notranslate nohighlight">\( \rho \)</span> define a particular dynamic ans <span class="math notranslate nohighlight">\( x_{0} \)</span> are the initial conditions. In the following block of code, the Right-Hand-Side (RHS) of the Lorenz System is defined and the PDEs are integrated using the <code class="docutils literal notranslate"><span class="pre">odeint</span></code> method over the total length of the trajectory <span class="math notranslate nohighlight">\( T_{long} \)</span>. Note that it is necessary to remove the first <span class="math notranslate nohighlight">\( t=1 \)</span> of the dataset itself as required from the exercise.</p>
@@ -613,16 +612,16 @@ MODEL SPECIFICATIONS:
 </div>
 </div>
 <p>Recall that the problem was initialized with  <span class="math notranslate nohighlight">\( \sigma = 10 \)</span>, <span class="math notranslate nohighlight">\( \beta=8/3 \)</span> and <span class="math notranslate nohighlight">\( \rho=28 \)</span>. Consequently the Lorenz system can be written explicitely as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cd958d85-f632-41c0-a9ec-222a10c64db3">
-<span class="eqno">(8)<a class="headerlink" href="#equation-cd958d85-f632-41c0-a9ec-222a10c64db3" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-097bc8f3-e107-4578-9c2c-32baa41e91eb">
+<span class="eqno">(8)<a class="headerlink" href="#equation-097bc8f3-e107-4578-9c2c-32baa41e91eb" title="Permalink to this equation">#</a></span>\[\begin{align}
 \dot{x} = 10(y-x)
 \end{align}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-de56490a-b50f-41f9-9f5f-806c7572cb8c">
-<span class="eqno">(9)<a class="headerlink" href="#equation-de56490a-b50f-41f9-9f5f-806c7572cb8c" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-f8c61e2c-e771-4c19-b9f1-b55f1abd9866">
+<span class="eqno">(9)<a class="headerlink" href="#equation-f8c61e2c-e771-4c19-b9f1-b55f1abd9866" title="Permalink to this equation">#</a></span>\[\begin{align}
 \dot{y} = x ( 28 - z ) - y
 \end{align}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-59dea903-1375-49df-9f48-5fcff8fcd2d5">
-<span class="eqno">(10)<a class="headerlink" href="#equation-59dea903-1375-49df-9f48-5fcff8fcd2d5" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-6b4651dd-858b-4348-b4bb-1ab76d8d9f69">
+<span class="eqno">(10)<a class="headerlink" href="#equation-6b4651dd-858b-4348-b4bb-1ab76d8d9f69" title="Permalink to this equation">#</a></span>\[\begin{align}
 \dot{z} = xy - 2.667 z
 \end{align}\]</div>
 <p>The result that we obtained above show that, for this choice of <span class="math notranslate nohighlight">\( r \)</span> , <span class="math notranslate nohighlight">\( T \)</span> and <span class="math notranslate nohighlight">\( \Delta t \)</span> , SINDy is perfectly able to recover the exact non-linear dynamics from the sparse data.</p>
@@ -863,9 +862,7 @@ PREDICTIONS:
 MSE =  42.63977802285405  R =  0.9869473946268292
 
 &gt;&gt;&gt;Poisson Noise:
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PREDICTIONS:
+PREDICTIONS:
 (x)&#39; = 2356.569 1 + 669.471 x + -311.695 y + -330.430 z + 64.747 x^2 + -68.895 x y + -50.118 x z + 18.337 y^2 + 25.220 y z + 11.120 z^2
 (y)&#39; = 1120.104 1 + -158.058 x + 99.172 y + -110.616 z + -24.529 x^2 + 20.516 x y + 8.445 x z + -2.711 y^2 + -5.267 y z + 2.702 z^2
 (z)&#39; = -556.555 1 + -355.466 x + 209.624 y + 66.762 z + -9.540 x^2 + 16.047 x y + 13.094 x z + -3.438 y^2 + -9.650 y z + -1.643 z^2

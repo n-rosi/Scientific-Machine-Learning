@@ -9,3 +9,38 @@
 :video_camera: The Notebooks contains links to my Youtube channel were videos can be dispalied. 
 
 📔 [Link](https://n-rosi.github.io/Scientific-Machine-Learning/intro.html) to the jupyter-book format.
+
+--------------------------------------------------------------------------------
+
+Create `jupybook` mamba virtual env with most of dependencies included with:
+```
+conda env create -f environment.yml
+
+```
+install `deepxde`:
+```
+mamba -c conda-forge deepxde
+```
+
+these library allow to run all notebooks. 
+
+--------------------------------------------------------------------------------
+
+Install `jupyter-book`:
+```
+mamba -c conda-forge jupyter-book
+```
+
+build your book:
+```
+jupyter-book build .
+```
+
+see your book preview:
+```
+cd _build/html
+
+python -m http.server 8000
+```
+
+For more information visit: [jupyter book docs](https://jupyterbook.org/en/stable/intro.html).

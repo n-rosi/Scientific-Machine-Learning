@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Exercise 6.1/Exercise_6.1_KS_a_b';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Neural Network for Numerical Integration on the Reaction Diffusion System" href="Exercise_6.1_RD_a_b_c.html" />
+    <link rel="next" title="Neural Network for Predicting the Lorenz System" href="Exercise6.1_L_d.html" />
     <link rel="prev" title="Exercise 6.1" href="6.1_toc.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -188,7 +188,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../Exercise%202.3/Exercise_2.3_.html">Exercise 2.3 - Fast Fourier Transform (FFT) for Numerical Integration</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="6.1_toc.html">Exercise 6.1</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Neural Network for Numerical Integration on the Kuramoto–Sivashinsky (KS) PDE</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Exercise_6.1_RD_a_b_c.html">Neural Network for Numerical Integration on the Reaction Diffusion System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Exercise6.1_L_d.html">Neural Network for Predicting the Lorenz System</a></li>
 </ul>
 </details></li>
@@ -701,7 +700,7 @@ NUMBER OF SPACE-POINTS: 1024
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/155cb20ad859a2163d1c8cdd708e228d7c39322e65d7f562f9c61f95cd86601e.png" src="../_images/155cb20ad859a2163d1c8cdd708e228d7c39322e65d7f562f9c61f95cd86601e.png" />
+<img alt="../_images/1cca3f1d7b568a22b1f218fa60ac74a4bc1e7c648d48823b5d6f141771b65426.png" src="../_images/1cca3f1d7b568a22b1f218fa60ac74a4bc1e7c648d48823b5d6f141771b65426.png" />
 </div>
 </div>
 <p>Use the model to make predictions and evaluate them trought the MSE.</p>
@@ -722,7 +721,7 @@ NUMBER OF SPACE-POINTS: 1024
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 147ms/step
+1/1 [==============================] - 0s 151ms/step
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1/8 [==&gt;...........................] - ETA: 0s
@@ -732,8 +731,8 @@ NUMBER OF SPACE-POINTS: 1024
 8/8 [==============================] - 0s 3ms/step
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>---&gt;The MSE on the test set is: 0.048
----&gt;The MSE on the entire dataset is: 0.040
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>---&gt;The MSE on the test set is: 0.057
+---&gt;The MSE on the entire dataset is: 0.037
 </pre></div>
 </div>
 </div>
@@ -804,7 +803,7 @@ allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; pic
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6a835ab40530216c971d80f5281deab8783b3b017a0ff72fc8c6d5af018917d1.png" src="../_images/6a835ab40530216c971d80f5281deab8783b3b017a0ff72fc8c6d5af018917d1.png" />
+<img alt="../_images/e5c154511bd5c8baddab937e4fa748dada0e6315adef9d17fd0d10b027ad7434.png" src="../_images/e5c154511bd5c8baddab937e4fa748dada0e6315adef9d17fd0d10b027ad7434.png" />
 </div>
 </div>
 </section>
@@ -990,7 +989,7 @@ allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; pic
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1ab71a911f0b49d6efdd4c98c8306e24d0be0e29c6f8a1be13aa601c72fe463c.png" src="../_images/1ab71a911f0b49d6efdd4c98c8306e24d0be0e29c6f8a1be13aa601c72fe463c.png" />
+<img alt="../_images/035f2603ac83d825e3a9b6c27563835d61f02b36bc8f54964eee215c90fa333b.png" src="../_images/035f2603ac83d825e3a9b6c27563835d61f02b36bc8f54964eee215c90fa333b.png" />
 </div>
 </div>
 <p>Use the model to make predictions and the MSE to evaluate them.</p>
@@ -1011,7 +1010,7 @@ allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; pic
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 51ms/step
+1/1 [==============================] - 0s 44ms/step
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1/7 [===&gt;..........................] - ETA: 0s
@@ -1091,7 +1090,7 @@ allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; pic
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f2a6dc504b332d98e016ea44b5f7199be8d3adde97c0c1a3e1b8778f918f78c8.png" src="../_images/f2a6dc504b332d98e016ea44b5f7199be8d3adde97c0c1a3e1b8778f918f78c8.png" />
+<img alt="../_images/23d51a5b10f03ca438a8cd24d5cb6bd889b6263a661cae9d3def34a63fa4d920.png" src="../_images/23d51a5b10f03ca438a8cd24d5cb6bd889b6263a661cae9d3def34a63fa4d920.png" />
 </div>
 </div>
 <p>In summary the FFNN model worked better than the RNN. This is slightly surprsising as when considering time series one would expect an RNN structure to outperform a simple FFNN.
@@ -1185,7 +1184,7 @@ i.e. input <span class="math notranslate nohighlight">\(uu^{(j)}\)</span> and ou
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a361b09d2192789838d6f088decc6feba713f22cc87a8748af130dcc9c1ccf0a.png" src="../_images/a361b09d2192789838d6f088decc6feba713f22cc87a8748af130dcc9c1ccf0a.png" />
+<img alt="../_images/2fd347f96f1463bbefb20a44b8ecca31dafc514004fe6d3e01a1bc44bf0c9dc8.png" src="../_images/2fd347f96f1463bbefb20a44b8ecca31dafc514004fe6d3e01a1bc44bf0c9dc8.png" />
 </div>
 </div>
 <p>The model is not looking to generalize well. Almost imediately the model starts to make poor predictions and these are then further propogated downstream.
@@ -1233,11 +1232,11 @@ It is expected that better performance can be achieved, however to sufficeintly 
       </div>
     </a>
     <a class="right-next"
-       href="Exercise_6.1_RD_a_b_c.html"
+       href="Exercise6.1_L_d.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Neural Network for Numerical Integration on the Reaction Diffusion System</p>
+        <p class="prev-next-title">Neural Network for Predicting the Lorenz System</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

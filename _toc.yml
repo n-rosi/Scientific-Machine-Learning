@@ -13,7 +13,7 @@ parts:
     - file: Exercise 6.1/6.1_toc.md
       sections:
       - file: Exercise 6.1/Exercise_6.1_KS_a_b.ipynb
-      - file: Exercise 6.1/Exercise_6.1_RD_a_b_c.ipynb
+      #- file: Exercise 6.1/Exercise_6.1_RD_a_b_c.ipynb # dataset missing
       - file: Exercise 6.1/Exercise6.1_L_d.ipynb
     - file: Exercise 7.4/Exercise_7.4_.ipynb
     - file: Exercise X02.1/Exercise_X02_1.ipynb
